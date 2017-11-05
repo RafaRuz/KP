@@ -1,0 +1,145 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment LaTeX Template Version 1.0 (5/5/12)
+% This template has been downloaded from: http://www.LaTeXTemplates.com
+% Original author:  Frits Wenneker (http://www.howtotex.com)
+% License: CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+% ---- Entrada y salida de texto -----
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[utf8]{inputenc}
+%\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+
+% ---- Idioma --------
+
+\usepackage[spanish, es-tabla]{babel} % Selecciona el español para palabras introducidas automáticamente, p.ej. "septiembre" en la fecha y especifica que se use la palabra Tabla en vez de Cuadro
+
+% ---- Otros paquetes ----
+
+\usepackage{url} % ,href} %para incluir URLs e hipervínculos dentro del texto (aunque hay que instalar href)
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+%\usepackage{graphics,graphicx, floatrow} %para incluir imágenes y notas en las imágenes
+\usepackage{graphics,graphicx, float} %para incluir imágenes y colocarlas
+
+% Para hacer tablas comlejas
+%\usepackage{multirow}
+%\usepackage{threeparttable}
+
+%\usepackage{sectsty} % Allows customizing section commands
+%\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	TÍTULO Y DATOS DEL ALUMNO
+%----------------------------------------------------------------------------------------
+
+\title{	
+\normalfont \normalsize 
+\textsc{\textbf{Grundlagen der Wissensverarbeitung} \\ Computer Science \\ Universität Hamburg} \\ [25pt] % Your university, school and/or department name(s)
+~\\
+~\\
+~\\
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\Huge Übung 1: Search Space Design \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+~\\
+~\\
+}
+
+\author{Rafael Ruz Gómez} % Nombre y apellidos
+
+\date{\normalsize\today} % Incluye la fecha actual
+
+%----------------------------------------------------------------------------------------
+% DOCUMENTO
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Muestra el Título
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.8]{logo_uni_hamburg.png}
+\end{figure}
+
+\newpage %inserta un salto de página
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	Question 1
+%----------------------------------------------------------------------------------------
+
+\section{Exercise 2.3}
+
+\subsection{In the game Scotland Yard, Mister X has to evade several detectives using different means of transportation (and spending tickets). We use the board and the transportation rules but discard everything else from the game: Suppose (against the rules of the game) you as Mister X has a fixed amount of steps A before the detectives may move a fixed amount of steps B each (and that is all nor more steps afterwards!). Mister X and the detectives start at different but known positions on the board. How would you find a place to go where the detectives can't reach you? Formalize your answer!}
+
+First of all, we should check which positions are reachable by the detectives(in B steps) and which ones are reachable by Mister X(in A steps). After that, we just should go to a position reachable by Mister X and not reachable by any of the detectives.
+
+
+%----------------------------------------------------------------------------------------
+%	Question 2
+%----------------------------------------------------------------------------------------
+
+\section{Exercise 2.4}
+
+\large \textbf{Define the search space, the goal, properties for the search space and an appropriate search strategy for the following problems:}
+
+\subsection{ Placing furniture in a flat. There are different kinds of furniture you can put in a set of places. Try to find an optimal placement, e.g. no door should be obstructed and the chairs should be near the table.}
+
+
+
+\subsection{Construction Site planning. When building a house, you can e.g. only paint the walls after the walls have been built and so on. In addition, several people may work on site at the same time on different parts of the house. We need a plan on who is doing what when to build the house as fast as possible.}
+
+
+
+\subsection{An elevate has to transport people in a sensible way. Suppose you have an elevator and several people want to use it, standing in different doors. What should the elevator do?}
+
+
+
+
+%------------------------------------------------
+
+
+
+
+
+
+
+%------------------------------------------------
+
+\bibliography{citas} %archivo citas.bib que contiene las entradas 
+\bibliographystyle{plain} % hay varias formas de citar
+
+\end{document}
