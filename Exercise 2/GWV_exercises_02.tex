@@ -119,9 +119,6 @@
 
 
 
-
-
-
 %----------------------------------------------------------------------------------------
 %	Question 2
 %----------------------------------------------------------------------------------------
@@ -132,9 +129,13 @@
 
 \subsection{Placing furniture in a flat. There are different kinds of furniture you can put in a set of places. Try to find an optimal placement, e.g. no door should be obstructed and the chairs should be near the table.}
 
+Let's define the search space:
+
 \begin{itemize}
-	\item The search space is the collection of the different positions where the furnitures can be placed. 
-	\item The goal is to place the furnitures in the “optimal” placement. For example, we could give the furnitures a value in function of how “good” they are placed (give the chairs more value if they are close to a table, give 0 or -1 if a furniture is positioned in front of a door, etc). 
+	\item We have a set of states, each one is a matrix representing the positions (x,y)  in the flat and a pair of values in the matrix representing the furniture (for example 0 if it's empty, 1 if it's a table on it, 2 if it's a chair, etc) and a value depending on how good placed is the furniture (0 if the furniture is good placed, 1 if not, for example a chair far away from any table, 2 if the furniture is blocking a door)
+	\item The start state is a matrix with the pair <0,0> in every position where we will be able to place a furniture, and -1 otherwise.
+	\item The actions that can be done is to put a furniture in an empty position or moving an already placed furniture to a better position.
+	\item The goal is to place the furnitures in the “optimal” placement. For example, we could give the furnitures the value 1 if they are good placed and an higher value (give the chairs more value if they are close to a table, give 0 or -1 if a furniture is positioned in front of a door, etc). 
 	\item The propertiy for the search space are that every node represent the positions of the house and their value depends on if there is or not a furniture on that position.
 	\item An appropiate search strategy would be to start expanding the nodes where the “more difficult to place” furnitures are placed and they have a low value.
 \end{itemize}
