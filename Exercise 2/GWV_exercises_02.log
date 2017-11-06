@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2017.3.7)  2 NOV 2017 17:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2017.3.7)  6 NOV 2017 22:06
 entering extended mode
 **./GWV_exercises_02.tex
 (GWV_exercises_02.tex
@@ -559,35 +559,32 @@ Package pdftex.def Info: logo_uni_hamburg.png used on input line 92.
 
 
 {C:/Users/Rafa/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <./logo_uni_h
-amburg.png>] (GWV_exercises_02.bbl
-
-LaTeX Warning: Empty `thebibliography' environment or \BreakBibliography
-               before end of `thebibliography' environment on input line 3.
-
-) [2] (GWV_exercises_02.aux
+amburg.png>] [2] [3] [4] (GWV_exercises_02.aux
 LaTeX Info: Redefining \. on input line 7.
 LaTeX Info: Redefining \% on input line 7.
 ) ) 
 Here is how much of TeX's memory you used:
- 5289 strings out of 493634
- 79204 string characters out of 3143748
- 231259 words of memory out of 3000000
- 8606 multiletter control sequences out of 15000+200000
+ 5287 strings out of 493634
+ 79113 string characters out of 3143748
+ 233295 words of memory out of 3000000
+ 8607 multiletter control sequences out of 15000+200000
  17161 words of font info for 40 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
  41i,10n,51p,8829b,384s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Rafa\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\
-ecbx1200.pk> <C:\Users\Rafa\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\e
-c\dpi600\ecsx1200.pk> <C:\Users\Rafa\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\j
-knappen\ec\dpi600\ecsx1440.pk> <C:\Users\Rafa\AppData\Local\MiKTeX\2.9\fonts\pk
-\ljfour\jknappen\ec\dpi600\ecrm1095.pk> <C:\Users\Rafa\AppData\Local\MiKTeX\2.9
-\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1440.pk> <C:\Users\Rafa\AppData\Local\M
-iKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm2488.pk> <C:\Users\Rafa\AppDat
-a\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\eccc1095.pk> <C:\Users\Ra
-fa\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecxc1095.pk>
-Output written on GWV_exercises_02.pdf (2 pages, 76274 bytes).
+ecrm1200.pk> <C:\Users\Rafa\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\e
+c\dpi600\ecbx1200.pk> <C:\Users\Rafa\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\j
+knappen\ec\dpi600\ecsx1200.pk> <C:\Users\Rafa\AppData\Local\MiKTeX\2.9\fonts\pk
+\ljfour\jknappen\ec\dpi600\ecsx1440.pk> <C:\Users\Rafa\AppData\Local\MiKTeX\2.9
+\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1095.pk> <C:\Users\Rafa\AppData\Local\M
+iKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1440.pk> <C:\Users\Rafa\AppDat
+a\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm2488.pk> <C:\Users\Ra
+fa\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\eccc1095.pk> <C:
+\Users\Rafa\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecxc109
+5.pk>
+Output written on GWV_exercises_02.pdf (4 pages, 98680 bytes).
 PDF statistics:
- 231 PDF objects out of 1000 (max. 8388607)
+ 299 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
