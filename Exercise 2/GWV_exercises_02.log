@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2017.3.7)  6 NOV 2017 22:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2017.3.7)  7 NOV 2017 00:34
 entering extended mode
 **./GWV_exercises_02.tex
 (GWV_exercises_02.tex
@@ -564,10 +564,10 @@ LaTeX Info: Redefining \. on input line 7.
 LaTeX Info: Redefining \% on input line 7.
 ) ) 
 Here is how much of TeX's memory you used:
- 5287 strings out of 493634
- 79113 string characters out of 3143748
+ 5292 strings out of 493634
+ 79179 string characters out of 3143748
  233295 words of memory out of 3000000
- 8607 multiletter control sequences out of 15000+200000
+ 8612 multiletter control sequences out of 15000+200000
  17161 words of font info for 40 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
  41i,10n,51p,8829b,384s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -582,9 +582,9 @@ a\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm2488.pk> <C:\Users\Ra
 fa\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\eccc1095.pk> <C:
 \Users\Rafa\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecxc109
 5.pk>
-Output written on GWV_exercises_02.pdf (4 pages, 98680 bytes).
+Output written on GWV_exercises_02.pdf (4 pages, 103318 bytes).
 PDF statistics:
- 299 PDF objects out of 1000 (max. 8388607)
+ 310 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
