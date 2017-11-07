@@ -135,31 +135,49 @@ Let's define the search space:
 	\item We have a set of states, each one is a matrix representing the positions (x,y)  in the flat and a pair of values in the matrix representing the furniture (for example 0 if it's empty, 1 if it's a table on it, 2 if it's a chair, etc) and a value depending on how good placed is the furniture (0 if the furniture is good placed, 1 if not, for example a chair far away from any table, 2 if the furniture is blocking a door)
 	\item The start state is a matrix with the pair <0,0> in every position where we will be able to place a furniture, and -1 otherwise.
 	\item The actions that can be done is to put a furniture in an empty position or moving an already placed furniture to a better position.
-	\item The goal is to place the furnitures in the “optimal” placement. So if the value of the state (the sum of the values of the matrix) is 0 (not including the walls, etc), and we have placed the furnitures, it's the goal.
-	\item The properties for the search space are that it's infinite and it contains cycles, because we can move furnitures wherever we want to, and it's a tree where the child nodes are created moving or placing a furniture
-	\item An appropiate search strategy would be A* but with X minimun steps, where X is the number of furnitures we have to place
-	\item Another option would be to define the start state with the furnitures randomnly placed.
 \end{itemize}
+The goal is to place the furnitures in the “optimal” placement. So if the value of the state (the sum of the values of the matrix) is 0 (not including the walls, etc), and we have placed the furnitures, we have reached the goal.\\
 
+The properties for the search space are that it's infinite and it contains cycles, because we can move furnitures wherever we want to, and it's a tree where the child nodes are created moving or placing a furniture\\
+
+An appropiate search strategy would be A* but with X minimun steps, where X is the number of furnitures we have to place\\
+
+Another option would be to define the start state with the furnitures randomnly placed.
+
+\newpage
 
 \subsection{Construction Site planning. When building a house, you can e.g. only paint the walls after the walls have been built and so on. In addition, several people may work on site at the same time on different parts of the house. We need a plan on who is doing what when to build the house as fast as possible.}
 
-\begin{itemize}
-	\item The search space is a collection where in every node you add an activity to the planning in a given time and a given part of the house, so in the final nodes you have the complete planning for building the house.
-	\item The goal is to have a planning with the shortest possible time and where two different activities are never happening at the same time in the same place.
-	\item An appropiate search strategy would be to start expanding the nodes where the longer activities are included in the planning in a good way and the the shorter ones.
-\end{itemize}
+Let's define the search space:
 
+\begin{itemize}
+	\item We have a set of states, each one is vector with all the elements that we have to build(Position 0 build walls, position 0 build doors, ... , 10 paint walls, etc) and a pair of values in the vector representing the priority (Less priority, more hurry) and a value counting the time that each worker have to wait to build each element
+	\item The start state is a vector with the pair <0,0> in every element
+	\item The actions that can be done is to put build a new element or wait if you can not build any element
+\end{itemize}
+The goal is to build in “optimal” time. So if the value of the time (the sum of the values of the time) is 0 (Thinking that we have build the first element), and we have build the house, we have reached the goal.\\
+
+The properties for the search space are that it's finite and it doesn't contains cycles, because we can't some element aready built.It's a tree where the child nodes are created building elements\\
+
+An appropiate search strategy breadth-first search, because we know the extension of the state space\\
+
+
+\newpage
 
 \subsection{An elevate has to transport people in a sensible way. Suppose you have an elevator and several people want to use it, standing in different doors. What should the elevator do?}
 
+Let's define the search space:
+
 \begin{itemize}
-	\item The search space is a collection of nodes where every node represent a sorted list of the doors that the elevetor have to go to.
-	\item The goal is that the difference between the doors is the less possible (i.e. that the elevator has to travel as little distance as possible)
-	\item An appropiate search strategy would be to start expanding the nodes where the next door to visit is the closest door to the actual one.	
+	\item The algorithm is based on the current floor, the destination floor and the time that each passenger has been waiting. It is assumed that an elevator can only answer calls if it is unoccupied or if a call made when the elevator is operating has its destination in the same direction as the route it is on. When there is a call that goes in the opposite direction of the current movement path, the elevator only saves it for the next pass that carries the direction. The space state is a vector with n elements (n is the number of floors) with a 3-tuple: One the current floor, other the destination floor and other with the time that each passenger has been waiting
+	\item The start state is a vector with the 3-tuple <0,0,0>
+	\item The actions that can be done is to go up or to go down
 \end{itemize}
+The goal is to build in “optimal” time. So if the value of the time (the sum of the values of the time) is 0 (Thinking that always each person travels alone), and we have build the house, we have reached the goal.\\
 
+The properties for the search space are that it's infinite and it contains cycles, because we can to any floor we want to, and it's a tree where the child nodes are created going up or going down\\
 
+An appropiate search strategy would be Depth-First Search\\
 
 %------------------------------------------------
 
