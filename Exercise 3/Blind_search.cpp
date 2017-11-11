@@ -1,7 +1,14 @@
 
 #include <iostream>
+#include <utility>          // std::pair
+#include <list>             // std::list
+#include <queue>            // std::queue
+#include "Blind_search.h"
 
 using namespace std;
+
+// Enumeration representing the orientation, needed to define a path
+enum Orientation { North, East, South, West };
 
 //Read the environment called "nameFile" and saves the dimensions of it in "rows" and "columns"
 void ReadEnvironment( char ** &environment, const char* nameFile, int &rows, int &columns ){
@@ -56,13 +63,27 @@ void PrintEnvironment( char** environment, const int rows, const int cols ){
   }
 }
 
+
+// Check if a position is suitable for going thru it
+bool ValidPosition( pair<int,int> position , char** environment ){
+  if( environment[position.first][position.second] == 'x' )
+    return(false);
+  return(true);
+}
+
 //
-void BreadthFirst( char** environment ){
+void BreadthFirst( const char** environment, pair<int,int> initialPosition, list<Orientation> &path ){
+
+  queue<list<Orientation>> frontier;
+  pair<int,int>
+
+  frontier.push(North);
 
 }
 
 //
-void DepthFirst( char** environment){
+void DepthFirst( const char** environment, pair<int,int> initialPosition, list<Orientation> &path ){
+
 
 }
 
