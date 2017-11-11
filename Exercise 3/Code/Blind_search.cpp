@@ -48,8 +48,8 @@ void ReadEnvironment( char ** &environment, const char* nameFile, int &rows, int
 // Prints the environment in ASCII code
 void PrintEnvironment( char** environment, const int rows, const int cols ){
 
-  for(int i=0; i<=rows; i++){
-    for(int j=0; j<=cols; j++){
+  for(int i=0; i<rows; i++){
+    for(int j=0; j<cols; j++){
       cout << environment[i][j];
     }
     cout << endl;
@@ -72,7 +72,7 @@ int main(int argc, char const *argv[]) {
   char **Environment;
   int rows,columns;
 
-  ReadEnvironment(Environment,"blatt3_environment_b.txt",rows,columns);
+  ReadEnvironment(Environment,"blatt3_environment.txt",rows,columns);
   PrintEnvironment(Environment,rows,columns);
   return(0);
 
