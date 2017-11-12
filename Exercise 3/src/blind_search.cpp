@@ -13,14 +13,14 @@ bool BreadthFirst( const Environment environment, Path &path ){
 
   queue<Path> frontier;
   Path currentPath;
-
-  if( environment.isValidPosition(environment.getStartPosition().first,environment.getStartPosition().second+1) )
+  pair<unsigned int,unsigned int> start = environment.getStart();
+  if( environment.isValidPosition(start.first,start.second+1 ))
     currentPath.addMovement(North);
-  else if( environment.isValidPosition(environment.getStartPosition().first+1,environment.getStartPosition().second) )
+  else if( environment.isValidPosition(start.first+1,start.second))
     currentPath.addMovement(East);
-  else if( environment.isValidPosition(environment.getStartPosition().first,environment.getStartPosition().second-1) )
+  else if( environment.isValidPosition(start.first,start.second-1))
     currentPath.addMovement(South);
-  else if( environment.isValidPosition(environment.getStartPosition().first-1,environment.getStartPosition().second) )
+  else if( environment.isValidPosition(start.first-1,start.second))
     currentPath.addMovement(West);
 
   while( !frontier.empty() ){
@@ -56,7 +56,7 @@ int main(int argc, char const *argv[]) {
     Environment environment("./txt/blatt3_environment.txt")
     environment.Print();
 
-  Path path(environment.getStartPosition());
+  Path path(start);
   BreadthFirst(Environment,path);
 
   cout << "Breadth-First algorithm:" << endl;
