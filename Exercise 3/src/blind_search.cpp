@@ -3,7 +3,7 @@
 #include <utility>          // std::pair
 #include <list>             // std::list
 #include <queue>            // std::queue
-#include "Blind_search.h"
+#include "blind_search.h"
 
 using namespace std;
 
