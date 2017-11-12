@@ -57,8 +57,8 @@ class Environment{
       }
 
       rewind(file);
-      environment = new char*[rows];
-      environment[0] = new char[columns];
+      matrix = new char*[rows];
+      matrix[0] = new char[columns];
       int currentRow = 0;
       int currentColumn = 0;
       c = fgetc(file);
@@ -66,11 +66,11 @@ class Environment{
       while( c != EOF ){
         if( c == '\n' ){
           currentRow++;
-          environment[currentRow] = new char[columns];
+          matrix[currentRow] = new char[columns];
           currentColumn = 0;
         }
         else{
-          environment[currentRow][currentColumn] = c;
+          matrix[currentRow][currentColumn] = c;
           currentColumn++;
         }
         c = fgetc(file);
@@ -105,7 +105,7 @@ class Environment{
     void Print(){
       for(int i=0; i<=rows; i++){
         for(int j=0; j<=cols; j++){
-          cout << environment[i][j];
+          cout << matrix[i][j];
         }
         cout << endl;
       }

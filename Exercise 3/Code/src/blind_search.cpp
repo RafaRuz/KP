@@ -53,13 +53,8 @@ void DepthFirst( const char** environment, pair<int,int> initialPosition, list<O
 
 
 int main(int argc, char const *argv[]) {
-  char **Environment;
-  int rows,columns;
-
-  ReadEnvironment(Environment,"blatt3_environment.txt",rows,columns);
-
-  cout << "Environment:" << endl;
-  PrintEnvironment(Environment,rows,columns);
+    Environment environment("./txt/blatt3_environment.txt")
+    environment.Print();
 
   Path path(environment.getStartPosition());
   BreadthFirst(Environment,path);
