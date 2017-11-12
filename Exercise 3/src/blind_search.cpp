@@ -24,7 +24,8 @@ bool BreadthFirst( const Environment environment, Path &path ){
     currentPath.addMovement(West);
 
   while( !frontier.empty() ){
-    currentPath = frontier.pop();
+    currentPath = frontier.front();
+    frontier.pop();
 
     if( environment.isValidPosition(currentPath.getEnd().first,currentPath.getEnd().second+1) &&
         !currentPath.containsPosition(currentPath.getEnd().first,currentPath.getEnd().second+1) )
