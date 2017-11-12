@@ -11,7 +11,6 @@ enum Direction { North, East, South, West };
 
 // Class representing a path between 2 positions
 class Path{
-
   private:
     pair<unsigned int,unsigned int> start,end;
     list<Direction> movements;
@@ -25,18 +24,23 @@ class Path{
     Path( const pair<unsigned int,unsigned int> s ):length(0), start(s){}
 
     // Start getter
-    inline pair<unsigned int,unsigned int> getStartPosition() const{
+    inline pair<unsigned int,unsigned int> getStart() const{
       return(start);
     }
 
     // End getter
-    inline pair<unsigned int,unsigned int> getEndPosition() const{
+    inline pair<unsigned int,unsigned int> getEnd() const{
       return(end);
     }
 
     // Movements getter
     inline list<Direction> getMovements() const{
       return(movements);
+    }
+
+    // Length getter
+    inline unsigned int getLength() const{
+      return(length);
     }
 
     // Add a movement to the path
@@ -51,6 +55,33 @@ class Path{
         end = pair<unsigned int,unsigned int>(end.first,end.second-1);
       else
         end = pair<unsigned int,unsigned int>(end.first-1,end.second);
+    }
+
+    // Check if a position is already in the path or not
+    bool containsPosition( pair<unsigned int, unsigned int> position ){
+      return(containsPosition(position.first,position.second));
+    }
+
+    // Check if a position is already in the path or not
+    bool containsPosition( unsigned int x, unsigned int y ){
+      unsigned int currentX = start.first;
+      unsigned int currentY = start.second;
+      list<Direction>::iterator it = movements.begin();
+
+      while( currentX != end.first || currentY != end.second ){
+        if( currentX == x && currentY == y ){
+          return(true);
+        }
+
+        if( *it == North )
+          currentY++;
+        else if( *it == East )
+          currentX++;
+        else if( *it == South )
+          currentY--;
+        else
+          currentX--;
+      }
     }
 };
 
@@ -78,13 +109,20 @@ class Environment{
     }
 
     // Copy constructor
-      Environment(const Environment& env ){
+    Environment(const Environment& env ){
       this->rows = env.getRows();
       this->columns = env.getColumns();
-      this->matrix = env.getMatrix();
       this->start = env.getStart();
       this->goal = env.getGoal();
+      char **envMatrix = env.getMatrix();
 
+      matrix = new char*[rows];
+      for (unsigned  int i = 0; i < rows; ++i)
+        matrix[i] = new char[columns];
+
+      for( unsigned int i=0; i<rows; ++i )
+        for( unsigned int j=0; j<columns; ++j )
+          matrix[i][j] = envMatrix[i][j];
     }
 
     // Destructor
@@ -93,20 +131,23 @@ class Environment{
         delete [] matrix[i];
       delete [] matrix;
     }
-    //Getter from Rows
+
+    // Getter for Rows
     inline unsigned int getRows() const{
       return rows;
     }
-    //Getter from Columns
+
+    // Getter for Columns
     inline unsigned int getColumns() const{
       return columns;
     }
 
-    //Getter for matrix
+    // Getter for matrix
     inline char** getMatrix() const{
       return matrix;
     }
-    //Getter for start
+
+    // Getter for start
     inline pair<unsigned int,unsigned int> getStart() const{
       return start;
     }
@@ -115,6 +156,7 @@ class Environment{
     inline pair<unsigned int,unsigned int> getStartNC(){
       return start;
     }*/
+
     //Getter for goal
     inline pair<unsigned int,unsigned int> getGoal() const{
       return goal;
@@ -162,17 +204,17 @@ class Environment{
     }
 
       // Check if a position is suitable for going thru it
-    bool isValidPosition( const pair<int,int> position ){
-      if( matrix[position.first][position.second] == 'x' )
-        return(false);
-      return(true);
+    bool isValidPosition( const pair<int,int> position ) const{
+      return(isValidPosition(position.first,position.second));
     }
 
     // Check if a position is suitable for going thru it
-    bool isValidPosition( const unsigned int x, const unsigned int y ){
-      if( matrix[x][y] == 'x' )
-        return(false);
-      return(true);
+    bool isValidPosition( const unsigned int x, const unsigned int y ) const{
+      if( x < columns && y < rows ){
+        if( matrix[x][y] != 'x' )
+          return(true);
+      }
+      return(false);
     }
 
     // Prints the environment in ASCII code
@@ -190,8 +232,8 @@ class Environment{
       Environment aux(*this);
 
       list<Direction> pathMovements = path.getMovements();
-      unsigned int x = path.getStartPosition().first;
-      unsigned int y = path.getStartPosition().second;
+      unsigned int x = path.getStart().first;
+      unsigned int y = path.getStart().second;
       list<Direction>::iterator it = pathMovements.begin();
       Direction last = *it;
       ++it;   // We don't want to overwritte the start position
