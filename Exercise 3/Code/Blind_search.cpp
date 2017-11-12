@@ -8,21 +8,39 @@
 using namespace std;
 
 
+// Breadth-First searching algorithm
+bool BreadthFirst( const Environment environment, Path &path ){
 
-// Check if a position is suitable for going thru it
-bool ValidPosition( pair<int,int> position , char** environment ){
-  if( environment[position.first][position.second] == 'x' )
-    return(false);
-  return(true);
-}
+  queue<Path> frontier;
+  Path currentPath;
 
-//
-void BreadthFirst( const char** environment, pair<int,int> initialPosition, list<Orientation> &path ){
+  if( environment.isValidPosition(environment.getStartPosition().first,environment.getStartPosition().second+1) )
+    currentPath.addMovement(North);
+  else if( environment.isValidPosition(environment.getStartPosition().first+1,environment.getStartPosition().second) )
+    currentPath.addMovement(East);
+  else if( environment.isValidPosition(environment.getStartPosition().first,environment.getStartPosition().second-1) )
+    currentPath.addMovement(South);
+  else if( environment.isValidPosition(environment.getStartPosition().first-1,environment.getStartPosition().second) )
+    currentPath.addMovement(West);
 
-  queue<list<Orientation>> frontier;
-  pair<int,int>
+  while( !frontier.empty() ){
+    currentPath = frontier.pop();
 
-  frontier.push(North);
+    if( environment.isValidPosition(currentPath.getEndPosition().first,currentPath.getEndPosition().second+1) )
+      currentPath.addMovement(North);
+    else if( environment.isValidPosition(currentPath.getEndPosition().first+1,currentPath.getEndPosition().second) )
+      currentPath.addMovement(East);
+    else if( environment.isValidPosition(currentPath.getEndPosition().first,currentPath.getEndPosition().second-1) )
+      currentPath.addMovement(South);
+    else if( environment.isValidPosition(currentPath.getEndPosition().first-1,currentPath.getEndPosition().second) )
+      currentPath.addMovement(West);
+
+    if( currentPath.getEndPosition() == environment.getGoalPosition() ){
+      path = currentPath;
+      return(true);
+    }
+  }
+  return(false);
 
 }
 
@@ -39,7 +57,15 @@ int main(int argc, char const *argv[]) {
   int rows,columns;
 
   ReadEnvironment(Environment,"blatt3_environment.txt",rows,columns);
+
+  cout << "Environment:" << endl;
   PrintEnvironment(Environment,rows,columns);
+
+  Path path(environment.getStartPosition());
+  BreadthFirst(Environment,path);
+
+  cout << "Breadth-First algorithm:" << endl;
+  environment.Print(path);
   return(0);
 
 }
