@@ -94,6 +94,16 @@ int main(int argc, char const *argv[]) {
   Environment environment("./txt/blatt3_environment.txt");
   environment.Print();
 
+  cout << "Pruebas" << endl;
+
+  Path p(environment.getStart());
+
+  p.addMovement(North);
+  p.addMovement(East);
+  p.addMovement(South);
+  cout << p.containsPosition(environment.getStart().first+1,environment.getStart().second) << endl;
+
+
   Path path(environment.getStart());
   BreadthFirst(environment,path);
 
