@@ -217,8 +217,8 @@ class Environment{
 
     // Check if a position is suitable for going thru it
     bool isValidPosition( const unsigned int x, const unsigned int y ) const{
-      if( x < columns && y < rows ){
-        cout << matrix[x][y];
+      cout << matrix[x][y];
+      if( x < rows && y < columns ){
         if( matrix[x][y] != 'x' ){
           return(true);
         }

@@ -105,6 +105,15 @@ void DepthFirst( Environment environment, Path &path ){
 int main(int argc, char const *argv[]) {
   Environment environment("./txt/blatt3_environment.txt");
   environment.Print();
+  cout << endl;
+
+  for (unsigned int i = 0; i < environment.getRows(); i++) {
+    for (unsigned int j = 0; j < environment.getColumns(); j++) {
+      cout << environment.isValidPosition(i,j);
+
+    }
+    cout << endl;
+  }
   cout << "Nodo INICIAL: <" << environment.getStart().first << "," << environment.getStart().second  << ">"<<  endl;
 
   cout << "Pruebas PATH" << endl;
@@ -125,11 +134,7 @@ int main(int argc, char const *argv[]) {
   cout << environment.isValidPosition(environment.getStart().first,environment.getStart().second) << endl;
   cout << environment.isValidPosition(environment.getStart().first,environment.getStart().second+1) << endl;
   cout << environment.isValidPosition(environment.getStart().first,environment.getStart().second+2) << endl;
-  cout << environment.isValidPosition(environment.getStart().first,environment.getStart().second+3) << endl;
-  cout << environment.isValidPosition(environment.getStart().first,environment.getStart().second+4) << endl;
-  cout << environment.isValidPosition(environment.getStart().first,environment.getStart().second+5) << endl;
-  cout << environment.isValidPosition(environment.getStart().first,environment.getStart().second+6) << endl;
-  cout << environment.isValidPosition(environment.getStart().first,environment.getStart().second+7) << endl;
+
 
 
 
