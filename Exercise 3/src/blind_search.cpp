@@ -103,7 +103,7 @@ void DepthFirst( Environment environment, Path &path ){
 
 
 int main(int argc, char const *argv[]) {
-  Environment environment("./txt/blatt3_environment_c.txt");
+  Environment environment("./txt/blatt3_environment_a.txt");
   cout << "Nodo INICIAL: <" << environment.getStart().first << "," << environment.getStart().second  << ">"<<  endl;
   environment.Print();
   cout << endl;/*
