@@ -22,7 +22,7 @@ class Path{
     Path():length(0){}
 
     // Constructor for an empty path with a start defined
-    Path( const pair<unsigned int,unsigned int> s ):length(0), start(s){}
+    Path( const pair<unsigned int,unsigned int> s ):length(0), start(s), end(s){}
 
     // Start getter
     inline pair<unsigned int,unsigned int> getStart() const{
@@ -82,8 +82,14 @@ class Path{
           currentY--;
         else
           currentX--;
+
+        ++it;
       }
-      return(false);
+      if( currentX == x && currentY == y ){
+        return(true);
+      }
+      else
+        return(false);
     }
 };  // End of class Path
 
@@ -201,7 +207,7 @@ class Environment{
             start = pair<unsigned int,unsigned int>(currentRow,currentColumn);
           else if( c == 'g' )
             goal = pair<unsigned int,unsigned int>(currentRow,currentColumn);
-            
+
           matrix[currentRow][currentColumn] = c;
           currentColumn++;
         }
