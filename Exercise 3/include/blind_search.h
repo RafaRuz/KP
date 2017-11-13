@@ -47,6 +47,7 @@ class Path{
     // Add a movement to the path
     void addMovement( const Direction dir ){
       movements.push_back(dir);
+      length++;
 
       if( dir == North )
         end = pair<unsigned int,unsigned int>(end.first-1,end.second);
@@ -217,7 +218,6 @@ class Environment{
 
     // Check if a position is suitable for going thru it
     bool isValidPosition( const unsigned int x, const unsigned int y ) const{
-      cout << matrix[x][y];
       if( x < rows && y < columns ){
         if( matrix[x][y] != 'x' ){
           return(true);
