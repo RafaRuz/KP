@@ -309,6 +309,9 @@ class Environment{
 
     // Modifies a position in the environment
     void modifyPosition( const unsigned int x, const unsigned int y, const char c ){
-      matrix[x][y] = c;
+      if( x < rows && y < columns ){
+        if( matrix[x][y] != 'x' ){
+          matrix[x][y] = c;
+      }
     }
 };

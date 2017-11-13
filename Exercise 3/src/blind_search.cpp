@@ -102,7 +102,6 @@ void DepthFirst( Environment environment, Path &path ){
 }
 
 
-
 int main(int argc, char const *argv[]) {
   Environment environment("./txt/blatt3_environment.txt");
   cout << "Nodo INICIAL: <" << environment.getStart().first << "," << environment.getStart().second  << ">"<<  endl;
@@ -131,21 +130,16 @@ int main(int argc, char const *argv[]) {
 
 
   Path path(environment.getStart());
-  //BreadthFirst(environment,path);
+  BreadthFirst(environment,path);
+  /*path.addMovement(North);
   path.addMovement(North);
   path.addMovement(North);
-  path.addMovement(North);
-  
+
   path.addMovement(East);
   path.addMovement(East);
   path.addMovement(East);
   path.addMovement(East);
-
-
-
-
-
-
+*/
   cout << "Path length --> " << path.getLength() << endl;
 
   cout << "Breadth-First algorithm:" << endl;
