@@ -227,7 +227,7 @@ class Environment{
     }
 
     // Prints the environment in ASCII code
-    void Print(){
+    void Print() const{
       for(unsigned int i=0; i<rows; i++){
         for(unsigned int j=0; j<columns; j++){
           cout << matrix[i][j];
@@ -237,7 +237,7 @@ class Environment{
     }
 
     // Prints the environment and a path in ASCII code
-    void Print( const Path path ){
+    void Print ( const Path path ) const{
       Environment aux(*this);
 
       list<Direction> pathMovements = path.getMovements();
@@ -245,40 +245,62 @@ class Environment{
       unsigned int y = path.getStart().second;
       list<Direction>::iterator it = pathMovements.begin();
       Direction last = *it;
+
+      if( *it == North )
+        x--;
+      else if( *it == East )
+        y++;
+      else if( *it == South )
+        x++;
+      else
+        y--;
+
       ++it;   // We don't want to overwritte the start position
 
       for( ; it != pathMovements.end(); ++it){
         if( *it == North ){
           if( last == East )
-            aux.modifyPosition(x,y,217);
+            aux.modifyPosition(x,y,(char)188);
           else if( last == West )
-            aux.modifyPosition(x,y,192);
+            aux.modifyPosition(x,y,(char)200);
+          else if( last == North )
+            aux.modifyPosition(x,y,(char)186);
 
           last = North;
+          x--;
         }
         else if( *it == East ){
           if( last == North )
-            aux.modifyPosition(x,y,192);
+            aux.modifyPosition(x,y,(char)201);
           else if( last == South )
-            aux.modifyPosition(x,y,218);
+            aux.modifyPosition(x,y,(char)200);
+          else if( last == East )
+            aux.modifyPosition(x,y,(char)205);
 
           last = East ;
+          y++;
         }
         else if( *it == South ){
           if( last == East )
-            aux.modifyPosition(x,y,218);
+            aux.modifyPosition(x,y,(char)187);
           else if( last == West )
-            aux.modifyPosition(x,y,191);
+            aux.modifyPosition(x,y,(char)201);
+          else if( last == South )
+            aux.modifyPosition(x,y,(char)186);
 
           last = South;
+          x++;
         }
         else{
           if( last == North )
-            aux.modifyPosition(x,y,217);
+            aux.modifyPosition(x,y,(char)187);
           else if( last == South )
-            aux.modifyPosition(x,y,191);
+            aux.modifyPosition(x,y,(char)188);
+          else if( last == West )
+            aux.modifyPosition(x,y,(char)205);
 
           last = West;
+          y--;
         }
       }
 

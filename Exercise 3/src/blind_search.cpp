@@ -41,6 +41,7 @@ bool BreadthFirst( const Environment environment, Path &path ){
   while( !frontier.empty() ){
     currentPath = frontier.front();
     frontier.pop();
+    environment.Print(currentPath);
 
     if( environment.isValidPosition(currentPath.getEnd().first+1,currentPath.getEnd().second) &&
         !currentPath.containsPosition(currentPath.getEnd().first+1,currentPath.getEnd().second) ){
@@ -130,8 +131,12 @@ int main(int argc, char const *argv[]) {
 
 
   Path path(environment.getStart());
-  //BreadthFirst(environment,path);
+  BreadthFirst(environment,path);
   path.addMovement(North);
+  path.addMovement(North);
+  path.addMovement(East);
+  path.addMovement(North);
+  path.addMovement(West);
 
   cout << "Path length --> " << path.getLength() << endl;
 
