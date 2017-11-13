@@ -260,44 +260,44 @@ class Environment{
       for( ; it != pathMovements.end(); ++it){
         if( *it == North ){
           if( last == East )
-            aux.modifyPosition(x,y,(char)188);
+            aux.modifyPosition(x,y,'*');
           else if( last == West )
-            aux.modifyPosition(x,y,(char)200);
+            aux.modifyPosition(x,y,'*');
           else if( last == North )
-            aux.modifyPosition(x,y,(char)186);
+            aux.modifyPosition(x,y,'*');
 
           last = North;
           x--;
         }
         else if( *it == East ){
           if( last == North )
-            aux.modifyPosition(x,y,(char)201);
+            aux.modifyPosition(x,y,'*');
           else if( last == South )
-            aux.modifyPosition(x,y,(char)200);
+            aux.modifyPosition(x,y,'*');
           else if( last == East )
-            aux.modifyPosition(x,y,(char)205);
+            aux.modifyPosition(x,y,'*');
 
           last = East ;
           y++;
         }
         else if( *it == South ){
           if( last == East )
-            aux.modifyPosition(x,y,(char)187);
+            aux.modifyPosition(x,y,'*');
           else if( last == West )
-            aux.modifyPosition(x,y,(char)201);
+            aux.modifyPosition(x,y,'*');
           else if( last == South )
-            aux.modifyPosition(x,y,(char)186);
+            aux.modifyPosition(x,y,'*');
 
           last = South;
           x++;
         }
         else{
           if( last == North )
-            aux.modifyPosition(x,y,(char)187);
+            aux.modifyPosition(x,y,'*');
           else if( last == South )
-            aux.modifyPosition(x,y,(char)188);
+            aux.modifyPosition(x,y,'*');
           else if( last == West )
-            aux.modifyPosition(x,y,(char)205);
+            aux.modifyPosition(x,y,'*');
 
           last = West;
           y--;

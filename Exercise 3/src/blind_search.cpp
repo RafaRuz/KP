@@ -131,12 +131,20 @@ int main(int argc, char const *argv[]) {
 
 
   Path path(environment.getStart());
-  BreadthFirst(environment,path);
+  //BreadthFirst(environment,path);
   path.addMovement(North);
   path.addMovement(North);
+  path.addMovement(North);
+  
   path.addMovement(East);
-  path.addMovement(North);
-  path.addMovement(West);
+  path.addMovement(East);
+  path.addMovement(East);
+  path.addMovement(East);
+
+
+
+
+
 
   cout << "Path length --> " << path.getLength() << endl;
 
