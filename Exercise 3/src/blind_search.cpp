@@ -42,7 +42,7 @@ bool BreadthFirst( const Environment environment, Path &path ){
 
       frontier.push(auxPath);
     }
-    else if( environment.isValidPosition(currentPath.getEnd().first+1,currentPath.getEnd().second) &&
+    if( environment.isValidPosition(currentPath.getEnd().first+1,currentPath.getEnd().second) &&
              !currentPath.containsPosition(currentPath.getEnd().first+1,currentPath.getEnd().second) ){
        auxPath = currentPath;
        auxPath.addMovement(East);
@@ -54,7 +54,7 @@ bool BreadthFirst( const Environment environment, Path &path ){
 
        frontier.push(auxPath);
     }
-    else if( environment.isValidPosition(currentPath.getEnd().first,currentPath.getEnd().second-1) &&
+    if( environment.isValidPosition(currentPath.getEnd().first,currentPath.getEnd().second-1) &&
              !currentPath.containsPosition(currentPath.getEnd().first,currentPath.getEnd().second-1) ){
        auxPath = currentPath;
        auxPath.addMovement(South);
@@ -66,7 +66,7 @@ bool BreadthFirst( const Environment environment, Path &path ){
 
        frontier.push(auxPath);
     }
-    else if( environment.isValidPosition(currentPath.getEnd().first-1,currentPath.getEnd().second) &&
+    if( environment.isValidPosition(currentPath.getEnd().first-1,currentPath.getEnd().second) &&
              !currentPath.containsPosition(currentPath.getEnd().first-1,currentPath.getEnd().second) ){
        auxPath = currentPath;
        auxPath.addMovement(West);
