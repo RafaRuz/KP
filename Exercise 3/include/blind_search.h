@@ -49,13 +49,13 @@ class Path{
       movements.push_back(dir);
 
       if( dir == North )
-        end = pair<unsigned int,unsigned int>(end.first,end.second-1);
-      else if( dir == East )
-        end = pair<unsigned int,unsigned int>(end.first+1,end.second);
-      else if( dir == South )
-        end = pair<unsigned int,unsigned int>(end.first,end.second+1);
-      else
         end = pair<unsigned int,unsigned int>(end.first-1,end.second);
+      else if( dir == East )
+        end = pair<unsigned int,unsigned int>(end.first,end.second+1);
+      else if( dir == South )
+        end = pair<unsigned int,unsigned int>(end.first+1,end.second);
+      else
+        end = pair<unsigned int,unsigned int>(end.first,end.second-1);
     }
 
     // Check if a position is already in the path or not
@@ -75,13 +75,13 @@ class Path{
         }
 
         if( *it == North )
-          currentY--;
-        else if( *it == East )
-          currentX++;
-        else if( *it == South )
-          currentY++;
-        else
           currentX--;
+        else if( *it == East )
+          currentY++;
+        else if( *it == South )
+          currentX++;
+        else
+          currentY--;
 
         ++it;
       }
