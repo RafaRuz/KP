@@ -17,7 +17,7 @@ bool BreadthFirst( const Environment environment, Path &path ){
   pair<unsigned int,unsigned int> start = environment.getStart();
 
   if( environment.isValidPosition(start.first,start.second+1) ){
-    auxPath = currentPath;
+    auxPath = currentPath;//Esta linea no hace falta
     auxPath.addMovement(North);
     frontier.push(auxPath);
   }
@@ -36,7 +36,7 @@ bool BreadthFirst( const Environment environment, Path &path ){
     auxPath.addMovement(West);
     frontier.push(auxPath);
   }
-  
+
 
   while( !frontier.empty() ){
     currentPath = frontier.front();
@@ -106,7 +106,7 @@ int main(int argc, char const *argv[]) {
   Environment environment("./txt/blatt3_environment.txt");
   environment.Print();
 
-  cout << "Pruebas" << endl;
+  cout << "Pruebas Path" << endl
 
   Path p(environment.getStart());
 
@@ -114,15 +114,28 @@ int main(int argc, char const *argv[]) {
   p.addMovement(East);
   p.addMovement(South);
   cout << p.containsPosition(environment.getStart().first+1,environment.getStart().second) << endl;
+  cout << p.containsPosition(environment.getStart().first+1,environment.getStart().second+1) << endl;
+  cout << p.containsPosition(environment.getStart().first,environment.getStart().second+1) << endl;
+  cout << p.containsPosition(environment.getStart().first,environment.getStart().second) << endl;
+  cout << p.containsPosition(environment.getStart().first,environment.getStart().second+2) << endl;
+
+  cout << endl << "Pruebas Environment" << endl;
+
+  cout << environment.isValidPosition(environment.getStart().first,environment.getStart().second-2) << endl;
 
 
+
+
+
+
+/*
   Path path(environment.getStart());
   BreadthFirst(environment,path);
 
   cout << "Path length --> " << path.getLength() << endl;
 
   cout << "Breadth-First algorithm:" << endl;
-  environment.Print(path);
+  environment.Print(path);*/
   return(0);
 
 }
