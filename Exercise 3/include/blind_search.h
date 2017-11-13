@@ -1,3 +1,4 @@
+#include <iostream>
 #include <utility>          // std::pair
 #include <list>             // std::list
 #include <queue>            // std::queue
@@ -82,8 +83,9 @@ class Path{
         else
           currentX--;
       }
+      return(false);
     }
-};
+};  // End of class Path
 
 // Class representing and environment
 class Environment{
@@ -195,6 +197,11 @@ class Environment{
           currentColumn = 0;
         }
         else{
+          if( c == 's' )
+            start = pair<unsigned int,unsigned int>(currentRow,currentColumn);
+          else if( c == 'g' )
+            goal = pair<unsigned int,unsigned int>(currentRow,currentColumn);
+            
           matrix[currentRow][currentColumn] = c;
           currentColumn++;
         }
@@ -219,8 +226,8 @@ class Environment{
 
     // Prints the environment in ASCII code
     void Print(){
-      for(unsigned int i=0; i<=rows; i++){
-        for(unsigned int j=0; j<=columns; j++){
+      for(unsigned int i=0; i<rows; i++){
+        for(unsigned int j=0; j<columns; j++){
           cout << matrix[i][j];
         }
         cout << endl;
