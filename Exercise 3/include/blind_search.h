@@ -312,6 +312,7 @@ class Environment{
       if( x < rows && y < columns ){
         if( matrix[x][y] != 'x' ){
           matrix[x][y] = c;
+        }
       }
     }
 };
