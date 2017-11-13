@@ -105,24 +105,47 @@ void DepthFirst( Environment environment, Path &path ){
 int main(int argc, char const *argv[]) {
   Environment environment("./txt/blatt3_environment.txt");
   environment.Print();
+  cout << "Nodo INICIAL: <" << environment.getStart().first << "," << environment.getStart().second  << ">"<<  endl;
 
-  cout << "Pruebas" << endl;
+  cout << "Pruebas PATH" << endl;
 
   Path p(environment.getStart());
 
   p.addMovement(North);
   p.addMovement(East);
   p.addMovement(South);
+  cout << p.containsPosition(environment.getStart().first,environment.getStart().second-1) << endl;
   cout << p.containsPosition(environment.getStart().first+1,environment.getStart().second) << endl;
+  cout << p.containsPosition(environment.getStart().first+1,environment.getStart().second) << endl;
+  cout << p.containsPosition(environment.getStart().first,environment.getStart().second) << endl;
 
 
+
+  cout << "Pruebas ENVIRONMENT" << endl;
+  cout << environment.isValidPosition(environment.getStart().first,environment.getStart().second) << endl;
+  cout << environment.isValidPosition(environment.getStart().first,environment.getStart().second+1) << endl;
+  cout << environment.isValidPosition(environment.getStart().first,environment.getStart().second+2) << endl;
+  cout << environment.isValidPosition(environment.getStart().first,environment.getStart().second+3) << endl;
+  cout << environment.isValidPosition(environment.getStart().first,environment.getStart().second+4) << endl;
+  cout << environment.isValidPosition(environment.getStart().first,environment.getStart().second+5) << endl;
+  cout << environment.isValidPosition(environment.getStart().first,environment.getStart().second+6) << endl;
+  cout << environment.isValidPosition(environment.getStart().first,environment.getStart().second+7) << endl;
+
+
+
+
+
+
+
+
+/*
   Path path(environment.getStart());
   BreadthFirst(environment,path);
 
   cout << "Path length --> " << path.getLength() << endl;
 
   cout << "Breadth-First algorithm:" << endl;
-  environment.Print(path);
+  environment.Print(path);*/
   return(0);
 
 }

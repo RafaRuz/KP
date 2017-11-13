@@ -49,11 +49,11 @@ class Path{
       movements.push_back(dir);
 
       if( dir == North )
-        end = pair<unsigned int,unsigned int>(end.first,end.second+1);
+        end = pair<unsigned int,unsigned int>(end.first,end.second-1);
       else if( dir == East )
         end = pair<unsigned int,unsigned int>(end.first+1,end.second);
       else if( dir == South )
-        end = pair<unsigned int,unsigned int>(end.first,end.second-1);
+        end = pair<unsigned int,unsigned int>(end.first,end.second+1);
       else
         end = pair<unsigned int,unsigned int>(end.first-1,end.second);
     }
@@ -75,11 +75,11 @@ class Path{
         }
 
         if( *it == North )
-          currentY++;
+          currentY--;
         else if( *it == East )
           currentX++;
         else if( *it == South )
-          currentY--;
+          currentY++;
         else
           currentX--;
 
@@ -159,12 +159,6 @@ class Environment{
     inline pair<unsigned int,unsigned int> getStart() const{
       return start;
     }
-/*
-    //Getter for start non constant
-    inline pair<unsigned int,unsigned int> getStartNC(){
-      return start;
-    }*/
-
     //Getter for goal
     inline pair<unsigned int,unsigned int> getGoal() const{
       return goal;
@@ -225,6 +219,7 @@ class Environment{
     bool isValidPosition( const unsigned int x, const unsigned int y ) const{
       if( x < columns && y < rows ){
         if( matrix[x][y] != 'x' )
+        cout << matrix[x][y];
           return(true);
       }
       return(false);
