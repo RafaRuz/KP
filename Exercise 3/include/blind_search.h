@@ -259,47 +259,55 @@ class Environment{
 
       for( ; it != pathMovements.end(); ++it){
         if( *it == North ){
-          if( last == East )
+          /*if( last == East )
             aux.modifyPosition(x,y,'*');
           else if( last == West )
             aux.modifyPosition(x,y,'*');
           else if( last == North )
             aux.modifyPosition(x,y,'*');
 
-          last = North;
+          last = North;*/
+          aux.modifyPosition(x,y,'.');
+
           x--;
         }
         else if( *it == East ){
-          if( last == North )
+        /*  if( last == North )
             aux.modifyPosition(x,y,'*');
           else if( last == South )
             aux.modifyPosition(x,y,'*');
           else if( last == East )
             aux.modifyPosition(x,y,'*');
 
-          last = East ;
+          last = East ;*/
+          aux.modifyPosition(x,y,'_');
+
           y++;
         }
         else if( *it == South ){
-          if( last == East )
+        /*  if( last == East )
             aux.modifyPosition(x,y,'*');
           else if( last == West )
             aux.modifyPosition(x,y,'*');
           else if( last == South )
             aux.modifyPosition(x,y,'*');
 
-          last = South;
+          last = South;*/
+          aux.modifyPosition(x,y,'.');
+
           x++;
         }
         else{
-          if( last == North )
+    /*      if( last == North )
             aux.modifyPosition(x,y,'*');
           else if( last == South )
             aux.modifyPosition(x,y,'*');
           else if( last == West )
             aux.modifyPosition(x,y,'*');
 
-          last = West;
+          last = West;*/
+          aux.modifyPosition(x,y,'_');
+
           y--;
         }
       }
