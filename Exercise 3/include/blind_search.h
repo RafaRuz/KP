@@ -60,7 +60,7 @@ class Path{
     }
 
     // Check if a position is already in the path or not
-    bool containsPosition( pair<unsigned int, unsigned int> position )const{
+    bool containsPosition( pair<unsigned int, unsigned int> position ) const{
       return(containsPosition(position.first,position.second));
     }
 
