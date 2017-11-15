@@ -60,15 +60,15 @@ class Path{
     }
 
     // Check if a position is already in the path or not
-    bool containsPosition( pair<unsigned int, unsigned int> position ){
+    bool containsPosition( pair<unsigned int, unsigned int> position )const{
       return(containsPosition(position.first,position.second));
     }
 
     // Check if a position is already in the path or not
-    bool containsPosition( unsigned int x, unsigned int y ){
+    bool containsPosition( unsigned int x, unsigned int y ) const{
       unsigned int currentX = start.first;
       unsigned int currentY = start.second;
-      list<Direction>::iterator it = movements.begin();
+      list<Direction>::const_iterator it = movements.begin();
 
       while( currentX != end.first || currentY != end.second ){
         if( currentX == x && currentY == y ){

@@ -9,92 +9,79 @@
 
 using namespace std;
 
+bool ExtendPath(const Path &currentPath, queue<Path> &frontier, const Environment environment, Path &finalPath){
+  Path auxPath(environment.getStart());
+
+  if( environment.isValidPosition(currentPath.getEnd().first+1,currentPath.getEnd().second) &&
+      !currentPath.containsPosition(currentPath.getEnd().first+1,currentPath.getEnd().second) ){
+    auxPath = currentPath;
+    auxPath.addMovement(South);
+
+    if( auxPath.getEnd() == environment.getGoal() ){
+      finalPath = auxPath;
+      return(true);
+    }
+
+    frontier.push(auxPath);
+  }
+  if( environment.isValidPosition(currentPath.getEnd().first,currentPath.getEnd().second+1) &&
+           !currentPath.containsPosition(currentPath.getEnd().first,currentPath.getEnd().second+1) ){
+     auxPath = currentPath;
+     auxPath.addMovement(East);
+
+     if( auxPath.getEnd() == environment.getGoal() ){
+       finalPath = auxPath;
+       return(true);
+     }
+
+     frontier.push(auxPath);
+  }
+  if( environment.isValidPosition(currentPath.getEnd().first-1,currentPath.getEnd().second) &&
+           !currentPath.containsPosition(currentPath.getEnd().first-1,currentPath.getEnd().second) ){
+     auxPath = currentPath;
+     auxPath.addMovement(North);
+
+     if( auxPath.getEnd() == environment.getGoal() ){
+       finalPath = auxPath;
+       return(true);
+     }
+
+     frontier.push(auxPath);
+  }
+  if( environment.isValidPosition(currentPath.getEnd().first,currentPath.getEnd().second-1) &&
+           !currentPath.containsPosition(currentPath.getEnd().first,currentPath.getEnd().second-1) ){
+     auxPath = currentPath;
+     auxPath.addMovement(West);
+
+     if( auxPath.getEnd() == environment.getGoal() ){
+       finalPath = auxPath;
+       return(true);
+     }
+
+     frontier.push(auxPath);
+  }
+  return(false);
+}
+
+
 
 // Breadth-First searching algorithm
 bool BreadthFirst( const Environment environment, Path &path ){
 
   queue<Path> frontier;
   Path currentPath(environment.getStart());
-  Path auxPath(environment.getStart());
   pair<unsigned int,unsigned int> start = environment.getStart();
 
-  if( environment.isValidPosition(start.first+1,start.second) ){
-    auxPath = currentPath;
-    auxPath.addMovement(South);
-    frontier.push(auxPath);
-  }
-  if( environment.isValidPosition(start.first,start.second+1) ){
-    auxPath = currentPath;
-    auxPath.addMovement(East);
-    frontier.push(auxPath);
-  }
-  if( environment.isValidPosition(start.first-1,start.second) ){
-    auxPath = currentPath;
-    auxPath.addMovement(North);
-    frontier.push(auxPath);
-  }
-  if( environment.isValidPosition(start.first,start.second-1) ){
-    auxPath = currentPath;
-    auxPath.addMovement(West);
-    frontier.push(auxPath);
-  }
+  do{
+    if(ExtendPath(currentPath, frontier, environment, path))
+    return (true);
 
-
-  while( !frontier.empty() ){
     currentPath = frontier.front();
     frontier.pop();
-    environment.Print(currentPath);
+  }while(!frontier.empty());
 
-    if( environment.isValidPosition(currentPath.getEnd().first+1,currentPath.getEnd().second) &&
-        !currentPath.containsPosition(currentPath.getEnd().first+1,currentPath.getEnd().second) ){
-      auxPath = currentPath;
-      auxPath.addMovement(South);
+  return (false);
 
-      if( auxPath.getEnd() == environment.getGoal() ){
-        path = auxPath;
-        return(true);
-      }
-
-      frontier.push(auxPath);
-    }
-    if( environment.isValidPosition(currentPath.getEnd().first,currentPath.getEnd().second+1) &&
-             !currentPath.containsPosition(currentPath.getEnd().first,currentPath.getEnd().second+1) ){
-       auxPath = currentPath;
-       auxPath.addMovement(East);
-
-       if( auxPath.getEnd() == environment.getGoal() ){
-         path = auxPath;
-         return(true);
-       }
-
-       frontier.push(auxPath);
-    }
-    if( environment.isValidPosition(currentPath.getEnd().first-1,currentPath.getEnd().second) &&
-             !currentPath.containsPosition(currentPath.getEnd().first-1,currentPath.getEnd().second) ){
-       auxPath = currentPath;
-       auxPath.addMovement(North);
-
-       if( auxPath.getEnd() == environment.getGoal() ){
-         path = auxPath;
-         return(true);
-       }
-
-       frontier.push(auxPath);
-    }
-    if( environment.isValidPosition(currentPath.getEnd().first,currentPath.getEnd().second-1) &&
-             !currentPath.containsPosition(currentPath.getEnd().first,currentPath.getEnd().second-1) ){
-       auxPath = currentPath;
-       auxPath.addMovement(West);
-
-       if( auxPath.getEnd() == environment.getGoal() ){
-         path = auxPath;
-         return(true);
-       }
-
-       frontier.push(auxPath);
-    }
-  }
-  return(false);
 }
 
 //
@@ -130,7 +117,6 @@ bool DepthFirst( Environment environment, Path &path ){
   while( !frontier.empty() ){
     currentPath = frontier.top();
     frontier.pop();
-    environment.Print(currentPath);
 
     if( environment.isValidPosition(currentPath.getEnd().first-1,currentPath.getEnd().second) &&
         !currentPath.containsPosition(currentPath.getEnd().first-1,currentPath.getEnd().second) ){
@@ -185,7 +171,7 @@ bool DepthFirst( Environment environment, Path &path ){
 }
 
 int main(int argc, char const *argv[]) {
-  Environment environment("./txt/blatt4_environment_a.txt");
+  Environment environment(argv[1]);
   cout << "Nodo INICIAL: <" << environment.getStart().first << "," << environment.getStart().second  << ">"<<  endl;
   environment.Print();
   cout << endl;
@@ -197,12 +183,13 @@ int main(int argc, char const *argv[]) {
   BreadthFirst(environment,path_b);
   cout << "Path length --> " << path_b.getLength() << endl;
   environment.Print(path_b);
-
+/*
   cout << "Depth-First algorithm:" << endl;
   DepthFirst(environment,path_d);
   cout << "Path length --> " << path_d.getLength() << endl;
   environment.Print(path_d);
-
+*/
+  //cout << "\u23CB"<< endl;
   return(0);
 
 }
