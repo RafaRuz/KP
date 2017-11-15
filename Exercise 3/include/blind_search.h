@@ -49,8 +49,11 @@ class Path{
       movements.push_back(dir);
       length++;
 
-      if( dir == North )
+      if( dir == North ){
+        if( )
+
         end = pair<unsigned int,unsigned int>(end.first-1,end.second);
+
       else if( dir == East )
         end = pair<unsigned int,unsigned int>(end.first,end.second+1);
       else if( dir == South )
@@ -100,12 +103,17 @@ class Environment{
     char** matrix;
     unsigned int rows,columns;
     pair<unsigned int,unsigned int> start,goal;
+    vector<pair<unsigned int,unsigned int> > portals;
 
   public:
     // Constructor for an empty environment with dimensions r and c
     Environment( const unsigned int r, const unsigned int c){
       rows = r;
       columns = c;
+      portals.push_back(pair<unsigned int,unsigned int>(0,0));
+      portals.push_back(pair<unsigned int,unsigned int>(0,0));
+      portals.push_back(pair<unsigned int,unsigned int>(0,0));
+      portals.push_back(pair<unsigned int,unsigned int>(0,0));
 
       matrix = new char*[rows];
       for (unsigned  int i = 0; i < rows; ++i)
@@ -114,6 +122,10 @@ class Environment{
 
     // Constructor for an environment from a file
     Environment( const char* nameFile ){
+      portals.push_back(pair<unsigned int,unsigned int>(0,0));
+      portals.push_back(pair<unsigned int,unsigned int>(0,0));
+      portals.push_back(pair<unsigned int,unsigned int>(0,0));
+      portals.push_back(pair<unsigned int,unsigned int>(0,0));
       this->ReadFile(nameFile);
     }
 
@@ -123,6 +135,7 @@ class Environment{
       this->columns = env.getColumns();
       this->start = env.getStart();
       this->goal = env.getGoal();
+      this->portals = env.getPortals();
       char **envMatrix = env.getMatrix();
 
       matrix = new char*[rows];
@@ -139,6 +152,11 @@ class Environment{
       for (unsigned int i = 0; i < rows; ++i)
         delete [] matrix[i];
       delete [] matrix;
+    }
+
+    // Getter for getPortals
+    inline vector<pair<unsigned int,unsigned int> > getPortals() const{
+      return portals;
     }
 
     // Getter for Rows
@@ -202,6 +220,19 @@ class Environment{
             start = pair<unsigned int,unsigned int>(currentRow,currentColumn);
           else if( c == 'g' )
             goal = pair<unsigned int,unsigned int>(currentRow,currentColumn);
+          else if( c == '1' ){
+            if( portals[0] == pair<unsigned int,unsigned int>(0,0) )
+              portals[0] = pair<unsigned int,unsigned int>(currentRow,currentColumn);
+            else
+              portals[1] = pair<unsigned int,unsigned int>(currentRow,currentColumn);
+          }
+          else if( c == '2' ){
+            if( portals[2] == pair<unsigned int,unsigned int>(0,0) )
+              portals[2] = pair<unsigned int,unsigned int>(currentRow,currentColumn);
+            else
+              portals[3] = pair<unsigned int,unsigned int>(currentRow,currentColumn);
+          }
+
 
           matrix[currentRow][currentColumn] = c;
           currentColumn++;
