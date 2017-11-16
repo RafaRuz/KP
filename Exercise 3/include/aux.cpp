@@ -2,6 +2,8 @@ void DepthFirst( Environment environment, Path &path ){
 
     stack<Path> frontier;
     Path currentPath(environment.getStart());
+
+    //COMEPOLLAS
     pair<unsigned int,unsigned int> start = environment.getStart();
     if( environment.isValidPosition(start.first,start.second+1))
       currentPath.addMovement(North);
