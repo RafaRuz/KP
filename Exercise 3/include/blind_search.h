@@ -2,6 +2,7 @@
 #include <utility>          // std::pair
 #include <list>             // std::list
 #include <queue>            // std::queue
+#include <vector>           // std::vector
 #include <cstdio>
 
 using namespace std;
@@ -13,8 +14,7 @@ enum Direction { North, East, South, West };
 // Class representing a path between 2 positions
 class Path{
   private:
-    pair<unsigned int,unsigned int> start,end;
-    list<Direction> movements;
+    vector<pair<unsigned int,unsigned int> > positions;
     unsigned int length;
 
   public:
@@ -22,21 +22,18 @@ class Path{
     Path():length(0){}
 
     // Constructor for an empty path with a start defined
-    Path( const pair<unsigned int,unsigned int> s ):length(0), start(s), end(s){}
+    Path( const pair<unsigned int,unsigned int> s ):length(1){
+      positions.push_back(s);
+    }
 
     // Start getter
     inline pair<unsigned int,unsigned int> getStart() const{
-      return(start);
+      return(positions.front());
     }
 
     // End getter
     inline pair<unsigned int,unsigned int> getEnd() const{
-      return(end);
-    }
-
-    // Movements getter
-    inline list<Direction> getMovements() const{
-      return(movements);
+      return(positions.back());
     }
 
     // Length getter
@@ -44,56 +41,36 @@ class Path{
       return(length);
     }
 
+    // Positions getter
+    inline vector<pair<unsigned int,unsigned int> > getPositions() const{
+      return(positions);
+    }
+
     // Add a movement to the path
-    void addMovement( const Direction dir ){
-      movements.push_back(dir);
-      length++;
+    bool addPosition( const pair<unsigned int,unsigned int> &pos ){
+      int difX = pos.first-positions.back().first;
+      int difY = pos.second-positions.back().second;
 
-      if( dir == North ){
-        if( )
-
-        end = pair<unsigned int,unsigned int>(end.first-1,end.second);
-
-      else if( dir == East )
-        end = pair<unsigned int,unsigned int>(end.first,end.second+1);
-      else if( dir == South )
-        end = pair<unsigned int,unsigned int>(end.first+1,end.second);
-      else
-        end = pair<unsigned int,unsigned int>(end.first,end.second-1);
-    }
-
-    // Check if a position is already in the path or not
-    bool containsPosition( pair<unsigned int, unsigned int> position ) const{
-      return(containsPosition(position.first,position.second));
-    }
-
-    // Check if a position is already in the path or not
-    bool containsPosition( unsigned int x, unsigned int y ) const{
-      unsigned int currentX = start.first;
-      unsigned int currentY = start.second;
-      list<Direction>::const_iterator it = movements.begin();
-
-      while( currentX != end.first || currentY != end.second ){
-        if( currentX == x && currentY == y ){
-          return(true);
-        }
-
-        if( *it == North )
-          currentX--;
-        else if( *it == East )
-          currentY++;
-        else if( *it == South )
-          currentX++;
-        else
-          currentY--;
-
-        ++it;
-      }
-      if( currentX == x && currentY == y ){
+      if( (difX == -1 || difX == 0 || difX == 1) && (difY == -1 || difY == 0 || difY == 1) && (difX != difY) ){
+        positions.push_back(pos);
+        length++;
         return(true);
       }
-      else
-        return(false);
+      else return(false);
+    }
+
+    // Check if a position is already in the path or not
+    bool containsPosition( const pair<unsigned int, unsigned int> position ) const{
+      for(vector<pair<unsigned int, unsigned int> >::const_iterator it=positions.begin(); it != positions.end(); ++it)
+        if( *it == position )
+          return(true);
+
+      return(false);
+    }
+
+    // Check if a position is already in the path or not
+    bool containsPosition( const unsigned int x, const unsigned int y ) const{
+      return(containsPosition(pair<unsigned int,unsigned int>(x,y)));
     }
 };  // End of class Path
 
@@ -110,10 +87,6 @@ class Environment{
     Environment( const unsigned int r, const unsigned int c){
       rows = r;
       columns = c;
-      portals.push_back(pair<unsigned int,unsigned int>(0,0));
-      portals.push_back(pair<unsigned int,unsigned int>(0,0));
-      portals.push_back(pair<unsigned int,unsigned int>(0,0));
-      portals.push_back(pair<unsigned int,unsigned int>(0,0));
 
       matrix = new char*[rows];
       for (unsigned  int i = 0; i < rows; ++i)
@@ -122,10 +95,6 @@ class Environment{
 
     // Constructor for an environment from a file
     Environment( const char* nameFile ){
-      portals.push_back(pair<unsigned int,unsigned int>(0,0));
-      portals.push_back(pair<unsigned int,unsigned int>(0,0));
-      portals.push_back(pair<unsigned int,unsigned int>(0,0));
-      portals.push_back(pair<unsigned int,unsigned int>(0,0));
       this->ReadFile(nameFile);
     }
 
@@ -178,11 +147,11 @@ class Environment{
     inline pair<unsigned int,unsigned int> getStart() const{
       return start;
     }
+
     //Getter for goal
     inline pair<unsigned int,unsigned int> getGoal() const{
       return goal;
     }
-
 
     // Load an environment from a file
     bool ReadFile( const char* nameFile ){
@@ -220,7 +189,7 @@ class Environment{
             start = pair<unsigned int,unsigned int>(currentRow,currentColumn);
           else if( c == 'g' )
             goal = pair<unsigned int,unsigned int>(currentRow,currentColumn);
-          else if( c == '1' ){
+        /*  else if( c == '1' ){
             if( portals[0] == pair<unsigned int,unsigned int>(0,0) )
               portals[0] = pair<unsigned int,unsigned int>(currentRow,currentColumn);
             else
@@ -231,7 +200,7 @@ class Environment{
               portals[2] = pair<unsigned int,unsigned int>(currentRow,currentColumn);
             else
               portals[3] = pair<unsigned int,unsigned int>(currentRow,currentColumn);
-          }
+          }*/
 
 
           matrix[currentRow][currentColumn] = c;
@@ -271,77 +240,10 @@ class Environment{
     void Print ( const Path path ) const{
       Environment aux(*this);
 
-      list<Direction> pathMovements = path.getMovements();
-      unsigned int x = path.getStart().first;
-      unsigned int y = path.getStart().second;
-      list<Direction>::iterator it = pathMovements.begin();
-      Direction last = *it;
+      vector<pair<unsigned int,unsigned int> > positionsPath = path.getPositions();
 
-      if( *it == North )
-        x--;
-      else if( *it == East )
-        y++;
-      else if( *it == South )
-        x++;
-      else
-        y--;
-
-      ++it;   // We don't want to overwritte the start position
-
-      for( ; it != pathMovements.end(); ++it){
-        if( *it == North ){
-          /*if( last == East )
-            aux.modifyPosition(x,y,'*');
-          else if( last == West )
-            aux.modifyPosition(x,y,'*');
-          else if( last == North )
-            aux.modifyPosition(x,y,'*');
-
-          last = North;*/
-          aux.modifyPosition(x,y,'.');
-
-          x--;
-        }
-        else if( *it == East ){
-        /*  if( last == North )
-            aux.modifyPosition(x,y,'*');
-          else if( last == South )
-            aux.modifyPosition(x,y,'*');
-          else if( last == East )
-            aux.modifyPosition(x,y,'*');
-
-          last = East ;*/
-          aux.modifyPosition(x,y,'_');
-
-          y++;
-        }
-        else if( *it == South ){
-        /*  if( last == East )
-            aux.modifyPosition(x,y,'*');
-          else if( last == West )
-            aux.modifyPosition(x,y,'*');
-          else if( last == South )
-            aux.modifyPosition(x,y,'*');
-
-          last = South;*/
-          aux.modifyPosition(x,y,'.');
-
-          x++;
-        }
-        else{
-    /*      if( last == North )
-            aux.modifyPosition(x,y,'*');
-          else if( last == South )
-            aux.modifyPosition(x,y,'*');
-          else if( last == West )
-            aux.modifyPosition(x,y,'*');
-
-          last = West;*/
-          aux.modifyPosition(x,y,'_');
-
-          y--;
-        }
-      }
+      for(vector<pair<unsigned int,unsigned int> >::const_iterator it=positionsPath.begin(); it!=positionsPath.end(); ++it)
+        matrix[it->first][it->second] = '*';
 
       aux.Print();
     }
