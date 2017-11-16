@@ -2,6 +2,7 @@ void DepthFirst( Environment environment, Path &path ){
 
   // Toma linea guapa pa ti
   // Toma segunda linea guapa pa ti
+  // Ola q ase
     stack<Path> frontier;
     Path currentPath(environment.getStart());
     pair<unsigned int,unsigned int> start = environment.getStart();
