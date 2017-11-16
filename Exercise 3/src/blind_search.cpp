@@ -4,7 +4,7 @@
 #include <list>             // std::list
 #include <queue>            // std::queue
 #include <stack>            // std::stack
-#include <vector>
+#include <vector>           // std::vector
 
 #include "blind_search.h"
 
@@ -18,30 +18,29 @@ vector<Path> ExpandPath( const Path &currentPath, const Environment &environment
   if( environment.isValidPosition(currentPath.getEnd().first+1,currentPath.getEnd().second) &&
       !currentPath.containsPosition(currentPath.getEnd().first+1,currentPath.getEnd().second) ){
     auxPath = currentPath;
-    auxPath.addMovement(South);
+    auxPath.addPosition(currentPath.getEnd().first+1,currentPath.getEnd().second);
     paths.push_back(auxPath);
   }
   if( environment.isValidPosition(currentPath.getEnd().first,currentPath.getEnd().second+1) &&
-           !currentPath.containsPosition(currentPath.getEnd().first,currentPath.getEnd().second+1) ){
+      !currentPath.containsPosition(currentPath.getEnd().first,currentPath.getEnd().second+1) ){
      auxPath = currentPath;
-     auxPath.addMovement(East);
+     auxPath.addPosition(currentPath.getEnd().first,currentPath.getEnd().second+1);
      paths.push_back(auxPath);
   }
   if( environment.isValidPosition(currentPath.getEnd().first-1,currentPath.getEnd().second) &&
-  !currentPath.containsPosition(currentPath.getEnd().first-1,currentPath.getEnd().second) ){
+      !currentPath.containsPosition(currentPath.getEnd().first-1,currentPath.getEnd().second) ){
     auxPath = currentPath;
-    auxPath.addMovement(North);
+    auxPath.addPosition(currentPath.getEnd().first-1,currentPath.getEnd().second);
     paths.push_back(auxPath);
   }
   if( environment.isValidPosition(currentPath.getEnd().first,currentPath.getEnd().second-1) &&
-           !currentPath.containsPosition(currentPath.getEnd().first,currentPath.getEnd().second-1) ){
+      !currentPath.containsPosition(currentPath.getEnd().first,currentPath.getEnd().second-1) ){
      auxPath = currentPath;
-     auxPath.addMovement(West);
+     auxPath.addPosition(currentPath.getEnd().first,currentPath.getEnd().second-1);
      paths.push_back(auxPath);
   }
   return(paths);
 }
-
 
 // Breadth-First searching algorithm
 bool BreadthFirst( const Environment &environment, Path &path ){
@@ -72,7 +71,7 @@ bool BreadthFirst( const Environment &environment, Path &path ){
   return(false);
 }
 
-//
+// Depth-First searching algorithm
 bool DepthFirst( const Environment &environment, Path &path ){
 
   stack<Path> frontier;

@@ -46,7 +46,12 @@ class Path{
       return(positions);
     }
 
-    // Add a movement to the path
+    // Adds a position at the end of the path
+    bool addPosition( const unsigned int x, const unsigned int y ){
+      return(addPosition(pair<unsigned int,unsigned int>(x,y)));
+    }
+
+    // Adds a position at the end of the path
     bool addPosition( const pair<unsigned int,unsigned int> &pos ){
       int difX = pos.first-positions.back().first;
       int difY = pos.second-positions.back().second;
@@ -241,8 +246,12 @@ class Environment{
       Environment aux(*this);
 
       vector<pair<unsigned int,unsigned int> > positionsPath = path.getPositions();
+      vector<pair<unsigned int,unsigned int> >::const_iterator it=positionsPath.begin();
+      ++it;
+      vector<pair<unsigned int,unsigned int> >::const_iterator it_end=positionsPath.end();
+      --it_end;
 
-      for(vector<pair<unsigned int,unsigned int> >::const_iterator it=positionsPath.begin(); it!=positionsPath.end(); ++it)
+      for( ; it != it_end; ++it)
         matrix[it->first][it->second] = '*';
 
       aux.Print();
