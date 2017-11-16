@@ -242,7 +242,7 @@ class Environment{
     }
 
     // Prints the environment and a path in ASCII code
-    void Print ( const Path path ) const{
+    void Print ( const Path &path ) const{
       Environment aux(*this);
 
       vector<pair<unsigned int,unsigned int> > positionsPath = path.getPositions();
@@ -252,7 +252,7 @@ class Environment{
       --it_end;
 
       for( ; it != it_end; ++it)
-        matrix[it->first][it->second] = '*';
+        aux.modifyPosition(it->first, it->second, '*');
 
       aux.Print();
     }
@@ -260,9 +260,7 @@ class Environment{
     // Modifies a position in the environment
     void modifyPosition( const unsigned int x, const unsigned int y, const char c ){
       if( x < rows && y < columns ){
-        if( matrix[x][y] != 'x' ){
           matrix[x][y] = c;
-        }
       }
     }
 };
