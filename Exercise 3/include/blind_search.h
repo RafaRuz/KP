@@ -4,6 +4,7 @@
 #include <queue>            // std::queue
 #include <vector>           // std::vector
 #include <cstdio>
+#include <stdlib.h>         // abs()
 
 using namespace std;
 
@@ -16,14 +17,35 @@ class Path{
   private:
     vector<pair<unsigned int,unsigned int> > positions;
     unsigned int length;
+    unsigned int cost;
 
   public:
     // Constructor for an empty Path
-    Path():length(0){}
+    Path():length(0),cost(0){}
 
     // Constructor for an empty path with a start defined
-    Path( const pair<unsigned int,unsigned int> s ):length(1){
+    Path( const pair<unsigned int,unsigned int> s ):length(1),cost(0){
       positions.push_back(s);
+    }
+
+    // Heuristic function for the distance to a position (used fot A* search)
+    double heuristic( const unsigned int &x, const unsigned int &y ) const{
+      return(abs(x-positions.back().first) + abs(y-positions.back().second));
+    }
+
+    // Heuristic function for the distance to a position (used fot A* search)
+    double heuristic( const pair<unsigned int,unsigned int> &goal ) const{
+      return(abs(goal.first-positions.back().first) + abs(goal.second-positions.back().second));
+    }
+
+    // Estimated cost for the extension of the actual Path to a position
+    double estimation( const unsigned int &x, const unsigned int &y ) const{
+      return(cost+heuristic(x,y));
+    }
+
+    // Estimated cost for the extension of the actual Path to a position
+    double estimation( const pair<unsigned int,unsigned int> &goal ) const{
+      return(cost+heuristic(goal));
     }
 
     // Start getter
@@ -39,6 +61,11 @@ class Path{
     // Length getter
     inline unsigned int getLength() const{
       return(length);
+    }
+
+    // Cost getter
+    inline unsigned int getCost() const{
+      return(cost);
     }
 
     // Positions getter
@@ -59,6 +86,7 @@ class Path{
       //if( (difX == -1 || difX == 0 || difX == 1) && (difY == -1 || difY == 0 || difY == 1) && (difX != difY) ){
         positions.push_back(pos);
         length++;
+        cost++;
         return(true);
       //}
       //else return(false);
@@ -104,13 +132,12 @@ class Environment{
     }
 
     // Copy constructor
-    Environment(const Environment& env ){
+    Environment( const Environment& env ){
       this->rows = env.getRows();
       this->columns = env.getColumns();
       this->start = env.getStart();
       this->goal = env.getGoal();
       this->portals = env.getPortals();
-      char **envMatrix = env.getMatrix();
 
       matrix = new char*[rows];
       for (unsigned  int i = 0; i < rows; ++i)
@@ -118,7 +145,7 @@ class Environment{
 
       for( unsigned int i=0; i<rows; ++i )
         for( unsigned int j=0; j<columns; ++j )
-          matrix[i][j] = envMatrix[i][j];
+          matrix[i][j] = env.getElement(i,j);
     }
 
     // Destructor
@@ -145,9 +172,13 @@ class Environment{
     }
 
     //Getter for an element
-    inline char getElement(unsigned int i, unsigned int j){
-      return matrix[i][j];
+    inline char getElement(const unsigned int x, const unsigned int y) const{
+      if( x < rows && y < columns ){
+        return matrix[x][y];
+      }
+      return('x');
     }
+
     //Getter for a element of a Portal
     inline pair<unsigned int,unsigned int> getPortal(unsigned int pos) const{
       return portals[pos];
@@ -266,7 +297,8 @@ class Environment{
       --it_end;
 
       for( ; it != it_end; ++it)
-        aux.modifyPosition(it->first, it->second, '*');
+        if( matrix[it->first][it->second] < '0' || matrix[it->first][it->second] > '9' )
+          aux.modifyPosition(it->first, it->second, '*');
 
       aux.Print();
     }

@@ -4,7 +4,7 @@ OBJ = obj
 BIN = bin
 
 CXX = g++
-CXXFLAGS = -pedantic -std=c++03 -g -O2 -I$(INC) # -Wall -Wextra
+CXXFLAGS = -pedantic -std=c++03 -g -I$(INC) # -Wall -Wextra -O2
 
 all: $(BIN)/blind_search
 
