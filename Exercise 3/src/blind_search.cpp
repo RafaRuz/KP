@@ -11,7 +11,7 @@
 using namespace std;
 
 // Expands a Path checking the four adjacent positions
-vector<Path> ExpandPath( const Path &currentPath, const Environment &environment){
+vector<Path> ExpandPath( const Path &currentPath, const Environment &environment, bool[][] &unreachedPositions ){
   Path auxPath(environment.getStart());
   vector<Path> paths;
 
@@ -47,6 +47,18 @@ bool BreadthFirst( const Environment &environment, Path &path ){
 
   queue<Path> frontier;
   Path currentPath(environment.getStart());
+  bool unreachedPositions[environment.getRows()][environment.getColumns()];
+
+  for (size_t i = 0; i < environment.getRows(); i++)
+    for (size_t j = 0; j < environment.getColumns(); j++)
+      unreachedPositions[i][j] = true;
+
+  for (size_t i = 0; i < environment.getRows(); i++){
+    for (size_t j = 0; j < environment.getColumns(); j++){
+      cout << unreachedPositions[i][j];
+    }
+    cout << endl;
+  }
 
   do{
     if( !frontier.empty() ){
@@ -55,7 +67,7 @@ bool BreadthFirst( const Environment &environment, Path &path ){
     }
 
     vector<Path> extendedPaths;
-    extendedPaths = ExpandPath(currentPath,environment);
+    extendedPaths = ExpandPath(currentPath,environment,unreachedPositions);
 
     for (vector<Path>::iterator it = extendedPaths.begin(); it != extendedPaths.end(); it++) {
       if( it->getEnd() == environment.getGoal() ){
@@ -76,6 +88,11 @@ bool DepthFirst( const Environment &environment, Path &path ){
 
   stack<Path> frontier;
   Path currentPath(environment.getStart());
+  bool unreachedPositions[environment.getRows()][environment.getColumns()];
+
+  for (size_t i = 0; i < environment.getRows(); i++)
+    for (size_t j = 0; j < environment.getColumns(); j++)
+      unreachedPositions[i][j] = true;
 
   do{
     if( !frontier.empty() ){
@@ -84,7 +101,7 @@ bool DepthFirst( const Environment &environment, Path &path ){
     }
 
     vector<Path> extendedPaths;
-    extendedPaths = ExpandPath(currentPath,environment);
+    extendedPaths = ExpandPath(currentPath,environment,unreachedPositions);
 
     for (vector<Path>::iterator it = extendedPaths.begin(); it != extendedPaths.end(); it++) {
       if( it->getEnd() == environment.getGoal() ){
