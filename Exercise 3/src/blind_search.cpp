@@ -11,121 +11,87 @@
 using namespace std;
 
 // Expands a Path checking the four adjacent positions
-vector<Path> ExpandPath( const Path &currentPath, const Environment &environment, bool[][] &unreachedPositions ){
+vector<Path> ExpandPath( const Path &currentPath, const Environment &environment, bool** &unreachedPositions ){
   Path auxPath(environment.getStart());
   vector<Path> paths;
+  unsigned int currentX = currentPath.getEnd().first;
+  unsigned int currentY = currentPath.getEnd().second;
 
-  if( environment.isValidPosition(currentPath.getEnd().first+1,currentPath.getEnd().second) &&
-      !currentPath.containsPosition(currentPath.getEnd().first+1,currentPath.getEnd().second) ){
-        if(currentPath.getEnd().first+1 == environment.getPortal(0).first && currentPath.getEnd().second == environment.getPortal(0).second){
-          auxPath = currentPath;
+  if( environment.isValidPosition(currentX+1,currentY) &&
+      !currentPath.containsPosition(currentX+1,currentY) &&
+      unreachedPositions[currentX+1][currentY] ){
+        auxPath = currentPath;
+
+        if( currentX+1 == environment.getPortal(0).first && currentY == environment.getPortal(0).second )
           auxPath.addPosition(environment.getPortal(1).first,environment.getPortal(1).second);
-          paths.push_back(auxPath);
-        }
-        else if((currentPath.getEnd().first+1 == environment.getPortal(1).first) && (currentPath.getEnd().second == environment.getPortal(1).second)){
-          auxPath = currentPath;
+        else if((currentX+1 == environment.getPortal(1).first) && (currentY == environment.getPortal(1).second))
           auxPath.addPosition(environment.getPortal(0).first,environment.getPortal(0).second);
-          paths.push_back(auxPath);
-        }
-        else if(currentPath.getEnd().first+1 == environment.getPortal(2).first && currentPath.getEnd().second == environment.getPortal(2).second){
-          auxPath = currentPath;
+        else if(currentX+1 == environment.getPortal(2).first && currentY == environment.getPortal(2).second)
           auxPath.addPosition(environment.getPortal(3).first,environment.getPortal(3).second);
-          paths.push_back(auxPath);
-        }
-        else if((currentPath.getEnd().first+1 == environment.getPortal(3).first) && (currentPath.getEnd().second == environment.getPortal(3).second)){
-          auxPath = currentPath;
+        else if((currentX+1 == environment.getPortal(3).first) && (currentY == environment.getPortal(3).second))
           auxPath.addPosition(environment.getPortal(2).first,environment.getPortal(2).second);
-          paths.push_back(auxPath);
-        }
-        else{
-          auxPath = currentPath;
-          auxPath.addPosition(currentPath.getEnd().first+1,currentPath.getEnd().second);
-          paths.push_back(auxPath);
-        }
+        else
+          auxPath.addPosition(currentX+1,currentY);
+
+        unreachedPositions[auxPath.getEnd().first][auxPath.getEnd().second] = false;
+        paths.push_back(auxPath);
   }
-  if( environment.isValidPosition(currentPath.getEnd().first,currentPath.getEnd().second+1) &&
-      !currentPath.containsPosition(currentPath.getEnd().first,currentPath.getEnd().second+1) ){
-        if(currentPath.getEnd().first == environment.getPortal(0).first && currentPath.getEnd().second+1 == environment.getPortal(0).second){
-          auxPath = currentPath;
+  if( environment.isValidPosition(currentX,currentY+1) &&
+      !currentPath.containsPosition(currentX,currentY+1) &&
+      unreachedPositions[currentX][currentY+1]){
+        auxPath = currentPath;
+
+        if(currentX == environment.getPortal(0).first && currentY+1 == environment.getPortal(0).second)
           auxPath.addPosition(environment.getPortal(1).first,environment.getPortal(1).second);
-          paths.push_back(auxPath);
-        }
-        else if((currentPath.getEnd().first == environment.getPortal(1).first) && (currentPath.getEnd().second+1 == environment.getPortal(1).second)){
-          auxPath = currentPath;
+        else if((currentX == environment.getPortal(1).first) && (currentY+1 == environment.getPortal(1).second))
           auxPath.addPosition(environment.getPortal(0).first,environment.getPortal(0).second);
-          paths.push_back(auxPath);
-        }
-        else if(currentPath.getEnd().first == environment.getPortal(2).first && currentPath.getEnd().second+1 == environment.getPortal(2).second){
-          auxPath = currentPath;
+        else if(currentX == environment.getPortal(2).first && currentY+1 == environment.getPortal(2).second)
           auxPath.addPosition(environment.getPortal(3).first,environment.getPortal(3).second);
-          paths.push_back(auxPath);
-        }
-        else if((currentPath.getEnd().first == environment.getPortal(3).first) && (currentPath.getEnd().second+1 == environment.getPortal(3).second)){
-          auxPath = currentPath;
+        else if((currentX == environment.getPortal(3).first) && (currentY+1 == environment.getPortal(3).second))
           auxPath.addPosition(environment.getPortal(2).first,environment.getPortal(2).second);
-          paths.push_back(auxPath);
-        }
-        else{
-     auxPath = currentPath;
-     auxPath.addPosition(currentPath.getEnd().first,currentPath.getEnd().second+1);
-     paths.push_back(auxPath);
-   }
+        else
+          auxPath.addPosition(currentX,currentY+1);
+
+        unreachedPositions[auxPath.getEnd().first][auxPath.getEnd().second] = false;
+        paths.push_back(auxPath);
   }
-  if( environment.isValidPosition(currentPath.getEnd().first-1,currentPath.getEnd().second) &&
-      !currentPath.containsPosition(currentPath.getEnd().first-1,currentPath.getEnd().second) ){
-        if(currentPath.getEnd().first-1 == environment.getPortal(0).first && currentPath.getEnd().second == environment.getPortal(0).second){
+  if( environment.isValidPosition(currentX-1,currentY) &&
+      !currentPath.containsPosition(currentX-1,currentY) &&
+      unreachedPositions[currentX-1][currentY]){
         auxPath = currentPath;
-        auxPath.addPosition(environment.getPortal(1).first,environment.getPortal(1).second);
-        paths.push_back(auxPath);
-      }
-      else if((currentPath.getEnd().first-1 == environment.getPortal(1).first) && (currentPath.getEnd().second == environment.getPortal(1).second)){
-        auxPath = currentPath;
-        auxPath.addPosition(environment.getPortal(0).first,environment.getPortal(0).second);
-        paths.push_back(auxPath);
-      }
-      else if(currentPath.getEnd().first-1 == environment.getPortal(2).first && currentPath.getEnd().second == environment.getPortal(2).second){
-        auxPath = currentPath;
-        auxPath.addPosition(environment.getPortal(3).first,environment.getPortal(3).second);
-        paths.push_back(auxPath);
-      }
-      else if((currentPath.getEnd().first-1 == environment.getPortal(3).first) && (currentPath.getEnd().second == environment.getPortal(3).second)){
-        auxPath = currentPath;
-        auxPath.addPosition(environment.getPortal(2).first,environment.getPortal(2).second);
-        paths.push_back(auxPath);
-      }
-      else{
-       auxPath = currentPath;
-       auxPath.addPosition(currentPath.getEnd().first-1,currentPath.getEnd().second);
+
+        if(currentX-1 == environment.getPortal(0).first && currentY == environment.getPortal(0).second)
+          auxPath.addPosition(environment.getPortal(1).first,environment.getPortal(1).second);
+        else if((currentX-1 == environment.getPortal(1).first) && (currentY == environment.getPortal(1).second))
+          auxPath.addPosition(environment.getPortal(0).first,environment.getPortal(0).second);
+        else if(currentX-1 == environment.getPortal(2).first && currentY == environment.getPortal(2).second)
+          auxPath.addPosition(environment.getPortal(3).first,environment.getPortal(3).second);
+        else if((currentX-1 == environment.getPortal(3).first) && (currentY == environment.getPortal(3).second))
+          auxPath.addPosition(environment.getPortal(2).first,environment.getPortal(2).second);
+        else
+         auxPath.addPosition(currentX-1,currentY);
+
+       unreachedPositions[auxPath.getEnd().first][auxPath.getEnd().second] = false;
        paths.push_back(auxPath);
-     }
   }
-  if( environment.isValidPosition(currentPath.getEnd().first,currentPath.getEnd().second-1) &&
-      !currentPath.containsPosition(currentPath.getEnd().first,currentPath.getEnd().second-1) ){
-        if(currentPath.getEnd().first == environment.getPortal(0).first && currentPath.getEnd().second-1 == environment.getPortal(0).second){
-          auxPath = currentPath;
+  if( environment.isValidPosition(currentX,currentY-1) &&
+      !currentPath.containsPosition(currentX,currentY-1) &&
+      unreachedPositions[currentX][currentY-1]){
+        auxPath = currentPath;
+
+        if(currentX == environment.getPortal(0).first && currentY-1 == environment.getPortal(0).second)
           auxPath.addPosition(environment.getPortal(1).first,environment.getPortal(1).second);
-          paths.push_back(auxPath);
-        }
-        else if((currentPath.getEnd().first == environment.getPortal(1).first) && (currentPath.getEnd().second-1 == environment.getPortal(1).second)){
-          auxPath = currentPath;
+        else if((currentX == environment.getPortal(1).first) && (currentY-1 == environment.getPortal(1).second))
           auxPath.addPosition(environment.getPortal(0).first,environment.getPortal(0).second);
-          paths.push_back(auxPath);
-        }
-        else if(currentPath.getEnd().first == environment.getPortal(2).first && currentPath.getEnd().second-1 == environment.getPortal(2).second){
-            auxPath = currentPath;
+        else if(currentX == environment.getPortal(2).first && currentY-1 == environment.getPortal(2).second)
             auxPath.addPosition(environment.getPortal(3).first,environment.getPortal(3).second);
-            paths.push_back(auxPath);
-          }
-        else if((currentPath.getEnd().first == environment.getPortal(3).first) && (currentPath.getEnd().second-1 == environment.getPortal(3).second)){
-            auxPath = currentPath;
+        else if((currentX == environment.getPortal(3).first) && (currentY-1 == environment.getPortal(3).second))
             auxPath.addPosition(environment.getPortal(2).first,environment.getPortal(2).second);
-            paths.push_back(auxPath);
-          }
-        else{
-         auxPath = currentPath;
-         auxPath.addPosition(currentPath.getEnd().first,currentPath.getEnd().second-1);
-         paths.push_back(auxPath);
-       }
+        else
+         auxPath.addPosition(currentX,currentY-1);
+
+       unreachedPositions[auxPath.getEnd().first][auxPath.getEnd().second] = false;
+       paths.push_back(auxPath);
   }
   return(paths);
 }
@@ -135,18 +101,14 @@ bool BreadthFirst( const Environment &environment, Path &path ){
 
   queue<Path> frontier;
   Path currentPath(environment.getStart());
-  bool unreachedPositions[environment.getRows()][environment.getColumns()];
+  bool** unreachedPositions = new bool*[environment.getRows()];
+
+  for (size_t i = 0; i < environment.getRows(); i++)
+    unreachedPositions[i] = new bool[environment.getColumns()];
 
   for (size_t i = 0; i < environment.getRows(); i++)
     for (size_t j = 0; j < environment.getColumns(); j++)
       unreachedPositions[i][j] = true;
-
-  for (size_t i = 0; i < environment.getRows(); i++){
-    for (size_t j = 0; j < environment.getColumns(); j++){
-      cout << unreachedPositions[i][j];
-    }
-    cout << endl;
-  }
 
   do{
     if( !frontier.empty() ){
@@ -160,6 +122,9 @@ bool BreadthFirst( const Environment &environment, Path &path ){
     for (vector<Path>::iterator it = extendedPaths.begin(); it != extendedPaths.end(); it++) {
       if( it->getEnd() == environment.getGoal() ){
         path = *it;
+        for (size_t i = 0; i < environment.getRows(); i++)
+          delete[] unreachedPositions[i];
+        delete[] unreachedPositions;
         return(true);
       }
       else
@@ -167,6 +132,10 @@ bool BreadthFirst( const Environment &environment, Path &path ){
     }
     //environment.Print(currentPath);
   }while( !frontier.empty() );
+
+  for (size_t i = 0; i < environment.getRows(); i++)
+    delete[] unreachedPositions[i];
+  delete[] unreachedPositions;
 
   return(false);
 }
@@ -176,7 +145,10 @@ bool DepthFirst( const Environment &environment, Path &path ){
 
   stack<Path> frontier;
   Path currentPath(environment.getStart());
-  bool unreachedPositions[environment.getRows()][environment.getColumns()];
+  bool** unreachedPositions = new bool*[environment.getRows()];
+
+  for (size_t i = 0; i < environment.getRows(); i++)
+    unreachedPositions[i] = new bool[environment.getColumns()];
 
   for (size_t i = 0; i < environment.getRows(); i++)
     for (size_t j = 0; j < environment.getColumns(); j++)
@@ -194,6 +166,9 @@ bool DepthFirst( const Environment &environment, Path &path ){
     for (vector<Path>::iterator it = extendedPaths.begin(); it != extendedPaths.end(); it++) {
       if( it->getEnd() == environment.getGoal() ){
         path = *it;
+        for (size_t i = 0; i < environment.getRows(); i++)
+          delete[] unreachedPositions[i];
+        delete[] unreachedPositions;
         return(true);
       }
       else
@@ -201,6 +176,10 @@ bool DepthFirst( const Environment &environment, Path &path ){
     }
     //environment.Print(currentPath);
   }while( !frontier.empty() );
+
+  for (size_t i = 0; i < environment.getRows(); i++)
+    delete[] unreachedPositions[i];
+  delete[] unreachedPositions;
 
   return(false);
 }
