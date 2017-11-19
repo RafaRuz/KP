@@ -11,19 +11,23 @@
 using namespace std;
 
 class PathComparison{
-  pair<unsigned int,unsigned int> goal;
-  bool reverse;
-public:
-  PathComparison(const pair<unsigned int,unsigned int> &g, const bool& revparam=false):reverse(revparam),goal(g){}
+  private:
+    pair<unsigned int,unsigned int> goal;
+    const Environment* environment;
+    bool reverse;
+  public:
+    PathComparison( const pair<unsigned int,unsigned int> &g, const Environment* env,
+                    const bool& revparam=false):reverse(revparam),goal(g),environment(env){}
 
-  PathComparison(const unsigned int &x, const unsigned int &y, const bool& revparam=false):reverse(revparam){
-    goal = std::make_pair(x,y);
-  }
+    PathComparison(const unsigned int &x, const unsigned int &y, const Environment* env,
+                    const bool& revparam=false):reverse(revparam),environment(env){
+      goal = std::make_pair(x,y);
+    }
 
-  bool operator() (const Path &p, const Path &q) const{
-    if (reverse) return (p.estimation(goal)>q.estimation(goal));
-    else return (p.estimation(goal)<q.estimation(goal));
-  }
+    bool operator() (const Path &p, const Path &q) const{
+      if (reverse) return (p.estimation(goal,environment->getPortals())>q.estimation(goal,environment->getPortals()));
+      else return (p.estimation(goal,environment->getPortals())<q.estimation(goal,environment->getPortals()));
+    }
 };
 
 // Expands a Path checking the four adjacent positions
@@ -360,7 +364,7 @@ bool DepthFirst( const Environment &environment, Path &path ){
 
 // A* algorithm
 bool AStar( const Environment &environment, Path &path ){
-  priority_queue<Path,vector<Path>,PathComparison> frontier(PathComparison(environment.getGoal(),true));
+  priority_queue<Path,vector<Path>,PathComparison> frontier(PathComparison(environment.getGoal(),&environment,true));
   Path currentPath(environment.getStart());
   bool** unreachedPositions = new bool*[environment.getRows()];
 

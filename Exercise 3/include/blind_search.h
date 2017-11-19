@@ -12,6 +12,8 @@ using namespace std;
 // Enumeration representing the possible directions, needed to define a path
 enum Direction { North, East, South, West };
 
+class Environment;
+
 // Class representing a path between 2 positions
 class Path{
   private:
@@ -29,23 +31,32 @@ class Path{
     }
 
     // Heuristic function for the distance to a position (used fot A* search)
-    double heuristic( const unsigned int &x, const unsigned int &y ) const{
-      return(abs(x-positions.back().first) + abs(y-positions.back().second));
+    double heuristic( const unsigned int &x, const unsigned int &y, const vector<pair<unsigned int,unsigned int> > &portals ) const{
+      vector<pair<unsigned int,unsigned int> >::const_iterator it = portals.begin();
+      unsigned int min = abs(x-positions.back().first) + abs(y-positions.back().second);
+
+      for( ; it!=portals.end(); ++it){
+        if( ( abs(positions.back().first - it->first) + abs(positions.back().second - it->second) + // Distance to the portal
+              abs(it->first - x) + abs(it->second - y) ) < min )     // Distance from the portal to the goal
+          min = ( abs(positions.back().first - it->first) + abs(positions.back().second - it->second) +
+                abs(it->first - x) + abs(it->second - y) );
+      }
+      return(min);
     }
 
     // Heuristic function for the distance to a position (used fot A* search)
-    double heuristic( const pair<unsigned int,unsigned int> &goal ) const{
-      return(abs(goal.first-positions.back().first) + abs(goal.second-positions.back().second));
+    double heuristic( const pair<unsigned int,unsigned int> &goal, const vector<pair<unsigned int,unsigned int> > &portals ) const{
+      return(heuristic(goal.first,goal.second,portals));
     }
 
     // Estimated cost for the extension of the actual Path to a position
-    double estimation( const unsigned int &x, const unsigned int &y ) const{
-      return(cost+heuristic(x,y));
+    double estimation( const unsigned int &x, const unsigned int &y, const vector<pair<unsigned int,unsigned int> > &portals ) const{
+      return(cost+heuristic(x,y,portals));
     }
 
     // Estimated cost for the extension of the actual Path to a position
-    double estimation( const pair<unsigned int,unsigned int> &goal ) const{
-      return(cost+heuristic(goal));
+    double estimation( const pair<unsigned int,unsigned int> &goal, const vector<pair<unsigned int,unsigned int> > &portals ) const{
+      return(cost+heuristic(goal,portals));
     }
 
     // Start getter
