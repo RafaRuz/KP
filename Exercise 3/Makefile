@@ -4,7 +4,7 @@ OBJ = obj
 BIN = bin
 
 CXX = g++
-CXXFLAGS = -pedantic -std=c++03 -g -I$(INC) # -Wall -Wextra -O2
+CXXFLAGS = -pedantic -std=c++03 -g -I$(INC) #-O2# -Wall -Wextra
 
 all: $(BIN)/blind_search
 
@@ -17,8 +17,9 @@ $(BIN)/blind_search : $(OBJ)/blind_search.o
 
 
 # ************ Limpieza ************
-clean :
-	-rm $(OBJ)/* $(SRC)/*~ $(INC)/*~ ./*~
+.PHONY: clean mrproper
+clean:
+	-rm -f $(OBJ)/* $(SRC)/*~ $(INC)/*~ ./*~
 
-mrproper : clean
-	-rm $(BIN)/*
+mrproper: clean
+	-rm -f $(BIN)/*

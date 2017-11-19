@@ -380,6 +380,7 @@ bool AStar( const Environment &environment, Path &path ){
       currentPath = frontier.top();
       frontier.pop();
     }
+    if(currentPath.getLength()>1)environment.Print(currentPath);
 
     vector<Path> extendedPaths;
     extendedPaths = ExpandPath(currentPath,environment,unreachedPositions);
@@ -395,7 +396,6 @@ bool AStar( const Environment &environment, Path &path ){
       else
         frontier.push(*it);
     }
-    //environment.Print(currentPath);
   }while( !frontier.empty() );
 
   for (size_t i = 0; i < environment.getRows(); i++)
