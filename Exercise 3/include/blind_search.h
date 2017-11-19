@@ -53,15 +53,15 @@ class Path{
 
     // Adds a position at the end of the path
     bool addPosition( const pair<unsigned int,unsigned int> &pos ){
-      int difX = pos.first-positions.back().first;
-      int difY = pos.second-positions.back().second;
+      //int difX = pos.first-positions.back().first;
+      //int difY = pos.second-positions.back().second;
 
-      if( (difX == -1 || difX == 0 || difX == 1) && (difY == -1 || difY == 0 || difY == 1) && (difX != difY) ){
+      //if( (difX == -1 || difX == 0 || difX == 1) && (difY == -1 || difY == 0 || difY == 1) && (difX != difY) ){
         positions.push_back(pos);
         length++;
         return(true);
-      }
-      else return(false);
+      //}
+      //else return(false);
     }
 
     // Check if a position is already in the path or not
@@ -126,6 +126,7 @@ class Environment{
       for (unsigned int i = 0; i < rows; ++i)
         delete [] matrix[i];
       delete [] matrix;
+      //delete [] portals;
     }
 
     // Getter for getPortals
@@ -141,6 +142,15 @@ class Environment{
     // Getter for Columns
     inline unsigned int getColumns() const{
       return columns;
+    }
+
+    //Getter for an element
+    inline char getElement(unsigned int i, unsigned int j){
+      return matrix[i][j];
+    }
+    //Getter for a element of a Portal
+    inline pair<unsigned int,unsigned int> getPortal(unsigned int pos) const{
+      return portals[pos];
     }
 
     // Getter for matrix
@@ -162,6 +172,10 @@ class Environment{
     bool ReadFile( const char* nameFile ){
       FILE* file = fopen(nameFile,"r");
       rows = columns = 0;
+
+      portals = vector<pair<unsigned int,unsigned int> >  (4, std::make_pair(0, 0));
+
+
       bool countColumns = true;
       char c = fgetc(file);
 
@@ -194,7 +208,7 @@ class Environment{
             start = pair<unsigned int,unsigned int>(currentRow,currentColumn);
           else if( c == 'g' )
             goal = pair<unsigned int,unsigned int>(currentRow,currentColumn);
-        /*  else if( c == '1' ){
+         else if( c == '1' ){
             if( portals[0] == pair<unsigned int,unsigned int>(0,0) )
               portals[0] = pair<unsigned int,unsigned int>(currentRow,currentColumn);
             else
@@ -205,7 +219,7 @@ class Environment{
               portals[2] = pair<unsigned int,unsigned int>(currentRow,currentColumn);
             else
               portals[3] = pair<unsigned int,unsigned int>(currentRow,currentColumn);
-          }*/
+          }
 
 
           matrix[currentRow][currentColumn] = c;
@@ -213,7 +227,7 @@ class Environment{
         }
         c = fgetc(file);
       }
-      return true;
+    return true;
     }
 
       // Check if a position is suitable for going thru it
