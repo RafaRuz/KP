@@ -101,6 +101,11 @@ bool DepthFirst( const Environment &environment, Path &path ){
 }
 
 int main(int argc, char const *argv[]) {
+
+  if(argc != 2){
+    cerr << "ERROR:Missing txt file" << endl;
+    return (1);
+  }
   Environment environment(argv[1]);
   cout << "Nodo INICIAL: <" << environment.getStart().first << "," << environment.getStart().second  << ">"<<  endl;
   environment.Print();
