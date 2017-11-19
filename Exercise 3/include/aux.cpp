@@ -1,12 +1,9 @@
 void DepthFirst( Environment environment, Path &path ){
 
-  // Toma linea guapa pa ti
-  // Toma segunda linea guapa pa ti
-  // Ola q ase
+  
     stack<Path> frontier;
     Path currentPath(environment.getStart());
 
-    //COMEPOLLAS RAFA
     pair<unsigned int,unsigned int> start = environment.getStart();
     if( environment.isValidPosition(start.first,start.second+1))
       currentPath.addMovement(North);
