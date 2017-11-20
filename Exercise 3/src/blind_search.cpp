@@ -6,29 +6,9 @@
 #include <vector>           // std::vector
 #include <sys/resource.h>   // rusage
 
-#include "blind_search.h"
+#include "pathComparison.h"
 
 using namespace std;
-
-class PathComparison{
-  private:
-    pair<unsigned int,unsigned int> goal;
-    const Environment* environment;
-    bool reverse;
-  public:
-    PathComparison( const pair<unsigned int,unsigned int> &g, const Environment* env,
-                    const bool& revparam=false):reverse(revparam),goal(g),environment(env){}
-
-    PathComparison(const unsigned int &x, const unsigned int &y, const Environment* env,
-                    const bool& revparam=false):reverse(revparam),environment(env){
-      goal = std::make_pair(x,y);
-    }
-
-    bool operator() (const Path &p, const Path &q) const{
-      if (reverse) return (p.estimation(goal,environment->getPortals())>q.estimation(goal,environment->getPortals()));
-      else return (p.estimation(goal,environment->getPortals())<q.estimation(goal,environment->getPortals()));
-    }
-};
 
 // Expands a Path checking the four adjacent positions
 vector<Path> ExpandPath( const Path &currentPath, const Environment &environment, bool** &unreachedPositions ){

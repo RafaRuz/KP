@@ -1,6 +1,6 @@
 void DepthFirst( Environment environment, Path &path ){
 
-  
+
     stack<Path> frontier;
     Path currentPath(environment.getStart());
 
