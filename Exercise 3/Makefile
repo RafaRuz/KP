@@ -23,5 +23,4 @@ clean:
 
 mrproper: clean
 	-rm -f $(BIN)/*
-	touch $(BIN)/1.txt
-	touch $(OBJ)/1.txt 
+	
