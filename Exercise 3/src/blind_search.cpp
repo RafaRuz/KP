@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <utility>          // std::pair
 #include <list>             // std::list
@@ -41,6 +40,7 @@ vector<Path> ExpandPath( const Path &currentPath, const Environment &environment
       !currentPath.containsPosition(currentX+1,currentY) &&
       unreachedPositions[currentX+1][currentY] ){
         auxPath = currentPath;
+
 
         if( currentX+1 == environment.getPortal(0).first && currentY == environment.getPortal(0).second ){
           auxPath.addPosition(environment.getPortal(0).first,environment.getPortal(0).second);

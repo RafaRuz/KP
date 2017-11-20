@@ -90,17 +90,12 @@ class Path{
     }
 
     // Adds a position at the end of the path
-    bool addPosition( const pair<unsigned int,unsigned int> &pos ){
-      //int difX = pos.first-positions.back().first;
-      //int difY = pos.second-positions.back().second;
-
-      //if( (difX == -1 || difX == 0 || difX == 1) && (difY == -1 || difY == 0 || difY == 1) && (difX != difY) ){
+    void addPosition( const pair<unsigned int,unsigned int> &pos ){
+    
         positions.push_back(pos);
         length++;
         cost++;
-        return(true);
-      //}
-      //else return(false);
+
     }
 
     // Check if a position is already in the path or not
