@@ -5,6 +5,7 @@
 #include <vector>           // std::vector
 #include <cstdio>
 #include <stdlib.h>         // abs()
+#include <cmath>            // abs()
 
 using namespace std;
 
@@ -101,12 +102,20 @@ class Path{
     }
 
     // Adds a position at the end of the path
+<<<<<<< HEAD
     bool addPosition( const unsigned int x, const unsigned int y ){
+=======
+    void addPosition( const unsigned int x, const unsigned int y ){
+>>>>>>> 2e97fd22cdbea31b5231c9ecea5ba2ee591d6dbe
       addPosition(pair<unsigned int,unsigned int>(x,y));
     }
 
     // Adds a position at the end of the path
     void addPosition( const pair<unsigned int,unsigned int> &pos ){
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2e97fd22cdbea31b5231c9ecea5ba2ee591d6dbe
         positions.push_back(pos);
         length++;
         cost++;
@@ -224,7 +233,7 @@ class Environment{
       FILE* file = fopen(nameFile,"r");
       rows = columns = 0;
 
-      portals = vector<pair<unsigned int,unsigned int> >  (4, std::make_pair(0, 0));
+      portals = vector<pair<unsigned int,unsigned int> >  (18, std::make_pair(0, 0));
 
 
       bool countColumns = true;
@@ -259,20 +268,12 @@ class Environment{
             start = pair<unsigned int,unsigned int>(currentRow,currentColumn);
           else if( c == 'g' )
             goal = pair<unsigned int,unsigned int>(currentRow,currentColumn);
-         else if( c == '1' ){
-            if( portals[0] == pair<unsigned int,unsigned int>(0,0) )
-              portals[0] = pair<unsigned int,unsigned int>(currentRow,currentColumn);
+          else if( c >'0' || c <= '9' ){
+            if( portals[c-'0'-1] == pair<unsigned int,unsigned int>(0,0) )
+              portals[c-'0'-1] = pair<unsigned int,unsigned int>(currentRow,currentColumn);
             else
-              portals[1] = pair<unsigned int,unsigned int>(currentRow,currentColumn);
+              portals[c-'0'] = pair<unsigned int,unsigned int>(currentRow,currentColumn);
           }
-          else if( c == '2' ){
-            if( portals[2] == pair<unsigned int,unsigned int>(0,0) )
-              portals[2] = pair<unsigned int,unsigned int>(currentRow,currentColumn);
-            else
-              portals[3] = pair<unsigned int,unsigned int>(currentRow,currentColumn);
-          }
-
-
           matrix[currentRow][currentColumn] = c;
           currentColumn++;
         }

@@ -335,7 +335,7 @@ bool DepthFirst( const Environment &environment, Path &path ){
 
 // A* algorithm
 bool AStar( const Environment &environment, Path &path ){
-  priority_queue<Path,vector<Path>,PathComparison> frontier(PathComparison(environment.getGoal(),&environment,true));
+  priority_queue<Path,vector<Path>,Pat,hComparison> frontier(PathComparison(environment.getGoal(),&environment,true));
   Path currentPath(environment.getStart());
   bool** unreachedPositions = new bool*[environment.getRows()];
 
