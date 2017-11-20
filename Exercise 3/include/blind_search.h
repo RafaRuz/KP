@@ -102,20 +102,12 @@ class Path{
     }
 
     // Adds a position at the end of the path
-<<<<<<< HEAD
-    bool addPosition( const unsigned int x, const unsigned int y ){
-=======
     void addPosition( const unsigned int x, const unsigned int y ){
->>>>>>> 2e97fd22cdbea31b5231c9ecea5ba2ee591d6dbe
       addPosition(pair<unsigned int,unsigned int>(x,y));
     }
 
     // Adds a position at the end of the path
     void addPosition( const pair<unsigned int,unsigned int> &pos ){
-<<<<<<< HEAD
-=======
-
->>>>>>> 2e97fd22cdbea31b5231c9ecea5ba2ee591d6dbe
         positions.push_back(pos);
         length++;
         cost++;
