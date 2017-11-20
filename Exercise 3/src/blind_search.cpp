@@ -41,17 +41,17 @@ vector<Path> ExpandPath( const Path &currentPath, const Environment &environment
       unreachedPositions[currentX+1][currentY] ){
         auxPath = currentPath;
 
-        if( environment.getElement(currentX+1,currentY) >= '0' && environment.getElement(currentX+1,currentY) <= '9' ){
+        if( environment.getElement(currentX+1,currentY) > '0' && environment.getElement(currentX+1,currentY) <= '9' ){
           unsigned int numPortal = environment.getElement(currentX+1,currentY) - '0';
-          if( numPortal%2 ){
-            auxPath.addPosition(environment.getPortal(numPortal).first,environment.getPortal(numPortal).second);
-            unreachedPositions[environment.getPortal(numPortal).first][environment.getPortal(numPortal).second] = false;
-            auxPath.addPosition(environment.getPortal(numPortal-1).first,environment.getPortal(numPortal-1).second);
+          if( environment.getPortal(2*numPortal-2) == std::make_pair(currentX+1,currentY) ){
+            auxPath.addPosition(environment.getPortal(2*numPortal-2).first,environment.getPortal(2*numPortal-2).second);
+            unreachedPositions[environment.getPortal(2*numPortal-2).first][environment.getPortal(2*numPortal-2).second] = false;
+            auxPath.addPosition(environment.getPortal(2*numPortal-1).first,environment.getPortal(2*numPortal-1).second);
           }
           else{
-            auxPath.addPosition(environment.getPortal(numPortal).first,environment.getPortal(numPortal).second);
-            unreachedPositions[environment.getPortal(numPortal).first][environment.getPortal(numPortal).second] = false;
-            auxPath.addPosition(environment.getPortal(numPortal+1).first,environment.getPortal(numPortal+1).second);
+            auxPath.addPosition(environment.getPortal(2*numPortal-1).first,environment.getPortal(2*numPortal-1).second);
+            unreachedPositions[environment.getPortal(2*numPortal-1).first][environment.getPortal(2*numPortal-1).second] = false;
+            auxPath.addPosition(environment.getPortal(2*numPortal-2).first,environment.getPortal(2*numPortal-2).second);
           }
         }
         else
@@ -65,17 +65,17 @@ vector<Path> ExpandPath( const Path &currentPath, const Environment &environment
       unreachedPositions[currentX][currentY+1]){
         auxPath = currentPath;
 
-        if( environment.getElement(currentX,currentY+1) >= '0' && environment.getElement(currentX,currentY+1) <= '9' ){
+        if( environment.getElement(currentX,currentY+1) > '0' && environment.getElement(currentX,currentY+1) <= '9' ){
           unsigned int numPortal = environment.getElement(currentX,currentY+1) - '0';
-          if( numPortal%2 ){
-            auxPath.addPosition(environment.getPortal(numPortal).first,environment.getPortal(numPortal).second);
-            unreachedPositions[environment.getPortal(numPortal).first][environment.getPortal(numPortal).second] = false;
-            auxPath.addPosition(environment.getPortal(numPortal-1).first,environment.getPortal(numPortal-1).second);
+          if( environment.getPortal(2*numPortal-2) == std::make_pair(currentX,currentY+1) ){
+            auxPath.addPosition(environment.getPortal(2*numPortal-2).first,environment.getPortal(2*numPortal-2).second);
+            unreachedPositions[environment.getPortal(2*numPortal-2).first][environment.getPortal(2*numPortal-2).second] = false;
+            auxPath.addPosition(environment.getPortal(2*numPortal-1).first,environment.getPortal(2*numPortal-1).second);
           }
           else{
-            auxPath.addPosition(environment.getPortal(numPortal).first,environment.getPortal(numPortal).second);
-            unreachedPositions[environment.getPortal(numPortal).first][environment.getPortal(numPortal).second] = false;
-            auxPath.addPosition(environment.getPortal(numPortal+1).first,environment.getPortal(numPortal+1).second);
+            auxPath.addPosition(environment.getPortal(2*numPortal-1).first,environment.getPortal(2*numPortal-1).second);
+            unreachedPositions[environment.getPortal(2*numPortal-1).first][environment.getPortal(2*numPortal-1).second] = false;
+            auxPath.addPosition(environment.getPortal(2*numPortal-2).first,environment.getPortal(2*numPortal-2).second);
           }
         }
         else
@@ -91,15 +91,15 @@ vector<Path> ExpandPath( const Path &currentPath, const Environment &environment
 
         if( environment.getElement(currentX-1,currentY) >= '0' && environment.getElement(currentX-1,currentY) <= '9' ){
           unsigned int numPortal = environment.getElement(currentX-1,currentY) - '0';
-          if( numPortal%2 ){
-            auxPath.addPosition(environment.getPortal(numPortal).first,environment.getPortal(numPortal).second);
-            unreachedPositions[environment.getPortal(numPortal).first][environment.getPortal(numPortal).second] = false;
-            auxPath.addPosition(environment.getPortal(numPortal-1).first,environment.getPortal(numPortal-1).second);
+          if( environment.getPortal(2*numPortal-2) == std::make_pair(currentX-1,currentY) ){
+            auxPath.addPosition(environment.getPortal(2*numPortal-2).first,environment.getPortal(2*numPortal-2).second);
+            unreachedPositions[environment.getPortal(2*numPortal-2).first][environment.getPortal(2*numPortal-2).second] = false;
+            auxPath.addPosition(environment.getPortal(2*numPortal-1).first,environment.getPortal(2*numPortal-1).second);
           }
           else{
-            auxPath.addPosition(environment.getPortal(numPortal).first,environment.getPortal(numPortal).second);
-            unreachedPositions[environment.getPortal(numPortal).first][environment.getPortal(numPortal).second] = false;
-            auxPath.addPosition(environment.getPortal(numPortal+1).first,environment.getPortal(numPortal+1).second);
+            auxPath.addPosition(environment.getPortal(2*numPortal-1).first,environment.getPortal(2*numPortal-1).second);
+            unreachedPositions[environment.getPortal(2*numPortal-1).first][environment.getPortal(2*numPortal-1).second] = false;
+            auxPath.addPosition(environment.getPortal(2*numPortal-2).first,environment.getPortal(2*numPortal-2).second);
           }
         }
         else
@@ -115,15 +115,15 @@ vector<Path> ExpandPath( const Path &currentPath, const Environment &environment
 
         if( environment.getElement(currentX,currentY-1) >= '0' && environment.getElement(currentX,currentY-1) <= '9' ){
           unsigned int numPortal = environment.getElement(currentX,currentY-1) - '0';
-          if( numPortal%2 ){
-            auxPath.addPosition(environment.getPortal(numPortal).first,environment.getPortal(numPortal).second);
-            unreachedPositions[environment.getPortal(numPortal).first][environment.getPortal(numPortal).second] = false;
-            auxPath.addPosition(environment.getPortal(numPortal-1).first,environment.getPortal(numPortal-1).second);
+          if( environment.getPortal(2*numPortal-2) == std::make_pair(currentX,currentY-1) ){
+            auxPath.addPosition(environment.getPortal(2*numPortal-2).first,environment.getPortal(2*numPortal-2).second);
+            unreachedPositions[environment.getPortal(2*numPortal-2).first][environment.getPortal(2*numPortal-2).second] = false;
+            auxPath.addPosition(environment.getPortal(2*numPortal-1).first,environment.getPortal(2*numPortal-1).second);
           }
           else{
-            auxPath.addPosition(environment.getPortal(numPortal).first,environment.getPortal(numPortal).second);
-            unreachedPositions[environment.getPortal(numPortal).first][environment.getPortal(numPortal).second] = false;
-            auxPath.addPosition(environment.getPortal(numPortal+1).first,environment.getPortal(numPortal+1).second);
+            auxPath.addPosition(environment.getPortal(2*numPortal-1).first,environment.getPortal(2*numPortal-1).second);
+            unreachedPositions[environment.getPortal(2*numPortal-1).first][environment.getPortal(2*numPortal-1).second] = false;
+            auxPath.addPosition(environment.getPortal(2*numPortal-2).first,environment.getPortal(2*numPortal-2).second);
           }
         }
         else
@@ -146,21 +146,16 @@ vector<Path> ExpandPath( const Path &currentPath, const Environment &environment
       !currentPath.containsPosition(currentX+1,currentY) ){
         auxPath = currentPath;
 
-        if( currentX+1 == environment.getPortal(0).first && currentY == environment.getPortal(0).second ){
-          auxPath.addPosition(environment.getPortal(0).first,environment.getPortal(0).second);
-          auxPath.addPosition(environment.getPortal(1).first,environment.getPortal(1).second);
-        }
-        else if((currentX+1 == environment.getPortal(1).first) && (currentY == environment.getPortal(1).second)){
-          auxPath.addPosition(environment.getPortal(1).first,environment.getPortal(1).second);
-          auxPath.addPosition(environment.getPortal(0).first,environment.getPortal(0).second);
-        }
-        else if(currentX+1 == environment.getPortal(2).first && currentY == environment.getPortal(2).second){
-          auxPath.addPosition(environment.getPortal(2).first,environment.getPortal(2).second);
-          auxPath.addPosition(environment.getPortal(3).first,environment.getPortal(3).second);
-        }
-        else if((currentX+1 == environment.getPortal(3).first) && (currentY == environment.getPortal(3).second)){
-          auxPath.addPosition(environment.getPortal(3).first,environment.getPortal(3).second);
-          auxPath.addPosition(environment.getPortal(2).first,environment.getPortal(2).second);
+        if( environment.getElement(currentX+1,currentY) > '0' && environment.getElement(currentX+1,currentY) <= '9' ){
+          unsigned int numPortal = environment.getElement(currentX+1,currentY) - '0';
+          if( environment.getPortal(2*numPortal-2) == std::make_pair(currentX+1,currentY) ){
+            auxPath.addPosition(environment.getPortal(2*numPortal-2).first,environment.getPortal(2*numPortal-2).second);
+            auxPath.addPosition(environment.getPortal(2*numPortal-1).first,environment.getPortal(2*numPortal-1).second);
+          }
+          else{
+            auxPath.addPosition(environment.getPortal(2*numPortal-1).first,environment.getPortal(2*numPortal-1).second);
+            auxPath.addPosition(environment.getPortal(2*numPortal-2).first,environment.getPortal(2*numPortal-2).second);
+          }
         }
         else
           auxPath.addPosition(currentX+1,currentY);
@@ -171,21 +166,16 @@ vector<Path> ExpandPath( const Path &currentPath, const Environment &environment
       !currentPath.containsPosition(currentX,currentY+1) ){
         auxPath = currentPath;
 
-        if( currentX == environment.getPortal(0).first && currentY+1 == environment.getPortal(0).second ){
-          auxPath.addPosition(environment.getPortal(0).first,environment.getPortal(0).second);
-          auxPath.addPosition(environment.getPortal(1).first,environment.getPortal(1).second);
-        }
-        else if((currentX == environment.getPortal(1).first) && (currentY+1 == environment.getPortal(1).second)){
-          auxPath.addPosition(environment.getPortal(1).first,environment.getPortal(1).second);
-          auxPath.addPosition(environment.getPortal(0).first,environment.getPortal(0).second);
-        }
-        else if(currentX == environment.getPortal(2).first && currentY+1 == environment.getPortal(2).second){
-          auxPath.addPosition(environment.getPortal(2).first,environment.getPortal(2).second);
-          auxPath.addPosition(environment.getPortal(3).first,environment.getPortal(3).second);
-        }
-        else if((currentX == environment.getPortal(3).first) && (currentY+1 == environment.getPortal(3).second)){
-          auxPath.addPosition(environment.getPortal(3).first,environment.getPortal(3).second);
-          auxPath.addPosition(environment.getPortal(2).first,environment.getPortal(2).second);
+        if( environment.getElement(currentX,currentY+1) > '0' && environment.getElement(currentX,currentY+1) <= '9' ){
+          unsigned int numPortal = environment.getElement(currentX,currentY+1) - '0';
+          if( environment.getPortal(2*numPortal-2) == std::make_pair(currentX,currentY+1) ){
+            auxPath.addPosition(environment.getPortal(2*numPortal-2).first,environment.getPortal(2*numPortal-2).second);
+            auxPath.addPosition(environment.getPortal(2*numPortal-1).first,environment.getPortal(2*numPortal-1).second);
+          }
+          else{
+            auxPath.addPosition(environment.getPortal(2*numPortal-1).first,environment.getPortal(2*numPortal-1).second);
+            auxPath.addPosition(environment.getPortal(2*numPortal-2).first,environment.getPortal(2*numPortal-2).second);
+          }
         }
         else
           auxPath.addPosition(currentX,currentY+1);
@@ -196,21 +186,16 @@ vector<Path> ExpandPath( const Path &currentPath, const Environment &environment
       !currentPath.containsPosition(currentX-1,currentY) ){
         auxPath = currentPath;
 
-        if( currentX-1 == environment.getPortal(0).first && currentY == environment.getPortal(0).second ){
-          auxPath.addPosition(environment.getPortal(0).first,environment.getPortal(0).second);
-          auxPath.addPosition(environment.getPortal(1).first,environment.getPortal(1).second);
-        }
-        else if((currentX-1 == environment.getPortal(1).first) && (currentY == environment.getPortal(1).second)){
-          auxPath.addPosition(environment.getPortal(1).first,environment.getPortal(1).second);
-          auxPath.addPosition(environment.getPortal(0).first,environment.getPortal(0).second);
-        }
-        else if(currentX-1 == environment.getPortal(2).first && currentY == environment.getPortal(2).second){
-          auxPath.addPosition(environment.getPortal(2).first,environment.getPortal(2).second);
-          auxPath.addPosition(environment.getPortal(3).first,environment.getPortal(3).second);
-        }
-        else if((currentX-1 == environment.getPortal(3).first) && (currentY == environment.getPortal(3).second)){
-          auxPath.addPosition(environment.getPortal(3).first,environment.getPortal(3).second);
-          auxPath.addPosition(environment.getPortal(2).first,environment.getPortal(2).second);
+        if( environment.getElement(currentX-1,currentY) >= '0' && environment.getElement(currentX-1,currentY) <= '9' ){
+          unsigned int numPortal = environment.getElement(currentX-1,currentY) - '0';
+          if( environment.getPortal(2*numPortal-2) == std::make_pair(currentX-1,currentY) ){
+            auxPath.addPosition(environment.getPortal(2*numPortal-2).first,environment.getPortal(2*numPortal-2).second);
+            auxPath.addPosition(environment.getPortal(2*numPortal-1).first,environment.getPortal(2*numPortal-1).second);
+          }
+          else{
+            auxPath.addPosition(environment.getPortal(2*numPortal-1).first,environment.getPortal(2*numPortal-1).second);
+            auxPath.addPosition(environment.getPortal(2*numPortal-2).first,environment.getPortal(2*numPortal-2).second);
+          }
         }
         else
          auxPath.addPosition(currentX-1,currentY);
@@ -221,21 +206,16 @@ vector<Path> ExpandPath( const Path &currentPath, const Environment &environment
       !currentPath.containsPosition(currentX,currentY-1) ){
         auxPath = currentPath;
 
-        if( currentX == environment.getPortal(0).first && currentY-1 == environment.getPortal(0).second ){
-          auxPath.addPosition(environment.getPortal(0).first,environment.getPortal(0).second);
-          auxPath.addPosition(environment.getPortal(1).first,environment.getPortal(1).second);
-        }
-        else if((currentX == environment.getPortal(1).first) && (currentY-1 == environment.getPortal(1).second)){
-          auxPath.addPosition(environment.getPortal(1).first,environment.getPortal(1).second);
-          auxPath.addPosition(environment.getPortal(0).first,environment.getPortal(0).second);
-        }
-        else if(currentX == environment.getPortal(2).first && currentY-1 == environment.getPortal(2).second){
-          auxPath.addPosition(environment.getPortal(2).first,environment.getPortal(2).second);
-          auxPath.addPosition(environment.getPortal(3).first,environment.getPortal(3).second);
-        }
-        else if((currentX == environment.getPortal(3).first) && (currentY-1 == environment.getPortal(3).second)){
-          auxPath.addPosition(environment.getPortal(3).first,environment.getPortal(3).second);
-          auxPath.addPosition(environment.getPortal(2).first,environment.getPortal(2).second);
+        if( environment.getElement(currentX,currentY-1) >= '0' && environment.getElement(currentX,currentY-1) <= '9' ){
+          unsigned int numPortal = environment.getElement(currentX,currentY-1) - '0';
+          if( environment.getPortal(2*numPortal-2) == std::make_pair(currentX,currentY-1) ){
+            auxPath.addPosition(environment.getPortal(2*numPortal-2).first,environment.getPortal(2*numPortal-2).second);
+            auxPath.addPosition(environment.getPortal(2*numPortal-1).first,environment.getPortal(2*numPortal-1).second);
+          }
+          else{
+            auxPath.addPosition(environment.getPortal(2*numPortal-1).first,environment.getPortal(2*numPortal-1).second);
+            auxPath.addPosition(environment.getPortal(2*numPortal-2).first,environment.getPortal(2*numPortal-2).second);
+          }
         }
         else
          auxPath.addPosition(currentX,currentY-1);
@@ -264,6 +244,7 @@ bool BreadthFirst( const Environment &environment, Path &path ){
       currentPath = frontier.front();
       frontier.pop();
     }
+    //environment.Print(currentPath);
 
     vector<Path> extendedPaths;
     extendedPaths = ExpandPath(currentPath,environment,unreachedPositions);
@@ -279,7 +260,6 @@ bool BreadthFirst( const Environment &environment, Path &path ){
       else
         frontier.push(*it);
     }
-    //environment.Print(currentPath);
   }while( !frontier.empty() );
 
   for (size_t i = 0; i < environment.getRows(); i++)
@@ -310,7 +290,7 @@ bool DepthFirst( const Environment &environment, Path &path ){
     }
 
     vector<Path> extendedPaths;
-    extendedPaths = ExpandPath(currentPath,environment);
+    extendedPaths = ExpandPath(currentPath,environment,unreachedPositions);
 
     for (vector<Path>::iterator it = extendedPaths.begin(); it != extendedPaths.end(); it++) {
       if( it->getEnd() == environment.getGoal() ){
@@ -351,7 +331,7 @@ bool AStar( const Environment &environment, Path &path ){
       currentPath = frontier.top();
       frontier.pop();
     }
-    if(currentPath.getLength()>1)environment.Print(currentPath);
+    //environment.Print(currentPath);
 
     vector<Path> extendedPaths;
     extendedPaths = ExpandPath(currentPath,environment,unreachedPositions);
@@ -393,21 +373,21 @@ int main(int argc, char const *argv[]) {
   Path path_a;
 
 
-  cout << "Breadth-First algorithm:" << endl;
+  cout << endl << "Breadth-First algorithm:" << endl;
   if( BreadthFirst(environment,path_b) ){
     cout << "Path length --> " << path_b.getLength() << endl;
     environment.Print(path_b);
   }
   else cout << "Path not found using Breadth-First algorithm." << endl;
 
-  cout << "Depth-First algorithm:" << endl;
+  cout << endl << "Depth-First algorithm:" << endl;
   if( DepthFirst(environment,path_d) ){
     cout << "Path length --> " << path_d.getLength() << endl;
     environment.Print(path_d);
   }
   else cout << "Path not found using Depth-First algorithm." << endl;
 
-  cout << "A* algorithm:" << endl;
+  cout << endl << "A* algorithm:" << endl;
   if( AStar(environment,path_d) ){
     cout << "Path length --> " << path_d.getLength() << endl;
     environment.Print(path_d);

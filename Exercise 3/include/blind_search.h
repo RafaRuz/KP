@@ -27,34 +27,25 @@ class Path{
     Path():length(0),cost(0){}
 
     // Constructor for an empty path with a start defined
-    Path( const pair<unsigned int,unsigned int> s ):length(1),cost(0){
+    Path( const pair<unsigned int,unsigned int> s ):length(1),cost(1){
       positions.push_back(s);
     }
 
     // Heuristic function for the distance to a position (used fot A* search)
-    double heuristic( const unsigned int &x, const unsigned int &y, const vector<pair<unsigned int,unsigned int> > &portals ) const{
+    double heuristic( const int &x, const int &y, const vector<pair<unsigned int,unsigned int> > &portals ) const{
       vector<pair<unsigned int,unsigned int> >::const_iterator it = portals.begin();
-      unsigned int min = abs(x-positions.back().first) + abs(y-positions.back().second);
-/*
-      for( ; it!=portals.end(); ++it){
-        if( ( abs(positions.back().first - it->first) + abs(positions.back().second - it->second) + // Distance to the portal
-              abs(it->first - x) + abs(it->second - y) ) < min )     // Distance from the portal to the goal
-          min = ( abs(positions.back().first - it->first) + abs(positions.back().second - it->second) +
-                abs(it->first - x) + abs(it->second - y) );
-      }
-*/
-      for (size_t i = 0; i < length; i++) {
+      unsigned int min = abs(x-(int)positions.back().first) + abs(y-(int)positions.back().second);
+
+      for (size_t i = 0; i < portals.size(); i++) {
         if( i%2 ){
-          if( ( abs(positions.back().first - portals[i].first) + abs(positions.back().second - portals[i].second) + // Distance to the portal
-                abs(portals[i-1].first - x) + abs(portals[i-1].second - y) ) < min )     // Distance from the portal to the goal
-            min = ( abs(positions.back().first - portals[i].first) + abs(positions.back().second - portals[i].second) +
-                  abs(portals[i-1].first - x) + abs(portals[i-1].second - y) );
+          if( ( abs((int)positions.back().first - (int)portals[i].first) + abs((int)positions.back().second - (int)portals[i].second) + abs((int)portals[i-1].first - x) + abs((int)portals[i-1].second - y) ) < min ){
+            min = ( abs((int)positions.back().first - (int)portals[i].first) + abs((int)positions.back().second - (int)portals[i].second) + ((int)portals[i-1].first - x) + abs((int)portals[i-1].second - y) );
+          }
         }
         else{
-          if( ( abs(positions.back().first - portals[i].first) + abs(positions.back().second - portals[i].second) + // Distance to the portal
-                abs(portals[i+1].first - x) + abs(portals[i+1].second - y) ) < min )     // Distance from the portal to the goal
-            min = ( abs(positions.back().first - portals[i].first) + abs(positions.back().second - portals[i].second) +
-                  abs(portals[i+1].first - x) + abs(portals[i+1].second - y) );
+          if( (abs((int)positions.back().first - (int)portals[i].first) + abs((int)positions.back().second - (int)portals[i].second) + abs((int)portals[i+1].first - x) + abs((int)portals[i+1].second - y)) < min ){
+            min = abs((int)positions.back().first - (int)portals[i].first) + abs((int)positions.back().second - (int)portals[i].second) + abs((int)portals[i+1].first - x) + abs((int)portals[i+1].second - y);
+          }
         }
       }
 
@@ -260,11 +251,11 @@ class Environment{
             start = pair<unsigned int,unsigned int>(currentRow,currentColumn);
           else if( c == 'g' )
             goal = pair<unsigned int,unsigned int>(currentRow,currentColumn);
-          else if( c >'0' || c <= '9' ){
-            if( portals[c-'0'-1] == pair<unsigned int,unsigned int>(0,0) )
-              portals[c-'0'-1] = pair<unsigned int,unsigned int>(currentRow,currentColumn);
+          else if( c >'0' && c <= '9' ){
+            if( portals[2*(c-'0')-2] == pair<unsigned int,unsigned int>(0,0) )
+              portals[2*(c-'0')-2] = pair<unsigned int,unsigned int>(currentRow,currentColumn);
             else
-              portals[c-'0'] = pair<unsigned int,unsigned int>(currentRow,currentColumn);
+              portals[2*(c-'0')-1] = pair<unsigned int,unsigned int>(currentRow,currentColumn);
           }
           matrix[currentRow][currentColumn] = c;
           currentColumn++;
