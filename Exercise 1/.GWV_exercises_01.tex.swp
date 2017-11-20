@@ -1,0 +1,151 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment LaTeX Template Version 1.0 (5/5/12)
+% This template has been downloaded from: http://www.LaTeXTemplates.com
+% Original author:  Frits Wenneker (http://www.howtotex.com)
+% License: CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+% ---- Entrada y salida de texto -----
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[utf8]{inputenc}
+%\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+
+% ---- Idioma --------
+
+\usepackage[spanish, es-tabla]{babel} % Selecciona el español para palabras introducidas automáticamente, p.ej. "septiembre" en la fecha y especifica que se use la palabra Tabla en vez de Cuadro
+
+% ---- Otros paquetes ----
+
+\usepackage{url} % ,href} %para incluir URLs e hipervínculos dentro del texto (aunque hay que instalar href)
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+%\usepackage{graphics,graphicx, floatrow} %para incluir imágenes y notas en las imágenes
+\usepackage{graphics,graphicx, float} %para incluir imágenes y colocarlas
+
+% Para hacer tablas comlejas
+%\usepackage{multirow}
+%\usepackage{threeparttable}
+
+%\usepackage{sectsty} % Allows customizing section commands
+%\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	TÍTULO Y DATOS DEL ALUMNO
+%----------------------------------------------------------------------------------------
+
+\title{	
+\normalfont \normalsize 
+\textsc{\textbf{Grundlagen der Wissensverarbeitung} \\ Computer Science \\ Universität Hamburg} \\ [25pt] % Your university, school and/or department name(s)
+~\\
+~\\
+~\\
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\Huge Übung 1: Search Space Design \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+~\\
+~\\
+}
+
+\author{Rafael Ruz Gómez\\Miguel Robles Urquiza} % Nombre y apellidos
+
+\date{\normalsize 5 November 2017} % Incluye la fecha actual
+
+%----------------------------------------------------------------------------------------
+% DOCUMENTO
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Muestra el Título
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.8]{logo_uni_hamburg.png}
+\end{figure}
+
+\newpage %inserta un salto de página
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	Question 1
+%----------------------------------------------------------------------------------------
+
+\section{Exercise 1.1}
+
+\subsection{A core capability a student of computer science should obtain is to characterise 
+and to model an environment for applying an algorithm or in our case a knowledge-based method.
+For each distinction give a reason why the difference might be important when designing AI applications for the given environment.
+Environments can be characterized by the following concepts:}
+
+	\begin{itemize}
+		\item \large{ \textbf{Fully observable <=> partially observable}}
+	 	\item \large{ \textbf{Discrete <=> continuous}}
+	 	\item \large{ \textbf{Deterministic <=> stochastic}}
+	\end{itemize}
+
+\large{ \textbf{Try to identify problems that exists in environments of one type but not in the other. You can use simple examples of environments and tasks to explain these problems.}}
+
+\newpage
+
+
+
+%----------------------------------------------------------------------------------------
+%	Question 2
+%----------------------------------------------------------------------------------------
+
+\section{Exercise 1.2}
+
+
+\subsection{Imagine you have to design a route planning application for public transport (Ger-man: Öffentlicher Nahverkehr). What would be the state-space in this application?And what would be the semantic of nodes and edges in the graphs representing the state-space for this application?}
+
+\newpage
+
+\subsection{You are given two jugs, a 4-liter jug and a 3-liter jug. Neither has any measuring markers on it. There is a pump that can be used to fill the jugs with water. How can you get exactly 2 liters of water into the 4-liter jug? Solve this riddle using your knowledge about searching gained so far.}
+
+\large{ \textbf{a) Develop a formal model of the problem and select appropriate methods to solveit.}}
+
+\newpage
+\large{ \textbf{b)Imagine instead of water you would have to measure 2 liters of expensive wine,so wasting any liquid is not an option. Is the riddle still solvable? Why/Why not?}}
+
+\newpage
+
+
+
+%------------------------------------------------
+
+%\bibliography{citas} %archivo citas.bib que contiene las entradas 
+%\bibliographystyle{plain} % hay varias formas de citar
+
+\end{document}
+
