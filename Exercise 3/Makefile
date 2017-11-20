@@ -11,8 +11,10 @@ all: $(BIN)/blind_search
 # ************ Compilación de módulos ************
 
 $(OBJ)/blind_search.o : $(SRC)/blind_search.cpp $(INC)/blind_search.h
+	-mkdir obj 2> /dev/null
 	$(CXX) -c $(CXXFLAGS) $(SRC)/blind_search.cpp -o $(OBJ)/blind_search.o
 $(BIN)/blind_search : $(OBJ)/blind_search.o
+	-mkdir bin 2> /dev/null
 	$(CXX) -o $(BIN)/blind_search $(OBJ)/blind_search.o
 
 
@@ -23,4 +25,3 @@ clean:
 
 mrproper: clean
 	-rm -f $(BIN)/*
-	

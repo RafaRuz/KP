@@ -4,6 +4,7 @@
 #include <queue>            // std::queue
 #include <stack>            // std::stack
 #include <vector>           // std::vector
+#include <sys/resource.h>   // rusage
 
 #include "blind_search.h"
 
@@ -231,6 +232,7 @@ bool BreadthFirst( const Environment &environment, Path &path ){
   queue<Path> frontier;
   Path currentPath(environment.getStart());
   bool** unreachedPositions = new bool*[environment.getRows()];
+  unsigned int maxNodes = 0;
 
   for (size_t i = 0; i < environment.getRows(); i++)
     unreachedPositions[i] = new bool[environment.getColumns()];
@@ -255,10 +257,13 @@ bool BreadthFirst( const Environment &environment, Path &path ){
         for (size_t i = 0; i < environment.getRows(); i++)
           delete[] unreachedPositions[i];
         delete[] unreachedPositions;
+        cout << "Maximum number of paths in the frontier: " << maxNodes << endl;
         return(true);
       }
       else
         frontier.push(*it);
+
+      if( frontier.size() > maxNodes ) maxNodes = frontier.size();
     }
   }while( !frontier.empty() );
 
@@ -266,6 +271,7 @@ bool BreadthFirst( const Environment &environment, Path &path ){
     delete[] unreachedPositions[i];
   delete[] unreachedPositions;
 
+  cout << "Maximum number of paths in the frontier: " << maxNodes << endl;
   return(false);
 }
 
@@ -275,6 +281,7 @@ bool DepthFirst( const Environment &environment, Path &path ){
   stack<Path> frontier;
   Path currentPath(environment.getStart());
   bool** unreachedPositions = new bool*[environment.getRows()];
+  unsigned int maxNodes = 0;
 
   for (size_t i = 0; i < environment.getRows(); i++)
     unreachedPositions[i] = new bool[environment.getColumns()];
@@ -288,6 +295,7 @@ bool DepthFirst( const Environment &environment, Path &path ){
       currentPath = frontier.top();
       frontier.pop();
     }
+    //environment.Print(currentPath);
 
     vector<Path> extendedPaths;
     extendedPaths = ExpandPath(currentPath,environment,unreachedPositions);
@@ -298,18 +306,21 @@ bool DepthFirst( const Environment &environment, Path &path ){
         for (size_t i = 0; i < environment.getRows(); i++)
           delete[] unreachedPositions[i];
         delete[] unreachedPositions;
+        cout << "Maximum number of paths in the frontier: " << maxNodes << endl;
         return(true);
       }
       else
         frontier.push(*it);
+
+      if( maxNodes < frontier.size() ) maxNodes = frontier.size();
     }
-    //environment.Print(currentPath);
   }while( !frontier.empty() );
 
   for (size_t i = 0; i < environment.getRows(); i++)
     delete[] unreachedPositions[i];
   delete[] unreachedPositions;
 
+  cout << "Maximum number of paths in the frontier: " << maxNodes << endl;
   return(false);
 }
 
@@ -318,6 +329,7 @@ bool AStar( const Environment &environment, Path &path ){
   priority_queue<Path,vector<Path>,PathComparison> frontier(PathComparison(environment.getGoal(),&environment,true));
   Path currentPath(environment.getStart());
   bool** unreachedPositions = new bool*[environment.getRows()];
+  unsigned int maxNodes = 0;
 
   for (size_t i = 0; i < environment.getRows(); i++)
     unreachedPositions[i] = new bool[environment.getColumns()];
@@ -342,10 +354,13 @@ bool AStar( const Environment &environment, Path &path ){
         for (size_t i = 0; i < environment.getRows(); i++)
           delete[] unreachedPositions[i];
         delete[] unreachedPositions;
+        cout << "Maximum number of paths in the frontier: " << maxNodes << endl;
         return(true);
       }
       else
         frontier.push(*it);
+
+      if( maxNodes < frontier.size() ) maxNodes = frontier.size();
     }
   }while( !frontier.empty() );
 
@@ -353,6 +368,7 @@ bool AStar( const Environment &environment, Path &path ){
     delete[] unreachedPositions[i];
   delete[] unreachedPositions;
 
+  cout << "Maximum number of paths in the frontier: " << maxNodes << endl;
   return(false);
 }
 
@@ -371,6 +387,12 @@ int main(int argc, char const *argv[]) {
   Path path_b;
   Path path_d;
   Path path_a;
+
+  int who = RUSAGE_SELF;
+  struct rusage usage;
+  int ret;
+
+
 
 
   cout << endl << "Breadth-First algorithm:" << endl;
@@ -393,6 +415,25 @@ int main(int argc, char const *argv[]) {
     environment.Print(path_d);
   }
   else cout << "Path not found using A* algorithm." << endl;
+
+   /*ret = getrusage(who, &usage);
+
+   cout <<   usage.ru_utime.tv_usec <<  " --> user CPU microseconds used"  << endl;
+   cout <<   usage.ru_stime.tv_usec <<  " --> system CPU microseconds used"  << endl;
+   cout <<   usage.ru_maxrss <<  " --> maximum resident set size"  << endl;
+   cout <<   usage.ru_ixrss <<  " --> integral shared memory size"  << endl;
+   cout <<   usage.ru_idrss <<  " --> integral unshared data size "  << endl;
+   cout <<   usage.ru_isrss <<  " --> integral unshared stack size"  << endl;
+   cout <<   usage.ru_minflt <<  " --> page reclaims (soft page faults)"  << endl;
+   cout <<   usage.ru_majflt <<  " --> page faults (hard page faults)"  << endl;
+   cout <<   usage.ru_nswap <<  " --> swaps"  << endl;
+   cout <<   usage.ru_inblock <<  " --> block input operations"  << endl;
+   cout <<   usage.ru_oublock <<  " --> block output operations"  << endl;
+   cout <<   usage.ru_msgsnd << " -->  IPC messages sent"  << endl;
+   cout <<   usage.ru_msgrcv <<  " --> IPC messages received"  << endl;
+   cout <<   usage.ru_nsignals <<  " --> signals received"  << endl;
+   cout <<   usage.ru_nvcsw <<  " --> voluntary context switches"  << endl;
+   cout <<   usage.ru_nivcsw <<  " --> involuntary context switches"  << endl;*/
 
   return(0);
 
