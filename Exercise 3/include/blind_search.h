@@ -34,13 +34,29 @@ class Path{
     double heuristic( const unsigned int &x, const unsigned int &y, const vector<pair<unsigned int,unsigned int> > &portals ) const{
       vector<pair<unsigned int,unsigned int> >::const_iterator it = portals.begin();
       unsigned int min = abs(x-positions.back().first) + abs(y-positions.back().second);
-
+/*
       for( ; it!=portals.end(); ++it){
         if( ( abs(positions.back().first - it->first) + abs(positions.back().second - it->second) + // Distance to the portal
               abs(it->first - x) + abs(it->second - y) ) < min )     // Distance from the portal to the goal
           min = ( abs(positions.back().first - it->first) + abs(positions.back().second - it->second) +
                 abs(it->first - x) + abs(it->second - y) );
       }
+*/
+      for (size_t i = 0; i < length; i++) {
+        if( i%2 ){
+          if( ( abs(positions.back().first - portals[i].first) + abs(positions.back().second - portals[i].second) + // Distance to the portal
+                abs(portals[i-1].first - x) + abs(portals[i-1].second - y) ) < min )     // Distance from the portal to the goal
+            min = ( abs(positions.back().first - portals[i].first) + abs(positions.back().second - portals[i].second) +
+                  abs(portals[i-1].first - x) + abs(portals[i-1].second - y) );
+        }
+        else{
+          if( ( abs(positions.back().first - portals[i].first) + abs(positions.back().second - portals[i].second) + // Distance to the portal
+                abs(portals[i+1].first - x) + abs(portals[i+1].second - y) ) < min )     // Distance from the portal to the goal
+            min = ( abs(positions.back().first - portals[i].first) + abs(positions.back().second - portals[i].second) +
+                  abs(portals[i+1].first - x) + abs(portals[i+1].second - y) );
+        }
+      }
+
       return(min);
     }
 
@@ -86,16 +102,14 @@ class Path{
 
     // Adds a position at the end of the path
     bool addPosition( const unsigned int x, const unsigned int y ){
-      return(addPosition(pair<unsigned int,unsigned int>(x,y)));
+      addPosition(pair<unsigned int,unsigned int>(x,y));
     }
 
     // Adds a position at the end of the path
     void addPosition( const pair<unsigned int,unsigned int> &pos ){
-    
         positions.push_back(pos);
         length++;
         cost++;
-
     }
 
     // Check if a position is already in the path or not
@@ -298,12 +312,13 @@ class Environment{
 
       vector<pair<unsigned int,unsigned int> > positionsPath = path.getPositions();
       vector<pair<unsigned int,unsigned int> >::const_iterator it=positionsPath.begin();
-      ++it;
-      vector<pair<unsigned int,unsigned int> >::const_iterator it_end=positionsPath.end();
-      --it_end;
+      // ++it;
+      // vector<pair<unsigned int,unsigned int> >::const_iterator it_end=positionsPath.end();
+      // --it_end;
 
-      for( ; it != it_end; ++it)
-        if( matrix[it->first][it->second] < '0' || matrix[it->first][it->second] > '9' )
+      for( ; it != positionsPath.end(); ++it)
+        if( (matrix[it->first][it->second] < '0' || matrix[it->first][it->second] > '9') &&
+             matrix[it->first][it->second] != 's' && matrix[it->first][it->second] != 'g' )
           aux.modifyPosition(it->first, it->second, '*');
 
       aux.Print();
