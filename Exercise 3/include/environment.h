@@ -5,7 +5,7 @@
 #include <utility>          // std::pair
 #include <vector>           // std::vector
 #include <cstdio>
-#include "path.hpp"
+#include "path.h"
 using namespace std;
 
 
