@@ -1,3 +1,7 @@
+#include "pathComparison.hpp"
+#include "environment.hpp"
+#include "path.hpp"
+
 #include <iostream>
 #include <utility>          // std::pair
 #include <list>             // std::list
@@ -6,9 +10,6 @@
 #include <vector>           // std::vector
 #include <sys/resource.h>   // rusage
 
-#include "pathComparison.h"
-#include "environment.h"
-#include "path.h"
 using namespace std;
 
 // Expands a Path checking the four adjacent positions

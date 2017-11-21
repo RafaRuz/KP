@@ -1,4 +1,4 @@
-#include "pathComparison.h"
+#include "pathComparison.hpp"
 
 using namespace std;
 

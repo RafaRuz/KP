@@ -1,6 +1,14 @@
-#include "path.h"
+#include "path.hpp"
 
 using namespace std;
+
+  // Constructor for an empty Path
+  Path::Path():length(0),cost(0){}
+
+  // Constructor for an empty path with a start defined
+  Path::Path( const pair<unsigned int,unsigned int> s ):length(1),cost(1){
+    positions.push_back(s);
+  }
 
       // Heuristic function for the distance to a position (used fot A* search)
     double Path::heuristic( const int &x, const int &y, const vector<pair<unsigned int,unsigned int> > &portals ) const{
