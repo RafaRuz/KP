@@ -1,4 +1,5 @@
-  #include "environment.hpp"
+  #include "environment.h"
+  #include "path.h"
 
   using namespace std;
 
@@ -188,4 +189,11 @@
       if( x < rows && y < columns ){
           matrix[x][y] = c;
       }
+    }
+
+    int main(int argc, char const *argv[]) {
+      cout << "mis muertos" << endl;
+      Path p;
+      Environment a(4,4);
+      return 0;
     }

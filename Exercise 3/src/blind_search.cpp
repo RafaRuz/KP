@@ -1,6 +1,6 @@
-#include "pathComparison.hpp"
-#include "environment.hpp"
-#include "path.hpp"
+#include "pathComparison.h"
+#include "environment.h"
+#include "path.h"
 
 #include <iostream>
 #include <utility>          // std::pair
