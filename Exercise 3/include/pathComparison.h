@@ -1,5 +1,5 @@
-#ifndef PATHCOMPARISON_H
-#define PATHCOMPARISON_H
+#ifndef _PATHCOMPARISON_H_
+#define _PATHCOMPARISON_H_
 
 #include <utility>          // std::pair
 #include "environment.h"

@@ -1,5 +1,5 @@
-#ifndef ENVIRONMENT_H
-#define ENVIRONMENT_H
+#ifndef _ENVIRONMENT_H_
+#define _ENVIRONMENT_H_
 
 #include <iostream>
 #include <utility>          // std::pair

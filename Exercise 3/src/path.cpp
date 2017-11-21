@@ -32,47 +32,47 @@ using namespace std;
     }
 
     // Heuristic function for the distance to a position (used fot A* search)
-     inline double Path::heuristic( const pair<unsigned int,unsigned int> &goal, const vector<pair<unsigned int,unsigned int> > &portals ) const{
+     double Path::heuristic( const pair<unsigned int,unsigned int> &goal, const vector<pair<unsigned int,unsigned int> > &portals ) const{
       return(heuristic(goal.first,goal.second,portals));
     }
 
     // Estimated cost for the extension of the actual Path to a position
-     inline double Path::estimation( const unsigned int &x, const unsigned int &y, const vector<pair<unsigned int,unsigned int> > &portals ) const{
+     double Path::estimation( const unsigned int &x, const unsigned int &y, const vector<pair<unsigned int,unsigned int> > &portals ) const{
       return(cost+heuristic(x,y,portals));
     }
 
     // Estimated cost for the extension of the actual Path to a position
-      inline double Path::estimation( const pair<unsigned int,unsigned int> &goal, const vector<pair<unsigned int,unsigned int> > &portals ) const{
+      double Path::estimation( const pair<unsigned int,unsigned int> &goal, const vector<pair<unsigned int,unsigned int> > &portals ) const{
       return(cost+heuristic(goal,portals));
     }
 
     // Start getter
-    inline pair<unsigned int,unsigned int> Path::getStart() const{
+    pair<unsigned int,unsigned int> Path::getStart() const{
       return(positions.front());
     }
 
     // End getter
-     inline pair<unsigned int,unsigned int> Path::getEnd() const{
+     pair<unsigned int,unsigned int> Path::getEnd() const{
       return(positions.back());
     }
 
     // Length getter
-     inline unsigned int Path::getLength() const{
+     unsigned int Path::getLength() const{
       return(length);
     }
 
     // Cost getter
-     inline unsigned int Path::getCost() const{
+     unsigned int Path::getCost() const{
       return(cost);
     }
 
     // Positions getter
-     inline vector<pair<unsigned int,unsigned int> > Path::getPositions() const{
+     vector<pair<unsigned int,unsigned int> > Path::getPositions() const{
       return(positions);
     }
 
     // Adds a position at the end of the path
-     inline void Path::addPosition( const unsigned int x, const unsigned int y ){
+     void Path::addPosition( const unsigned int x, const unsigned int y ){
       addPosition(pair<unsigned int,unsigned int>(x,y));
     }
 
@@ -92,7 +92,7 @@ using namespace std;
       return(false);
     }
 
-    inline bool Path::containsPosition( const unsigned int x, const unsigned int y ) const{
+    bool Path::containsPosition( const unsigned int x, const unsigned int y ) const{
       return(containsPosition(pair<unsigned int,unsigned int>(x,y)));
 
     }
