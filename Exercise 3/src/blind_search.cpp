@@ -7,7 +7,8 @@
 #include <sys/resource.h>   // rusage
 
 #include "pathComparison.h"
-
+#include "environment.h"
+#include "path.h"
 using namespace std;
 
 // Expands a Path checking the four adjacent positions
