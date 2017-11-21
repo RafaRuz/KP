@@ -1,4 +1,7 @@
-#include "environment.h"
+  #include "environment.h"
+  #include "path.h"
+
+  using namespace std;
 
     // Constructor for an empty environment with dimensions r and c
     Environment::Environment( const unsigned int r, const unsigned int c){
@@ -41,22 +44,22 @@
     }
 
     // Getter for getPortals
-     vector<pair<unsigned int,unsigned int> > Environment::getPortals() const{
+    inline vector<pair<unsigned int,unsigned int> > Environment::getPortals() const{
       return portals;
     }
 
     // Getter for Rows
-     unsigned int Environment::getRows() const{
+    inline unsigned int Environment::getRows() const{
       return rows;
     }
 
     // Getter for Columns
-     unsigned int Environment::getColumns() const{
+    inline unsigned int Environment::getColumns() const{
       return columns;
     }
 
     //Getter for an element
-     char Environment::getElement(const unsigned int x, const unsigned int y) const{
+    inline char Environment::getElement(const unsigned int x, const unsigned int y) const{
       if( x < rows && y < columns ){
         return matrix[x][y];
       }
@@ -64,22 +67,22 @@
     }
 
     //Getter for a element of a Portal
-     pair<unsigned int,unsigned int> Environment::getPortal(unsigned int pos) const{
+    inline pair<unsigned int,unsigned int> Environment::getPortal(unsigned int pos) const{
       return portals[pos];
     }
 
     // Getter for matrix
-     char** Environment::getMatrix() const{
+    inline char** Environment::getMatrix() const{
       return matrix;
     }
 
     // Getter for start
-     pair<unsigned int,unsigned int> Environment::getStart() const{
+    inline pair<unsigned int,unsigned int> Environment::getStart() const{
       return start;
     }
 
     //Getter for goal
-     pair<unsigned int,unsigned int> Environment::getGoal() const{
+    inline pair<unsigned int,unsigned int> Environment::getGoal() const{
       return goal;
     }
 
@@ -148,9 +151,9 @@
     return(false);
   }
   // Check if a position is suitable for going thru it
-   bool Environment::isValidPosition( const pair<int,int> position ) const{
-  return(isValidPosition(position.first,position.second));
-}
+  inline bool Environment::isValidPosition( const pair<int,int> position ) const{
+    return(isValidPosition(position.first,position.second));
+  }
 
 
     // Prints the environment in ASCII code
@@ -186,4 +189,11 @@
       if( x < rows && y < columns ){
           matrix[x][y] = c;
       }
+    }
+
+    int main(int argc, char const *argv[]) {
+      cout << "mis muertos" << endl;
+      Path p;
+      Environment a(4,4);
+      return 0;
     }

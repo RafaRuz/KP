@@ -104,26 +104,26 @@
 \huge{ \textbf{Exercise 4.3}}
 \newline
 
-\large{\textbf{Provide example mazes that show the differences between and properties of the search strategies. Describe these properties}}
+\large{\textbf{Provide example mazes that show the differences between and properties of the search strategies. Describe these properties}}\\
 
+Breadth first is useful when you want a solution containing the fewest arcs. It's obvious that bread first search have few arcs than depth first search.\\
 
-
-\newpage
-
-
+\includegraphics[scale=0.7]{K1.jpg}
+\includegraphics[scale=0.699]{K2.jpg}
 
 %----------------------------------------------------------------------------------------
 %	Question 2
 %----------------------------------------------------------------------------------------
-
+\newpage
 \huge{ \textbf{Exercise 4.4}}
 \newline
 
-\large{\textbf{Are there cases in which your program is unable to find a solution? Provide examplemazes.}}
+\large{\textbf{Are there cases in which your program is unable to find a solution? Provide example mazes.}}\\
 
+We have found just one case in wich our program is unable to find a solution, when there is no real solution. We meant, when we can not arrive to the goal because the goal is totally surrounded by 'x'.\\
 
+\includegraphics[scale=1.3]{maze.jpg}
 
-\newpage
 
 %----------------------------------------------------------------------------------------
 %	Question 3
@@ -132,26 +132,26 @@
 \huge{ \textbf{Exercise 5.2}}
 \newline
 
-\large{\textbf{Write a second heuristic function that works correctly with portals. What do you have to change?}}
+\large{\textbf{Write a second heuristic function that works correctly with portals. What do you have to change?}}\\
+
+We check which distance is the minimum distance between our actual position and each portal. If taking this portal we arrive to the goal with minimum cost, we choose this path.\\
 
 
 
-\newpage
 
 %----------------------------------------------------------------------------------------
 %	Question 4
 %----------------------------------------------------------------------------------------
+\newpage
 
 \huge{ \textbf{Exercise 5.3}}
 \newline
 
-\large{\textbf{The maze above is a slightly modified version of the environment (Not possible path between start and goal). How does your search react in this case? Can you ensure termination?}}
+\large{\textbf{The maze above is a slightly modified version of the environment (Not possible path between start and goal). How does your search react in this case? Can you ensure termination?}}\\
 
-
-
-
-
-\newpage
+We send a message to the user telling that the program has been unable to find a path between the start node the goal node.\\
+Yes, we can ensure termination
+\newline
 
 %----------------------------------------------------------------------------------------
 %	Question 5

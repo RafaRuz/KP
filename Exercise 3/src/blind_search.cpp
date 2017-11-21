@@ -1,3 +1,7 @@
+#include "pathComparison.h"
+#include "environment.h"
+#include "path.h"
+
 #include <iostream>
 #include <utility>          // std::pair
 #include <list>             // std::list
@@ -5,8 +9,6 @@
 #include <stack>            // std::stack
 #include <vector>           // std::vector
 #include <sys/resource.h>   // rusage
-
-#include "pathComparison.h"
 
 using namespace std;
 

@@ -2,8 +2,8 @@
 #define PATHCOMPARISON_H
 
 #include <utility>          // std::pair
-#include "environment.h"
-#include "path.h"
+#include "environment.hpp"
+#include "path.hpp"
 
 using namespace std;
 
