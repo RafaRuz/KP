@@ -8,7 +8,8 @@
 #include <queue>            // std::queue
 #include <stack>            // std::stack
 #include <vector>           // std::vector
-#include <sys/resource.h>   // rusage
+#include <ctime>            //time
+
 
 using namespace std;
 
@@ -370,52 +371,40 @@ int main(int argc, char const *argv[]) {
   Path path_d;
   Path path_a;
 
-  int who = RUSAGE_SELF;
-  struct rusage usage;
-  int ret;
-
-
+double t1, t2;
 
 
   cout << endl << "Breadth-First algorithm:" << endl;
+  t1 = clock();
   if( BreadthFirst(environment,path_b) ){
+    t2 = clock();
     cout << "Path length --> " << path_b.getLength() << endl;
     environment.Print(path_b);
+    cout << "Ejecution time: " << (t2-t1)/CLOCKS_PER_SEC << endl;
   }
   else cout << "Path not found using Breadth-First algorithm." << endl;
 
+
+
   cout << endl << "Depth-First algorithm:" << endl;
+  t1 = clock();
   if( DepthFirst(environment,path_d) ){
+    t2 = clock();
     cout << "Path length --> " << path_d.getLength() << endl;
     environment.Print(path_d);
+    cout << "Ejecution time: " << (t2-t1)/CLOCKS_PER_SEC << endl;
   }
   else cout << "Path not found using Depth-First algorithm." << endl;
 
   cout << endl << "A* algorithm:" << endl;
+  t1 = clock();
   if( AStar(environment,path_d) ){
+    t2 = clock();
     cout << "Path length --> " << path_d.getLength() << endl;
     environment.Print(path_d);
+    cout << "Ejecution time: " << (t2-t1)/CLOCKS_PER_SEC << endl;
   }
   else cout << "Path not found using A* algorithm." << endl;
-
-   /*ret = getrusage(who, &usage);
-
-   cout <<   usage.ru_utime.tv_usec <<  " --> user CPU microseconds used"  << endl;
-   cout <<   usage.ru_stime.tv_usec <<  " --> system CPU microseconds used"  << endl;
-   cout <<   usage.ru_maxrss <<  " --> maximum resident set size"  << endl;
-   cout <<   usage.ru_ixrss <<  " --> integral shared memory size"  << endl;
-   cout <<   usage.ru_idrss <<  " --> integral unshared data size "  << endl;
-   cout <<   usage.ru_isrss <<  " --> integral unshared stack size"  << endl;
-   cout <<   usage.ru_minflt <<  " --> page reclaims (soft page faults)"  << endl;
-   cout <<   usage.ru_majflt <<  " --> page faults (hard page faults)"  << endl;
-   cout <<   usage.ru_nswap <<  " --> swaps"  << endl;
-   cout <<   usage.ru_inblock <<  " --> block input operations"  << endl;
-   cout <<   usage.ru_oublock <<  " --> block output operations"  << endl;
-   cout <<   usage.ru_msgsnd << " -->  IPC messages sent"  << endl;
-   cout <<   usage.ru_msgrcv <<  " --> IPC messages received"  << endl;
-   cout <<   usage.ru_nsignals <<  " --> signals received"  << endl;
-   cout <<   usage.ru_nvcsw <<  " --> voluntary context switches"  << endl;
-   cout <<   usage.ru_nivcsw <<  " --> involuntary context switches"  << endl;*/
 
   return(0);
 
