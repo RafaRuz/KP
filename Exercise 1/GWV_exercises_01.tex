@@ -119,21 +119,16 @@ Environments can be characterized by the following concepts:}
 \newline
 
 \begin{itemize}
-\item Fully observable: agent sensors give you access to the complete state of the environment; sensors detect all aspects relevant to decision making \\
-\item Partially observable: not fully observable due to noise and inaccurate sensors or missing system information \\
+\item Fully observable: Too much space reserved in memory 
+\item Partially observable: The agent has to recompute the path each step it does and discovers new environment.
 
-One problem of the partially observable is that agent need to maintain a internal state to know what happens on the outside.\\
-
-\item Discreet: When there is a finite number of states, actions and perceptions.\\
-\item Continuous: Does not have a finite number of states.\\
+\item Discrete: No problem found  
+\item Continuous: Does not have a finite number of states.
 
 
-\item Deterministic: if the next state of the environment is totally determined by its current state and the action executed by the agent. \\      
-\item Stochastic: not deterministic i. e. the medium is not determined by the current state. \\
+\item Deterministic: Everything is structured, we can not take random actions \\      
+\item Stochastic: There is no chance to predict the nex state 
 \end{itemize}
-\newpage
-
-
 
 %----------------------------------------------------------------------------------------
 %	Question 2
@@ -141,20 +136,49 @@ One problem of the partially observable is that agent need to maintain a interna
 
 \huge{ \textbf{Exercise 1.2}}\\
 
+\begin{enumerate}
+\item 
+\large{ \textbf{Imagine you have to design a route planning application for public transport (German: Öffentlicher Nahverkehr). What would be the state-space in this application? And what would be the semantic of nodes and edges in the graphs representing the state-space for this application?}}\\
 
-\large{ \textbf{Imagine you have to design a route planning application for public transport (German: Öffentlicher Nahverkehr). What would be the state-space in this application?And what would be the semantic of nodes and edges in the graphs representing the state-space for this application?}}
+States space is form by differents bus stops and where the buses are(Environment state) and in which bus or stop is the person(Agent state)
+The nodes of this space are the bus stops and the arcs are the paths between two bus stops.\\
 
-\newpage
-
+\item
 \large{ \textbf{You are given two jugs, a 4-liter jug and a 3-liter jug. Neither has any measuring markers on it. There is a pump that can be used to fill the jugs with water. How can you get exactly 2 liters of water into the 4-liter jug? Solve this riddle using your knowledge about searching gained so far.}}\\
 
 \large{ \textbf{a) Develop a formal model of the problem and select appropriate methods to solveit.}}
+\begin{itemize}
+\item States\\
+3-liter jug fill\\
+3-liter jug empty\\
+3-liter jug with 1 liter\\
+3-liter jug with 2 liters\\
+4-liter jug fill\\
+4-liter jug empty\\
+4-liter jug with 1 liter\\
+4-liter jug with 2 liters\\
+4-liter jug with 3 liters\\
 
+
+\item 
+Start: Both jugs are empty\\
+Goal: 2 liter in 4-liter jug\\
+
+\item Transitions between states\\
+Fill 4-liter jug\\
+Fill 3-liter jug\\
+Empty 4-liter jug\\
+Empty 3-liter jug\\
+Fill 4-liter jug with 3-liter jug\\
+Fill 3-liter jug with 4-liter jug \\
+\newline
+\end{itemize}
+
+\large{ \textbf{b)Imagine instead of water you would have to measure 2 liters of expensive wine, so wasting any liquid is not an option. Is the riddle still solvable? Why/Why not?}}
+
+No, because there is no solution if you delete the empty actions from the transitions between states.
 \newpage
-\large{ \textbf{b)Imagine instead of water you would have to measure 2 liters of expensive wine,so wasting any liquid is not an option. Is the riddle still solvable? Why/Why not?}}
-
-\newpage
-
+\end{enumerate}
 
 
 %------------------------------------------------
