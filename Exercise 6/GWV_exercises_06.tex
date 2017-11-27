@@ -1,0 +1,150 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment LaTeX Template Version 1.0 (5/5/12)
+% This template has been downloaded from: http://www.LaTeXTemplates.com
+% Original author:  Frits Wenneker (http://www.howtotex.com)
+% License: CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+% ---- Entrada y salida de texto -----
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[utf8]{inputenc}
+%\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+
+% ---- Idioma --------
+
+\usepackage[spanish, es-tabla]{babel} % Selecciona el español para palabras introducidas automáticamente, p.ej. "septiembre" en la fecha y especifica que se use la palabra Tabla en vez de Cuadro
+
+% ---- Otros paquetes ----
+
+\usepackage{url} % ,href} %para incluir URLs e hipervínculos dentro del texto (aunque hay que instalar href)
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+%\usepackage{graphics,graphicx, floatrow} %para incluir imágenes y notas en las imágenes
+\usepackage{graphics,graphicx, float} %para incluir imágenes y colocarlas
+
+% Para hacer tablas comlejas
+%\usepackage{multirow}
+%\usepackage{threeparttable}
+
+%\usepackage{sectsty} % Allows customizing section commands
+%\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	TÍTULO Y DATOS DEL ALUMNO
+%----------------------------------------------------------------------------------------
+
+\title{	
+\normalfont \normalsize 
+\textsc{\textbf{Grundlagen der Wissensverarbeitung} \\ Computer Science \\ Universität Hamburg} \\ [25pt] % Your university, school and/or department name(s)
+~\\
+~\\
+~\\
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\Huge Tutorial 6: Search and Parsing \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+~\\
+~\\
+}
+
+\author{Rafael Ruz Gómez\\Miguel Robles Urquiza} % Nombre y apellidos
+
+\date{\normalsize 27 November 2017} % Incluye la fecha actual
+
+%----------------------------------------------------------------------------------------
+% DOCUMENTO
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Muestra el Título
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.8]{logo_uni_hamburg.png}
+\end{figure}
+
+\newpage %inserta un salto de página
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	Question 1
+%----------------------------------------------------------------------------------------
+
+\huge{ \textbf{Exercise 1}}
+\newline
+
+\large{\textbf{(a) By what operations is the input transformed into the output? What do these
+operations do?\\
+(b) When does the parsing algorithm terminate?\\
+(c) Describe the formal properties of a dependency tree as defined in the paper.\\
+(d) For each property: Give an example dependency tree that violates the property.
+Note: We ask for a tree, not a sentence! Do not try to find a matching sentence
+to your trees, it will only distract you.}\\
+
+%----------------------------------------------------------------------------------------
+%	Question 2
+%----------------------------------------------------------------------------------------
+\huge{ \textbf{Exercise 2}}
+\newline
+
+\large{\textbf{Try to use the proposed parser actions to produce the tree depicted in. Write down the steps and the intermediate states.} \\
+
+%----------------------------------------------------------------------------------------
+%	Question 3
+%----------------------------------------------------------------------------------------
+\huge{ \textbf{Exercise 3}}
+\newline
+
+\large{\textbf{The basic idea laid out in the paper by Nivre is still in use in state-of-the-art parsers such as the one coined “Parsey McParseface” by Google. While the actions are still the same, the mechanics of selecting actions are quite different. The actions are not ordered using a fixed precedence and their applicability is not restricted by lexical rules as they are introduced in the paper. Instead, search is used.
+If you now view parsing using the proposed actions as a search problem:\\
+\newline
+• What are the search states?\\
+• What is the start state?\\
+• What are the end states?\\
+• What are the state transitions?\\
+• Can the search space be created before parsing starts?\\
+• What is the advantage of the proposed algorithm in contrast to simply trying to find a good dependency tree by enumerating all possible trees and selecting the best one from them?\\
+• For the search strategies discussed so far: are they a good fit for this search problem and why (not)?\\
+• How would you design a parser using the parser actions together with an appropriate search procedure?}}\\
+
+
+
+\newpage
+%------------------------------------------------
+
+%\bibliography{citas} %archivo citas.bib que contiene las entradas 
+%\bibliographystyle{plain} % hay varias formas de citar
+
+\end{document}
+
