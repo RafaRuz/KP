@@ -101,16 +101,26 @@
 %	Question 1
 %----------------------------------------------------------------------------------------
 
-\huge{ \textbf{Exercise 1}}
-\newline
+\section{Exercise 1}
 
-\large{\textbf{(a) By what operations is the input transformed into the output? What do these
-operations do?\\
-(b) When does the parsing algorithm terminate?\\
-(c) Describe the formal properties of a dependency tree as defined in the paper.\\
-(d) For each property: Give an example dependency tree that violates the property.
-Note: We ask for a tree, not a sentence! Do not try to find a matching sentence
-to your trees, it will only distract you.}\\
+\subsection{By what operations is the input transformed into the output? What do these operations do?}
+
+\begin{itemize}
+	\item Left-Arc: Adds an arc from the next input token to the node on top of the stack and reduces from the stack(pops).
+	\item Right-Arc: Adds an arc from the node on top of the stack to the next input token and pushes the next input token into the stack.
+	\item Reduce: Pops from the stack.
+	\item Shift: Push the next input item into the stack.
+\end{itemize}
+
+\subsection{When does the parsing algorithm terminate?}
+
+It terminates when the list of remaining input tokens is empty, i.e. when it reaches a configuration <S,nil,A> (S stack, empty input, A arc relation).
+
+\subsection{Describe the formal properties of a dependency tree as defined in the paper.}
+
+
+
+\subsection{For each property: Give an example dependency tree that violates the property. Note: We ask for a tree, not a sentence! Do not try to find a matching sentence to your trees, it will only distract you.}
 
 %----------------------------------------------------------------------------------------
 %	Question 2
