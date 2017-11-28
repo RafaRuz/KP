@@ -101,9 +101,9 @@
 %	Question 1
 %----------------------------------------------------------------------------------------
 
-\section{Exercise 1}
+\section*{Exercise 1}
 
-\subsection{By what operations is the input transformed into the output? What do these operations do?}
+\subsection*{(a) By what operations is the input transformed into the output? What do these operations do?}
 
 \begin{itemize}
 	\item Left-Arc: Adds an arc from the next input token to the node on top of the stack and reduces from the stack(pops).
@@ -112,23 +112,50 @@
 	\item Shift: Push the next input item into the stack.
 \end{itemize}
 
-\subsection{When does the parsing algorithm terminate?}
+\subsection*{(b) When does the parsing algorithm terminate?}
 
-It terminates when the list of remaining input tokens is empty, i.e. when it reaches a configuration <S,nil,A> (S stack, empty input, A arc relation).
+It terminates when the list of remaining input tokens is empty, i.e. when it reaches a configuration <S,nil,A> where S represents the stack, the second element represents the empty input, and A represents the arc relation.
 
-\subsection{Describe the formal properties of a dependency tree as defined in the paper.}
+\subsection*{(c) Describe the formal properties of a dependency tree as defined in the paper.}
+
+\begin{itemize}
+	\item Single head: If there are 2 nodes having an arc to the same node, then those 2 nodes are the same node, i.e. every node has got 0 or 1 parent node, but no more than 1.
+	\item Acyclic: For every 2 differents nodes n and n', there's never an arc from n to n' and at the same time one path(one or more arcs consecutively) from n' to n.
+	\item Connected: For every 2 different nodes n and n', there's always a path between them (from n to n' or from n' to n).
+	\item Projective: For every two nodes n and n' having an arc from one to the other, if there's another node n'' between them ( n < n'' < n' means POS(n) < POS(n'') < POS(n') ), then there has to be a path from n or from n' to n''
+\end{itemize}
+
+\subsection*{For each property: Give an example dependency tree that violates the property. Note: We ask for a tree, not a sentence! Do not try to find a matching sentence to your trees, it will only distract you.}
+
+\begin{itemize}
+	\item Single head: Three nodes n0,n1 and n2. Arcs: n0->n1 , n2->n1
+	\item Acyclic: Two nodes n0 and n1. Arcs: n0->n1 , n1->n0
+	\item Connected: Two nodes n0 and n1. Arcs: none
+	\item Projective: Three nodes n0,n1 and n2. Note that the list of input tokens are n0=(0,w0), n1=(1,w1) and n2=(2,w2) where the pair is consisting of a position and a word form. Then the list of arcs would be: n0->n2
+\end{itemize}
 
 
-
-\subsection{For each property: Give an example dependency tree that violates the property. Note: We ask for a tree, not a sentence! Do not try to find a matching sentence to your trees, it will only distract you.}
 
 %----------------------------------------------------------------------------------------
 %	Question 2
 %----------------------------------------------------------------------------------------
-\huge{ \textbf{Exercise 2}}
-\newline
+\section*{Exercise 2}
 
-\large{\textbf{Try to use the proposed parser actions to produce the tree depicted in. Write down the steps and the intermediate states.} \\
+
+\subsection*{Try to use the proposed parser actions to produce the tree depicted in Figure 1. Write down the steps and the intermediate states.}
+
+\begin{enumerate}
+	\item Initialization . <nil, Der Mann isst eine Giraffe, $\emptyset$>
+	\item Shift . <Der, Mann isst eine Giraffe, $\emptyset$>
+	\item No se cual de las siguientes va.
+	\item Right-Arc . <Mann Der, isst eine Giraffe, $\emptyset$>
+	\item Left-ARc . <nil, Mann isst eine Giraffe, {(Mann,Der)}>
+	
+\end{enumerate}
+
+
+
+
 
 %----------------------------------------------------------------------------------------
 %	Question 3
