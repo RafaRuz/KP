@@ -147,9 +147,13 @@ It terminates when the list of remaining input tokens is empty, i.e. when it rea
 \begin{enumerate}
 	\item Initialization . <nil, Der Mann isst eine Giraffe, $\emptyset$>
 	\item Shift . <Der, Mann isst eine Giraffe, $\emptyset$>
-	\item No se cual de las siguientes va.
-	\item Right-Arc . <Mann Der, isst eine Giraffe, $\emptyset$>
-	\item Left-ARc . <nil, Mann isst eine Giraffe, {(Mann,Der)}>
+	\item Left-Arc . <nil, Mann isst eine Giraffe, {(Mann,Der)}>
+	\item Shift . <Mann, isst eine Giraffe, {(Mann,Der)}>
+	\item Left-Arc . <nil, isst eine Giraffe, {(Mann,Der),(isst,Mann)}>
+	\item Shift . <isst, eine Giraffe, {(Mann,Der),(isst,Mann)}>
+	\item Shift . <eine isst, Giraffe, {(Mann,Der),(isst,Mann)}>
+	\item Left-Arc . <isst, Giraffe, {(Mann,Der),(isst,Mann), (Giraffe,eine)}>
+	\item Right-Arc . <Giraffe isst, \textbf{nil}, {(Mann,Der),(isst,Mann), (Giraffe,eine), (isst,Giraffe)}>
 	
 \end{enumerate}
 
@@ -160,21 +164,43 @@ It terminates when the list of remaining input tokens is empty, i.e. when it rea
 %----------------------------------------------------------------------------------------
 %	Question 3
 %----------------------------------------------------------------------------------------
-\huge{ \textbf{Exercise 3}}
-\newline
+\section*{Exercise 3}
 
-\large{\textbf{The basic idea laid out in the paper by Nivre is still in use in state-of-the-art parsers such as the one coined “Parsey McParseface” by Google. While the actions are still the same, the mechanics of selecting actions are quite different. The actions are not ordered using a fixed precedence and their applicability is not restricted by lexical rules as they are introduced in the paper. Instead, search is used.
-If you now view parsing using the proposed actions as a search problem:\\
-\newline
-• What are the search states?\\
-• What is the start state?\\
-• What are the end states?\\
-• What are the state transitions?\\
-• Can the search space be created before parsing starts?\\
-• What is the advantage of the proposed algorithm in contrast to simply trying to find a good dependency tree by enumerating all possible trees and selecting the best one from them?\\
-• For the search strategies discussed so far: are they a good fit for this search problem and why (not)?\\
-• How would you design a parser using the parser actions together with an appropriate search procedure?}}\\
+\subsection*{The basic idea laid out in the paper by Nivre is still in use in state-of-the-art parsers such as the one coined “Parsey McParseface” by Google. While the actions are still the same, the mechanics of selecting actions are quite different. The actions are not ordered using a fixed precedence and their applicability is not restricted by lexical rules as they are introduced in the paper. Instead, search is used. If you now view parsing using the proposed actions as a search problem:}
 
+\subsubsection*{• What are the search states?}
+The search states are nodes composed by the set <S,I,A> as described before (S stack, I input tokens, A arcs). 
+
+\subsubsection*{• What is the start state?}
+The start state is a node composed by <nil, I, $\emptyset$>
+
+\subsubsection*{• What are the end states?}
+The end states are those who have no more input tokens remaining, i.e. <S, nil, A> where $A\neq\emptyset$
+
+\subsubsection*{• What are the state transitions?}
+The transitions are the same described in the paper :
+\begin{itemize}
+	\item Left-Arc
+	\item Right-Arc
+	\item Reduce
+	\item Shift
+\end{itemize}
+
+\subsubsection*{• Can the search space be created before parsing starts?}
+Yes, because the algorithm is deterministic. There are two kinds of transitions: Those that pops an element from the stack, and those that push an element into the stack(and then delete an element from the input). When the stack is empty, the only option is to make a “push” transition, so in the end, we will reach an end state, and so on we can create the search space before parsing starts.
+
+\subsubsection*{• What is the advantage of the proposed algorithm in contrast to simply trying to find a good dependency tree by enumerating all possible trees and selecting the best one from them?}
+The efficiency in time and even more in space.
+
+\subsubsection*{• For the search strategies discussed so far: are they a good fit for this search problem and why (not)?}
+It depends on the length of the input, but in fact depth-first looks like we are applying the algorithm with the priority of transitions described in the paper, so it's not a good idea to create the search space and then just do the same proposed in the paper.\\
+
+Breadth-first has the same problem as always, the efficiency in time and space.\\
+
+A* looks like the best option, but on the other hand I find not easy to define a good heuristic function.
+
+\subsubsection*{• How would you design a parser using the parser actions together with an appropriate search procedure?}
+I would define the search space as described above and then choose A* as the search algorithm.
 
 
 \newpage
