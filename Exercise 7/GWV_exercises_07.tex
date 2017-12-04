@@ -69,7 +69,7 @@
 ~\\
 ~\\
 \horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
-\Huge Tutorial 6: Search and Parsing \\ % The assignment title
+\Huge Tutorial 7: Constraint Satisfaction\\ % The assignment title
 \horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
 ~\\
 ~\\
@@ -77,7 +77,7 @@
 
 \author{Rafael Ruz Gómez\\Miguel Robles Urquiza} % Nombre y apellidos
 
-\date{\normalsize 27 November 2017} % Incluye la fecha actual
+\date{\normalsize \today} % Incluye la fecha actual
 
 %----------------------------------------------------------------------------------------
 % DOCUMENTO
@@ -104,15 +104,14 @@
 \section*{Exercise 7.1}
 
 \subsection*{Formalize this riddle in the form of a constraint network, with the constraints being reasonably small. (I.e. writing a single constraint is not a good solution!) In the following pattern each letter stands for a digit so that the resulting sum is correct.}
-
+\textbf{
 \ \ \ \ S E N D\\
++\  M O R E\\
+=======\\
+\ M O N E Y\\
+}
 
-\ \ \ M O R E\\
-=========\\
-M O N E Y\\
-
-
-\textbf{Let's call $S_i$ the sum done in the last step. Then the constraints are:}
+Let's call $S_i$ the sum done in the last step. Then the constraints are:
 \begin{itemize}
 	\item Different letter have different values: $S \neq E , E \neq N , N \neq D...$
 	\item $(D + E) \% 10 == Y \ \ \ \ \ \ ( S_0 = (D + E) )$
@@ -121,9 +120,13 @@ M O N E Y\\
 	\item $ (((S_2 - S_2) \% 10) / 10 + S + M) \% 10 == O \ \ \ \ \ \ ( S_3 = ((S_2 - S_2) \% 10) / 10 + S + M) $
 	\item $ (((S_3 - S_3) \% 10) / 10 == M $
 \end{itemize}
+%----------------------------------------------------------------------------------------
+%	Question 2
+%----------------------------------------------------------------------------------------
 
 \subsection*{Manual constraint solving.}
 
+\textbf{
 Crossword puzzles are often used in newspapers because they provide joy in solving semi-complex problems by combining logics and human experience. For the crossword above we want to find 6 words of length 3 that fit into the 3x3 table in a way that 3 words can be read horizontal from left to right and 3 words can be read vertically from top to bottom. Choose the words from the following list:\\
 \\
 add, ado, age, ago, aid, ail, aim, air,\\
@@ -133,9 +136,19 @@ bag, ban, bat, bee, boa, ear, eel, eft,\\
 far, fat, fit, lee, oaf, rat, tar, tie.\\
 \\
 First, try to solve the problem without any formal methods or tools. How do you approach this problem as a human? (It is not necessary to give a full solution to the problem at this point, but you should report on the strategies you employ as a human and the problems you encounter.)
+}
+
+
+
+%----------------------------------------------------------------------------------------
+%	Question 3
+%----------------------------------------------------------------------------------------
 
 \subsection*{Solve the problem by hand using domain consistency as a first step and as a second step the arc consistency. Document this process thoroughly.}
 
+%----------------------------------------------------------------------------------------
+%	Question 4
+%----------------------------------------------------------------------------------------
 
 
 \subsection*{• Implement the arc consistency algorithm (found in sect. 4.5 of Poole and Mackworth (2010)) along with a suitable representation of the problem to solve this puzzle.}
