@@ -105,10 +105,22 @@
 
 \subsection*{Formalize this riddle in the form of a constraint network, with the constraints being reasonably small. (I.e. writing a single constraint is not a good solution!) In the following pattern each letter stands for a digit so that the resulting sum is correct.}
 
-S E N D\\
-M O R E\\
+\ \ \ \ S E N D\\
+
+\ \ \ M O R E\\
 =========\\
 M O N E Y\\
+
+
+\textbf{Let's call $S_i$ the sum done in the last step. Then the constraints are:}
+\begin{itemize}
+	\item Different letter have different values: $S \neq E , E \neq N , N \neq D...$
+	\item $(D + E) \% 10 == Y \ \ \ \ \ \ ( S_0 = (D + E) )$
+	\item $ (((S_0 - S_0) \% 10) / 10 + N + R) \% 10 == E \ \ \ \ \ \ ( S_1 = ((S_0 - S_0) \% 10) / 10 + N + R ) $
+	\item $ (((S_1 - S_1) \% 10) / 10 + E + O) \% 10 == N \ \ \ \ \ \ ( S_2 = ((S_1 - S_1) \% 10) / 10 + E + O) $
+	\item $ (((S_2 - S_2) \% 10) / 10 + S + M) \% 10 == O \ \ \ \ \ \ ( S_3 = ((S_2 - S_2) \% 10) / 10 + S + M) $
+	\item $ (((S_3 - S_3) \% 10) / 10 == M $
+\end{itemize}
 
 \subsection*{Manual constraint solving.}
 
