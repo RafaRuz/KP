@@ -137,7 +137,22 @@ far, fat, fit, lee, oaf, rat, tar, tie.\\
 \\
 First, try to solve the problem without any formal methods or tools. How do you approach this problem as a human? (It is not necessary to give a full solution to the problem at this point, but you should report on the strategies you employ as a human and the problems you encounter.)
 }
+\newpage
 
+A good way to begin is seeing which letter appearing more. We take one of this words, let's think the word is "XYZ". \\
+
+After that, it's time to check if there is other word that starts with "X". If that happens, we should put the word in the first row or in the first colum and add the other word in the correct position.\\
+If don't, we shoul check if there is other word that starts with "Y". If that happens, we should put the word in the first row or in the first colum and add the other word in the correct position.\\
+ If don't, we should check if there is other word that starts with "Z". If that happens, we should put the word in the first row or in the first colum and add the other word in the correct position. \\
+  If don't, we should check if there is other word that has a "X" \ in second position. If that happens, we should put the word in the second row or second coulm and add the other word in the correct position. \\
+ If don't, we should check if there is other word that has a "Y" \ in second position. If that happens, we should put the word in the second row or second coulm and add the other word in the correct position. \\
+ If don't, we should check if there is other word that has a "Z" \ in second position. If thath happens, we should put the word in the second row or second coulm.\\
+  If don't, we should check if there is other word that has a "X" \ in third position. If thath happens, we should put the word in the third row or third coulm and add the other word in the correct position.\\
+ If don't, we should check if there is other word that has a "Y" \ in third position. If thath happens, we should put the word in the third row or third coulm and add the other word in the correct position.\\
+  If don't, we should check if there is other word that has a "Z" \ in third position. If thath happens, we should put the word in the third row or third coulm and add the other word in the correct position.\\
+  
+Basically, the constraint is that the letters where a pair of words intersect must be the same.
+ 
 
 
 %----------------------------------------------------------------------------------------
@@ -145,6 +160,22 @@ First, try to solve the problem without any formal methods or tools. How do you 
 %----------------------------------------------------------------------------------------
 
 \subsection*{Solve the problem by hand using domain consistency as a first step and as a second step the arc consistency. Document this process thoroughly.}
+
+ \begin{itemize}
+ 
+ \item Domain consistency: 
+ 
+We can solve the problem by treating it as a CSP. The set of variables is \newline S = "X,Y,Z", that represents X as the first letter of the word, Y as the second and Z as the last. Dom(X) = Dom(Y) = Dom(Z) (I.e All the letters of the alphabet)\\
+
+Now, we take the first letter of the alphabet and check if it's appears in any of the words given. If not, we delete that letter from the domain.
+
+
+
+ 
+ 
+ 
+
+ \end{itemize}
 
 %----------------------------------------------------------------------------------------
 %	Question 4
