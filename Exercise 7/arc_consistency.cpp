@@ -49,7 +49,7 @@ void GraphArcConsistency( vector< vector<string> > &variables ){
     bool deleteWordFinal = false;
     bool insertedDependencies = false;
 
-    if( actualVariable < 3 ){
+    if( actualVariable < 3 ){     // If we are checking a row
       for( std::vector<string>::iterator it = variables[actualVariable].begin() ; it != variables[actualVariable].end() ; ){
         deleteWordFinal = false;
         for (size_t i = col0; i <= col2; i++) {    // We check the 3 columns
@@ -76,7 +76,7 @@ void GraphArcConsistency( vector< vector<string> > &variables ){
         else it++;
       }
     }
-    else{
+    else{               // If we are checking a column
       for( vector<string>::iterator it = variables[actualVariable].begin() ; it != variables[actualVariable].end() ; ){
         deleteWordFinal = false;
         for (size_t i = row0; i <= row2; i++) {    // We check the 3 rows
@@ -102,10 +102,7 @@ void GraphArcConsistency( vector< vector<string> > &variables ){
         }
         else it++;
       }
-
-
     }
-
   }
 }
 

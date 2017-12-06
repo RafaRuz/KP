@@ -185,9 +185,31 @@ If don't, we shoul check if there is other word that starts with "Y". If that ha
 
 \subsection*{• Implement the arc consistency algorithm (found in sect. 4.5 of Poole and Mackworth (2010)) along with a suitable representation of the problem to solve this puzzle.}
 
+\begin{figure}[H]
+	\includegraphics[scale=0.8]{img0.png}
+\end{figure}
 
-We haven't been able to implement the algorithm.
+First of all, we create the "to do" list and we instert all the variables on it.
 
+\begin{figure}[H]
+	\includegraphics[scale=0.8]{img1.png}
+\end{figure} 
+
+Then the main loop is while we have something to do(i.e. any arc to check) then we remove it from the "to do" list and initialize some booleans for later.
+
+\begin{figure}[H]
+	\includegraphics[scale=0.4]{img2.png}
+\end{figure}
+
+After that we check if we are processing an arc involving a row word or a column word. If it's the row 'n', we check the position 'n' of the words we can put on the columns.\\
+
+If there's no word for any of the columns that satisfies the constraint then we delete the word from the domain of the row 'n' and we add the columns connected to that constraint (in this case the 3 columns) to check them later.
+
+\begin{figure}[H]
+	\includegraphics[scale=0.4]{img3.png}
+\end{figure}
+
+If we are processing an arc involving a column word, we do the same but checking and adding the rows connected.
 
 
 %------------------------------------------------
