@@ -1,0 +1,146 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment LaTeX Template Version 1.0 (5/5/12)
+% This template has been downloaded from: http://www.LaTeXTemplates.com
+% Original author:  Frits Wenneker (http://www.howtotex.com)
+% License: CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+% ---- Entrada y salida de texto -----
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[utf8]{inputenc}
+%\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+
+% ---- Idioma --------
+
+\usepackage[spanish, es-tabla]{babel} % Selecciona el español para palabras introducidas automáticamente, p.ej. "septiembre" en la fecha y especifica que se use la palabra Tabla en vez de Cuadro
+
+% ---- Otros paquetes ----
+
+\usepackage{url} % ,href} %para incluir URLs e hipervínculos dentro del texto (aunque hay que instalar href)
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+%\usepackage{graphics,graphicx, floatrow} %para incluir imágenes y notas en las imágenes
+\usepackage{graphics,graphicx, float} %para incluir imágenes y colocarlas
+
+% Para hacer tablas comlejas
+%\usepackage{multirow}
+%\usepackage{threeparttable}
+
+%\usepackage{sectsty} % Allows customizing section commands
+%\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	TÍTULO Y DATOS DEL ALUMNO
+%----------------------------------------------------------------------------------------
+
+\title{	
+\normalfont \normalsize 
+\textsc{\textbf{Grundlagen der Wissensverarbeitung} \\ Computer Science \\ Universität Hamburg} \\ [25pt] % Your university, school and/or department name(s)
+~\\
+~\\
+~\\
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\Huge Tutorial 8 : Propositions and Inference\\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+~\\
+~\\
+}
+
+\author{Rafael Ruz Gómez\\Miguel Robles Urquiza} % Nombre y apellidos
+
+\date{\normalsize \today} % Incluye la fecha actual
+
+%----------------------------------------------------------------------------------------
+% DOCUMENTO
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Muestra el Título
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.8]{logo_uni_hamburg.png}
+\end{figure}
+
+\newpage %inserta un salto de página
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	Question 1
+%----------------------------------------------------------------------------------------
+
+\section*{Exercise 8.1}
+
+\subsection*{Introduction to Diagnosis: A Murder Investigation
+Apply your knowledge of propositions and inference to catch the murderer. Find a formal representation of the assumables, observations, rules and integrity constraints given below. Then compute the minimal conflict and the minimal diagnosis}
+
+Notation:
+
+\begin{itemize}
+
+\item Gardener $\Rightarrow$ G
+\item Butler $\Rightarrow$ B
+\item Work $\Rightarrow$ w
+\item Dirt $\Rightarrow$ d
+\item Statement\_Gardener $\Rightarrow$ S\_G
+\item Statement\_Butler $\Rightarrow$ S\_B
+
+\end{itemize}
+
+
+We can see that the rules determine that:
+
+\begin{itemize}
+\item S\_G  	= $d_G \leftarrow w_G$ \hspace{4cm} ($d_G$ = 0 $w_G$ = 1)
+\item S\_B 	= $d_B \leftarrow w_B$ \hspace{4cm} ($d_B$ = 1 $w_B$ = 1)\\
+
+\end{itemize}
+We can conclude that the Gardener's sentence is fake $\Rightarrow$ \textit{Gardener's the murderer}
+
+%----------------------------------------------------------------------------------------
+%	Question 2
+%----------------------------------------------------------------------------------------
+
+\section*{Exercise 8.2}
+\subsection*{When the ignition key is turned a good
+mechanic can hear (observe) three noises produced by the starter, the fuel pump and the engine itself. In case one of the noises is not observed there is a fault in at least one component. Formalize the given diagnosis problem. You can assume that all connections (cables, pipes and mechanical links) work properly but each component (grey box) could be faulty in one way or the other: A fuel tank could be empty, a starter broken, a filter clogged and so on. Perform a diagnosis (that is compute the minimal diagnoses). }
+
+%------------------------------------------------
+
+%\bibliography{citas} %archivo citas.bib que contiene las entradas 
+%\bibliographystyle{plain} % hay varias formas de citar
+
+\end{document}
+
