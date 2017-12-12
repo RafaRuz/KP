@@ -152,9 +152,9 @@ We can conclude that the Gardener's sentence is fake $\Rightarrow$ \textit{Garde
 	\item $ engine(noise3) \leftarrow starter \land filter $
 	\item $ filter \leftarrow fuel\_pump $
 	
-	
-	\begin{itemize}		
-		\item If there's no noise, then the starter, the fuel pump and the engine are not working. If the starter is not working it's because it's broken or the ignition key is not working. If the ignition key is not working, it's because it's broken or the battery is not working. If we keep going on with this reasoning, we find the following:\\
+\end{itemize}
+
+ \textbf{If there's no noise}, then the starter, the fuel pump and the engine are not working. If the starter is not working it's because it's broken or the ignition key is not working. If the ignition key is not working, it's because it's broken or the battery is not working. If we keep going on with this reasoning, we find the following:\\
 		
 %----------------------------------------------
 %                  NO NOISE
@@ -166,9 +166,8 @@ We can conclude that the Gardener's sentence is fake $\Rightarrow$ \textit{Garde
 		$ (\lnot starter \lor \lnot ignition\_key \lor \lnot battery) \land (\lnot fuel\_pump \lor \lnot fuel\_tank \lor \lnot electronic\_fuel\_regulation \lor \lnot ignition\_key \lor \lnot battery) \land (\lnot engine \lor \lnot filter \lor \lnot fuel\_pump \lor \lnot fuel\_tank \lor \lnot electronic\_fuel\_regulation \lor \lnot ignition\_key \lor \lnot battery \lor \lnot starter \lor \lnot ignition\_key \lor \lnot battery) = 1 $
 		
 			
-		We can not conclude anything
+		We can not conclude anything\\
 		
-\newpage
 		
 		
 %----------------------------------------------
@@ -176,7 +175,7 @@ We can conclude that the Gardener's sentence is fake $\Rightarrow$ \textit{Garde
 %----------------------------------------------			
 		
 		
-		\item If we only can hear noise1:
+\textbf{If we only can hear noise1:}\\
 		
 		$ Only\_noise1 \rightarrow  starter \land \lnot fuel\_pump \land \lnot engine = 1 $\\
 		
@@ -185,7 +184,7 @@ We can conclude that the Gardener's sentence is fake $\Rightarrow$ \textit{Garde
 	$ (starter \lor ignition\_key \lor battery) \land (\lnot fuel\_pump \lor \lnot fuel\_tank \lor \lnot electronic\_fuel\_regulation \lor \lnot ignition\_key \lor \lnot battery) \land (\lnot engine \lor \lnot filter \lor \lnot fuel\_pump \lor \lnot fuel\_tank \lor \lnot electronic\_fuel\_regulation \lor \lnot ignition\_key \lor \lnot battery \lor \lnot starter \lor \lnot ignition\_key \lor \lnot battery) = 1 $
 		
 		
-		We conclude that the battery, the ignition key and the starter are working, but the electronic fuel regulation or fuel pump are broken at least.
+		We conclude that the battery, the ignition key and the starter are working, but the electronic fuel regulation or fuel pump are broken at least.\\
 		
 		
 %----------------------------------------------
@@ -193,8 +192,8 @@ We can conclude that the Gardener's sentence is fake $\Rightarrow$ \textit{Garde
 %----------------------------------------------			
 		
 		
-\newpage		
-		\item If we only can hear noise2:
+
+\textbf{If we only can hear noise2}\\
 		
 		$ Only\_noise1 \rightarrow  \lnot starter \land fuel\_pump \land \lnot engine = 1 $\\
 		
@@ -203,14 +202,14 @@ We can conclude that the Gardener's sentence is fake $\Rightarrow$ \textit{Garde
 $ (\lnot starter \lor \lnot ignition\_key \lor \lnot battery) \land ( fuel\_pump \lor fuel\_tank \lor electronic\_fuel\_regulation \lor ignition\_key \lor battery) \land (\lnot engine \lor \lnot filter \lor \lnot fuel\_pump \lor \lnot fuel\_tank \lor \lnot electronic\_fuel\_regulation \lor \lnot ignition\_key \lor \lnot battery \lor \lnot starter \lor \lnot ignition\_key \lor \lnot battery) = 1 $
 		
 		
-		We conclude that the battery, the ignition key, the electronic fuel regulation, the fuel pump and the fuel tank are working, but the filter or the engine are broken at least and the stater is broken.
+		We conclude that the battery, the ignition key, the electronic fuel regulation, the fuel pump and the fuel tank are working, but the filter or the engine are broken at least and the stater is broken.\\
 		
 %----------------------------------------------
 %                  NOT NOISE  3
 %----------------------------------------------			
 		
-\newpage		
-		\item If we can hear noise1 and noise 2 but not noise3:
+
+\textbf{If we can hear noise1 and noise 2 but not noise3:}\\
 		
 		$ Only\_noise1 \rightarrow  starter \land fuel\_pump \land \lnot engine = 1 $\\
 		
@@ -219,9 +218,9 @@ $ (\lnot starter \lor \lnot ignition\_key \lor \lnot battery) \land ( fuel\_pump
 $ ( starter \lor  ignition\_key \lor  battery) \land ( fuel\_pump \lor fuel\_tank \lor electronic\_fuel\_regulation \lor ignition\_key \lor battery) \land (\lnot engine \lor \lnot filter \lor \lnot fuel\_pump \lor \lnot fuel\_tank \lor \lnot electronic\_fuel\_regulation \lor \lnot ignition\_key \lor \lnot battery \lor \lnot starter \lor \lnot ignition\_key \lor \lnot battery) = 1 $
 		
 		
-		We conclude that the battery, the ignition key, the starter, the electronic fuel regulation, the fuel pump and the fuel tank are working, but the filter or the engine are broken at least.
+		We conclude that the battery, the ignition key, the starter, the electronic fuel regulation, the fuel pump and the fuel tank are working, but the filter or the engine are broken at least.\\
 		
-	\end{itemize}
+
 
 	\begin{comment}
 
@@ -248,7 +247,7 @@ $ ( starter \lor  ignition\_key \lor  battery) \land ( fuel\_pump \lor fuel\_tan
 		
 \end{comment}
 
-\end{itemize}
+
 
 If a variable is false, it means it's not working and so on it could be broken.
 
