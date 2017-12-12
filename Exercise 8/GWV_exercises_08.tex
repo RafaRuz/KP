@@ -136,19 +136,43 @@ We can conclude that the Gardener's sentence is fake $\Rightarrow$ \textit{Garde
 \newpage
 
 \section*{Exercise 8.2}
-\subsection*{When the ignition key is turned a good
-mechanic can hear (observe) three noises produced by the starter, the fuel pump and the engine itself. In case one of the noises is not observed there is a fault in at least one component. Formalize the given diagnosis problem. You can assume that all connections (cables, pipes and mechanical links) work properly but each component (grey box) could be faulty in one way or the other: A fuel tank could be empty, a starter broken, a filter clogged and so on. Perform a diagnosis (that is compute the minimal diagnoses). }
+\subsection*{When the ignition key is turned a good mechanic can hear (observe) three noises produced by the starter, the fuel pump and the engine itself. In case one of the noises is not observed there is a fault in at least one component. Formalize the given diagnosis problem. You can assume that all connections (cables, pipes and mechanical links) work properly but each component (grey box) could be faulty in one way or the other: A fuel tank could be empty, a starter broken, a filter clogged and so on. Perform a diagnosis (that is compute the minimal diagnoses) for the following sets of observations:. }
 
 
 \begin{itemize}
-	\item $ battery $
-	\item $ fuel\_tank $
+
 	\item $ starter(noise1) \leftarrow ignition\_key $
 	\item $ ignition\_key \leftarrow battery $
+	
+	\item $ fuel\_pump(noise2) \leftarrow electronic\_fuel\_regulation \land fuel\_tank $					
 	\item $ electronic\_fuel\_regulation \leftarrow battery \land ignition\_key $
-	\item $ fuel\_pump(noise2) \leftarrow electronic\_fuel\_regulation \land fuel\_tank $
-	\item $ filter \leftarrow fuel\_pump $
+			
+
 	\item $ engine(noise3) \leftarrow starter \land filter $
+	\item $ filter \leftarrow fuel\_pump $
+	
+
+	
+		\begin{itemize}
+			\item No noise\\
+				If no noise1, then battery is broken or ignition key is broken\\
+				If no noise2, then battery is broken or ignition key is broken or fuel tank is broken\\
+				If no noise3, then there is at least some element broken\\
+			\item Only noise1\\
+				If only noise1, then battery works and works\\
+				If no noise2 and electronic fuel regulation works, then fuel tank is broken\\
+				
+			\item Only noise2\\	
+				If only noise 2, then electronic fuel regulation works and fuel tank works
+				If no noise1 and electronic fuel regulation works, then batery and ingnition key works but starter is broken
+			\item Noise1 and 2 but not 3\\
+				If noise1 then ingnition key and battery works
+				If noise 2 then electronic fuel regulation and fuel tank works 
+				If no noise 3 and starter and fuel pump works, then engine or filter are broken
+			
+			
+		\end{itemize}
+
 \end{itemize}
 
 
