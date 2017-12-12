@@ -166,7 +166,7 @@ We can conclude that the Gardener's sentence is fake $\Rightarrow$ \textit{Garde
 		$ (\lnot starter \lor \lnot ignition\_key \lor \lnot battery) \land (\lnot fuel\_pump \lor \lnot fuel\_tank \lor \lnot electronic\_fuel\_regulation \lor \lnot ignition\_key \lor \lnot battery) \land (\lnot engine \lor \lnot filter \lor \lnot fuel\_pump \lor \lnot fuel\_tank \lor \lnot electronic\_fuel\_regulation \lor \lnot ignition\_key \lor \lnot battery \lor \lnot starter \lor \lnot ignition\_key \lor \lnot battery) = 1 $
 		
 			
-		We can not conclude anything\\
+		We can conclude that at least one component needed by the starter, one needed by the fuel\_pump and one needed by the engine are broken.\\
 		
 		
 		
@@ -181,10 +181,12 @@ We can conclude that the Gardener's sentence is fake $\Rightarrow$ \textit{Garde
 		
 		And that means: \\
 		
-	$ (starter \lor ignition\_key \lor battery) \land (\lnot fuel\_pump \lor \lnot fuel\_tank \lor \lnot electronic\_fuel\_regulation \lor \lnot ignition\_key \lor \lnot battery) \land (\lnot engine \lor \lnot filter \lor \lnot fuel\_pump \lor \lnot fuel\_tank \lor \lnot electronic\_fuel\_regulation \lor \lnot ignition\_key \lor \lnot battery \lor \lnot starter \lor \lnot ignition\_key \lor \lnot battery) = 1 $
+	$ starter \land ignition\_key \land battery =1 $\\
+	$ \lnot fuel\_pump \lor \lnot fuel\_tank \lor \lnot electronic\_fuel\_regulation \lor \lnot ignition\_key \lor \lnot battery =1 $\\
+	$ \lnot engine \lor \lnot filter \lor \lnot fuel\_pump \lor \lnot fuel\_tank \lor \lnot electronic\_fuel\_regulation \lor \lnot ignition\_key \lor \lnot battery \lor \lnot starter \lor \lnot ignition\_key \lor \lnot battery = 1 $
 		
 		
-		We conclude that the battery, the ignition key and the starter are working, but the electronic fuel regulation or fuel pump are broken at least.\\
+		We conclude that the battery, the ignition key and the starter are working, but one between the electronic fuel regulation, fuel pump and fuel tank and one between engine, filter, electronic fuel regulation, fuel pump and fuel tank are broken at least.\\
 		
 		
 %----------------------------------------------
@@ -199,10 +201,10 @@ We can conclude that the Gardener's sentence is fake $\Rightarrow$ \textit{Garde
 		
 		And that means: \\
 		
-$ (\lnot starter \lor \lnot ignition\_key \lor \lnot battery) \land ( fuel\_pump \lor fuel\_tank \lor electronic\_fuel\_regulation \lor ignition\_key \lor battery) \land (\lnot engine \lor \lnot filter \lor \lnot fuel\_pump \lor \lnot fuel\_tank \lor \lnot electronic\_fuel\_regulation \lor \lnot ignition\_key \lor \lnot battery \lor \lnot starter \lor \lnot ignition\_key \lor \lnot battery) = 1 $
+	$ (\lnot starter \lor \lnot ignition\_key \lor \lnot battery) \land ( fuel\_pump \lor fuel\_tank \lor electronic\_fuel\_regulation \lor ignition\_key \lor battery) \land (\lnot engine \lor \lnot filter \lor \lnot fuel\_pump \lor \lnot fuel\_tank \lor \lnot electronic\_fuel\_regulation \lor \lnot ignition\_key \lor \lnot battery \lor \lnot starter \lor \lnot ignition\_key \lor \lnot battery) = 1 $
 		
 		
-		We conclude that the battery, the ignition key, the electronic fuel regulation, the fuel pump and the fuel tank are working, but the filter or the engine are broken at least and the stater is broken.\\
+		We conclude that the battery, the ignition key, the electronic fuel regulation, the fuel pump and the fuel tank are working, but one between the filter and the engine is broken at least and the starter is broken.\\
 		
 %----------------------------------------------
 %                  NOT NOISE  3
@@ -247,9 +249,6 @@ $ ( starter \lor  ignition\_key \lor  battery) \land ( fuel\_pump \lor fuel\_tan
 		
 \end{comment}
 
-
-
-If a variable is false, it means it's not working and so on it could be broken.
 
 
 
