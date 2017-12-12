@@ -27,6 +27,7 @@
 \usepackage{amsmath,amsfonts,amsthm} % Math packages
 %\usepackage{graphics,graphicx, floatrow} %para incluir imágenes y notas en las imágenes
 \usepackage{graphics,graphicx, float} %para incluir imágenes y colocarlas
+\usepackage{verbatim} % comentarios
 
 % Para hacer tablas comlejas
 %\usepackage{multirow}
@@ -155,60 +156,75 @@ We can conclude that the Gardener's sentence is fake $\Rightarrow$ \textit{Garde
 	\begin{itemize}		
 		\item If there's no noise, then the starter, the fuel pump and the engine are not working. If the starter is not working it's because it's broken or the ignition key is not working. If the ignition key is not working, it's because it's broken or the battery is not working. If we keep going on with this reasoning, we find the following:\\
 		
+%----------------------------------------------
+%                  NO NOISE
+%----------------------------------------------		
 		$ No\_noise \rightarrow \lnot starter \land \lnot fuel\_pump \land \lnot engine = 1 $\\
 		
 		And that means: \\
 		
 		$ (\lnot starter \lor \lnot ignition\_key \lor \lnot battery) \land (\lnot fuel\_pump \lor \lnot fuel\_tank \lor \lnot electronic\_fuel\_regulation \lor \lnot ignition\_key \lor \lnot battery) \land (\lnot engine \lor \lnot filter \lor \lnot fuel\_pump \lor \lnot fuel\_tank \lor \lnot electronic\_fuel\_regulation \lor \lnot ignition\_key \lor \lnot battery \lor \lnot starter \lor \lnot ignition\_key \lor \lnot battery) = 1 $
 		
-		And that's:
+			
+		We can not conclude anything
 		
-		$  $
-		
-		We conclude that 
-		
+\newpage
 		
 		
+%----------------------------------------------
+%                  NOISE  1
+%----------------------------------------------			
 		
 		
 		\item If we only can hear noise1:
 		
-		$ Only\_noise1 \leftarrow  \lnot fuel\_pump \land \lnot engine \land starter = 1 $\\
+		$ Only\_noise1 \rightarrow  starter \land \lnot fuel\_pump \land \lnot engine = 1 $\\
 		
 		And that means: \\
 		
-		$ (\lnot fuel\_pump \lor \lnot fuel\_tank \lor \lnot electronic\_fuel\_regulation \lor \lnot ignition\_key \lor \lnot battery) \land (\lnot engine \lor \lnot filter \lor \lnot fuel\_pump \lor \lnot fuel\_tank \lor \lnot electronic\_fuel\_regulation \lor \lnot ignition\_key \lor \lnot battery \lor \lnot starter \lor \lnot ignition\_key \lor \lnot battery) = 1$\\
+	$ (starter \lor ignition\_key \lor battery) \land (\lnot fuel\_pump \lor \lnot fuel\_tank \lor \lnot electronic\_fuel\_regulation \lor \lnot ignition\_key \lor \lnot battery) \land (\lnot engine \lor \lnot filter \lor \lnot fuel\_pump \lor \lnot fuel\_tank \lor \lnot electronic\_fuel\_regulation \lor \lnot ignition\_key \lor \lnot battery \lor \lnot starter \lor \lnot ignition\_key \lor \lnot battery) = 1 $
 		
-		And that's:
-		
-		$  $
 		
 		We conclude that the battery, the ignition key and the starter are working, but the electronic fuel regulation or fuel pump are broken at least.
 		
 		
+%----------------------------------------------
+%                  NOISE  2
+%----------------------------------------------			
 		
 		
-		
-		
+\newpage		
 		\item If we only can hear noise2:
 		
-		$ Only\_noise2 \rightarrow  \lnot starter \land \lnot engine \land fuel\_pump = 1 $\\
+		$ Only\_noise1 \rightarrow  \lnot starter \land fuel\_pump \land \lnot engine = 1 $\\
 		
 		And that means: \\
 		
-		$  = 1$\\
-		
-		And that's:
-		
-		$  $
-		
-		We conclude that 
+$ (\lnot starter \lor \lnot ignition\_key \lor \lnot battery) \land ( fuel\_pump \lor fuel\_tank \lor electronic\_fuel\_regulation \lor ignition\_key \lor battery) \land (\lnot engine \lor \lnot filter \lor \lnot fuel\_pump \lor \lnot fuel\_tank \lor \lnot electronic\_fuel\_regulation \lor \lnot ignition\_key \lor \lnot battery \lor \lnot starter \lor \lnot ignition\_key \lor \lnot battery) = 1 $
 		
 		
+		We conclude that the battery, the ignition key, the electronic fuel regulation, the fuel pump and the fuel tank are working, but the filter or the engine are broken at least and the stater is broken.
+		
+%----------------------------------------------
+%                  NOT NOISE  3
+%----------------------------------------------			
+		
+\newpage		
+		\item If we can hear noise1 and noise 2 but not noise3:
+		
+		$ Only\_noise1 \rightarrow  starter \land fuel\_pump \land \lnot engine = 1 $\\
+		
+		And that means: \\
+		
+$ ( starter \lor  ignition\_key \lor  battery) \land ( fuel\_pump \lor fuel\_tank \lor electronic\_fuel\_regulation \lor ignition\_key \lor battery) \land (\lnot engine \lor \lnot filter \lor \lnot fuel\_pump \lor \lnot fuel\_tank \lor \lnot electronic\_fuel\_regulation \lor \lnot ignition\_key \lor \lnot battery \lor \lnot starter \lor \lnot ignition\_key \lor \lnot battery) = 1 $
+		
+		
+		We conclude that the battery, the ignition key, the starter, the electronic fuel regulation, the fuel pump and the fuel tank are working, but the filter or the engine are broken at least.
 		
 	\end{itemize}
 
-	
+	\begin{comment}
+
 		\begin{itemize}
 			\item No noise\\
 				If no noise1, then battery is broken or ignition key is broken\\
@@ -229,6 +245,8 @@ We can conclude that the Gardener's sentence is fake $\Rightarrow$ \textit{Garde
 			
 			
 		\end{itemize}
+		
+\end{comment}
 
 \end{itemize}
 
