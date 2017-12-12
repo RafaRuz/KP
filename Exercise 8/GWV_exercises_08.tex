@@ -133,9 +133,27 @@ We can conclude that the Gardener's sentence is fake $\Rightarrow$ \textit{Garde
 %	Question 2
 %----------------------------------------------------------------------------------------
 
+\newpage
+
 \section*{Exercise 8.2}
 \subsection*{When the ignition key is turned a good
 mechanic can hear (observe) three noises produced by the starter, the fuel pump and the engine itself. In case one of the noises is not observed there is a fault in at least one component. Formalize the given diagnosis problem. You can assume that all connections (cables, pipes and mechanical links) work properly but each component (grey box) could be faulty in one way or the other: A fuel tank could be empty, a starter broken, a filter clogged and so on. Perform a diagnosis (that is compute the minimal diagnoses). }
+
+
+\begin{itemize}
+	\item $ battery $
+	\item $ fuel\_tank $
+	\item $ starter(noise1) \leftarrow ignition\_key $
+	\item $ ignition\_key \leftarrow battery $
+	\item $ electronic\_fuel\_regulation \leftarrow battery \land ignition\_key $
+	\item $ fuel\_pump(noise2) \leftarrow electronic\_fuel\_regulation \land fuel\_tank $
+	\item $ filter \leftarrow fuel\_pump $
+	\item $ engine(noise3) \leftarrow starter \land filter $
+\end{itemize}
+
+
+
+
 
 %------------------------------------------------
 
