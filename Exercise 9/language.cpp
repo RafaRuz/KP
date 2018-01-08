@@ -71,14 +71,13 @@ int main(int argc, char const *argv[]) {
   cout << "Tell me the length of the sentence you want me to build." << endl;
   cin >> length;
   cin.ignore();
-  cout << "\nTell me the initial part of the sentence (write # to end the program)." << endl;
+  cout << "Tell me the initial part of the sentence (write # to end the program)." << endl;
   getline(cin,final_sentence);
 
   while( final_sentence != "#" ){
     string token;
     istringstream( { final_sentence.rbegin(), final_sentence.rend() } ) >> token; // #include <sstream>
     final_sentence = { token.rbegin(), token.rend() };
-    cout << "ASDASDSA    ("<< final_sentence << ")  werwerwer" << endl;
 
     map<string,map<string,double> >::iterator pos = dictionary.find(final_sentence);
 
@@ -102,9 +101,10 @@ int main(int argc, char const *argv[]) {
         //  i--;
         //}
         //else{
-          final_sentence += (" " + selected_word);
+          final_sentence = final_sentence + " " + selected_word;
         //}
       }
+      cout << "Final sentece: " << final_sentence << endl << endl;
     }
     else{
       cout << "Oops, I didn't even know that word existed!." << endl;
@@ -112,6 +112,7 @@ int main(int argc, char const *argv[]) {
 
     cout << "Tell me the length of the sentence you want me to build." << endl;
     cin >> length;
+    cin.ignore();
     cout << "Tell me the initial part of the sentence (write # to end the program)." << endl;
     getline(cin,final_sentence);
   }
