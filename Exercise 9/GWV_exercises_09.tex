@@ -70,7 +70,7 @@
 ~\\
 ~\\
 \horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
-\Huge Tutorial 8 : Propositions and Inference\\ % The assignment title
+\Huge Tutorial 9 : Belief Networks\\ % The assignment title
 \horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
 ~\\
 ~\\
@@ -102,33 +102,9 @@
 %	Question 1
 %----------------------------------------------------------------------------------------
 
-\section*{Exercise 8.1}
+\section*{Exercise 9.2}
 
-\subsection*{Introduction to Diagnosis: A Murder Investigation
-Apply your knowledge of propositions and inference to catch the murderer. Find a formal representation of the assumables, observations, rules and integrity constraints given below. Then compute the minimal conflict and the minimal diagnosis}
-
-Notation:
-
-\begin{itemize}
-
-\item Gardener $\Rightarrow$ G
-\item Butler $\Rightarrow$ B
-\item Work $\Rightarrow$ w
-\item Dirt $\Rightarrow$ d
-\item Statement\_Gardener $\Rightarrow$ S\_G
-\item Statement\_Butler $\Rightarrow$ S\_B
-
-\end{itemize}
-
-
-We can see that the rules determine that:
-
-\begin{itemize}
-\item S\_G  	= $d_G \leftarrow w_G$ \hspace{4cm} ($d_G$ = 0 $w_G$ = 1)
-\item S\_B 	= $d_B \leftarrow w_B$ \hspace{4cm} ($d_B$ = 1 $w_B$ = 1)\\
-
-\end{itemize}
-We can conclude that the Gardener's sentence is fake $\Rightarrow$ \textit{Gardener's the murderer}
+\subsection*{Describe properties of the resulting sequences: what are the similarities and differences to “real” texts?}
 
 %----------------------------------------------------------------------------------------
 %	Question 2
@@ -136,122 +112,44 @@ We can conclude that the Gardener's sentence is fake $\Rightarrow$ \textit{Garde
 
 \newpage
 
-\section*{Exercise 8.2}
-\subsection*{When the ignition key is turned a good mechanic can hear (observe) three noises produced by the starter, the fuel pump and the engine itself. In case one of the noises is not observed there is a fault in at least one component. Formalize the given diagnosis problem. You can assume that all connections (cables, pipes and mechanical links) work properly but each component (grey box) could be faulty in one way or the other: A fuel tank could be empty, a starter broken, a filter clogged and so on. Perform a diagnosis (that is compute the minimal diagnoses) for the following sets of observations:. }
-
-
+\section*{Exercise 9.3}
+\subsection*{Compute the following probabilities:}
 \begin{itemize}
 
-	\item $ starter(noise1) \leftarrow ignition\_key $
-	\item $ ignition\_key \leftarrow battery $
-	
-	\item $ fuel\_pump(noise2) \leftarrow electronic\_fuel\_regulation \land fuel\_tank $					
-	\item $ electronic\_fuel\_regulation \leftarrow battery \land ignition\_key $
-			
+\item The probability that the battery is working =	0.9
+\\ The probability that the starter is working = 0.9*0.9
+\\ The probability that the engine is working = (0.9*0.9)*0.9*(0.9*0.9*0.9*0.9*0.9*0.9)
+\\ The probability that the engine is working after making the observation that the pump is working =(0.9*0.9)*0.9*(0.9*0.9)
 
-	\item $ engine(noise3) \leftarrow starter \land filter $
-	\item $ filter \leftarrow fuel\_pump $
 	
 \end{itemize}
 
- \textbf{If there's no noise}, then the starter, the fuel pump and the engine are not working. If the starter is not working it's because it's broken or the ignition key is not working. If the ignition key is not working, it's because it's broken or the battery is not working. If we keep going on with this reasoning, we find the following:\\
-		
-%----------------------------------------------
-%                  NO NOISE
-%----------------------------------------------		
-		$ No\_noise \rightarrow \lnot starter \land \lnot fuel\_pump \land \lnot engine = 1 $\\
-		
-		And that means: \\
-		
-		$ (\lnot starter \lor \lnot ignition\_key \lor \lnot battery) \land (\lnot fuel\_pump \lor \lnot fuel\_tank \lor \lnot electronic\_fuel\_regulation \lor \lnot ignition\_key \lor \lnot battery) \land (\lnot engine \lor \lnot filter \lor \lnot fuel\_pump \lor \lnot fuel\_tank \lor \lnot electronic\_fuel\_regulation \lor \lnot ignition\_key \lor \lnot battery \lor \lnot starter \lor \lnot ignition\_key \lor \lnot battery) = 1 $
-		
-			
-		We can conclude that at least one component needed by the starter, one needed by the fuel\_pump and one needed by the engine are broken.\\
-		
-		
-		
-%----------------------------------------------
-%                  NOISE  1
-%----------------------------------------------			
-		
-		
-\textbf{If we only can hear noise1:}\\
-		
-		$ Only\_noise1 \rightarrow  starter \land \lnot fuel\_pump \land \lnot engine = 1 $\\
-		
-		And that means: \\
-		
-	$ starter \land ignition\_key \land battery =1 $\\
-	$ \lnot fuel\_pump \lor \lnot fuel\_tank \lor \lnot electronic\_fuel\_regulation \lor \lnot ignition\_key \lor \lnot battery =1 $\\
-	$ \lnot engine \lor \lnot filter \lor \lnot fuel\_pump \lor \lnot fuel\_tank \lor \lnot electronic\_fuel\_regulation \lor \lnot ignition\_key \lor \lnot battery \lor \lnot starter \lor \lnot ignition\_key \lor \lnot battery = 1 $
-		
-		
-		We conclude that the battery, the ignition key and the starter are working, but one between the electronic fuel regulation, fuel pump and fuel tank and one between engine, filter, electronic fuel regulation, fuel pump and fuel tank are broken at least.\\
-		
-		
-%----------------------------------------------
-%                  NOISE  2
-%----------------------------------------------			
-		
-		
 
-\textbf{If we only can hear noise2}\\
-		
-		$ Only\_noise1 \rightarrow  \lnot starter \land fuel\_pump \land \lnot engine = 1 $\\
-		
-		And that means: \\
-		
-	$ (\lnot starter \lor \lnot ignition\_key \lor \lnot battery) \land ( fuel\_pump \lor fuel\_tank \lor electronic\_fuel\_regulation \lor ignition\_key \lor battery) \land (\lnot engine \lor \lnot filter \lor \lnot fuel\_pump \lor \lnot fuel\_tank \lor \lnot electronic\_fuel\_regulation \lor \lnot ignition\_key \lor \lnot battery \lor \lnot starter \lor \lnot ignition\_key \lor \lnot battery) = 1 $
-		
-		
-		We conclude that the battery, the ignition key, the electronic fuel regulation, the fuel pump and the fuel tank are working, but one between the filter and the engine is broken at least and the starter is broken.\\
-		
-%----------------------------------------------
-%                  NOT NOISE  3
-%----------------------------------------------			
-		
+%----------------------------------------------------------------------------------------
+%	Question 3
+%----------------------------------------------------------------------------------------
 
-\textbf{If we can hear noise1 and noise 2 but not noise3:}\\
-		
-		$ Only\_noise1 \rightarrow  starter \land fuel\_pump \land \lnot engine = 1 $\\
-		
-		And that means: \\
-		
-$ ( starter \lor  ignition\_key \lor  battery) \land ( fuel\_pump \lor fuel\_tank \lor electronic\_fuel\_regulation \lor ignition\_key \lor battery) \land (\lnot engine \lor \lnot filter \lor \lnot fuel\_pump \lor \lnot fuel\_tank \lor \lnot electronic\_fuel\_regulation \lor \lnot ignition\_key \lor \lnot battery \lor \lnot starter \lor \lnot ignition\_key \lor \lnot battery) = 1 $
-		
-		
-		We conclude that the battery, the ignition key, the starter, the electronic fuel regulation, the fuel pump and the fuel tank are working, but the filter or the engine are broken at least.\\
-		
+\newpage
+
+\section*{Exercise 9.4}
+\subsection*{Complete the missing probabilities and draw the probability network}
+\begin{itemize}
+
+\item The 
+	
+\end{itemize}
+
+\subsection*{Give an example of explaining away in the given network}
 
 
-	\begin{comment}
+\subsection*{Compute the following probabilities}
 
-		\begin{itemize}
-			\item No noise\\
-				If no noise1, then battery is broken or ignition key is broken\\
-				If no noise2, then battery is broken or ignition key is broken or fuel tank is broken\\
-				If no noise3, then there is at least some element broken\\
-				
-			\item Only noise1\\
-				If only noise1, then battery works and works\\
-				If no noise2 and electronic fuel regulation works, then fuel tank is broken\\
-				
-			\item Only noise2\\	
-				If only noise 2, then electronic fuel regulation works and fuel tank works
-				If no noise1 and electronic fuel regulation works, then batery and ingnition key works but starter is broken
-			\item Noise1 and 2 but not 3\\
-				If noise1 then ingnition key and battery works
-				If noise 2 then electronic fuel regulation and fuel tank works 
-				If no noise 3 and starter and fuel pump works, then engine or filter are broken
-			
-			
-		\end{itemize}
-		
-\end{comment}
+The probability that a person is a smuggler given the observation that the drug dog is barking\\
 
+The probability that a suspect is sweating (without any prior observation)\\
 
-
-
+The probability that a person is a smuggler given both the observations that
+that person is sweating and that the drug dog barked at him or her
 %------------------------------------------------
 
 %\bibliography{citas} %archivo citas.bib que contiene las entradas 
