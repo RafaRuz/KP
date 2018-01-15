@@ -28,8 +28,12 @@
 %\usepackage{graphics,graphicx, floatrow} %para incluir imágenes y notas en las imágenes
 \usepackage{graphics,graphicx, float} %para incluir imágenes y colocarlas
 \usepackage{verbatim} % comentarios
+\usepackage{subfig} %Pa poner figuras paralelas
+
+\usepackage{sidecap}
 
 % Para hacer tablas comlejas
+
 %\usepackage{multirow}
 %\usepackage{threeparttable}
 
@@ -106,22 +110,32 @@
 
 \subsection*{Describe properties of the resulting sequences: what are the similarities and differences to “real” texts?}
 
+Similarities are that sometimes the grammar is correct (excepting the words that has the same form for sustantive and adjective for example, where the program can't distinguish between them or more difficult constructions like weil and the verb at the end) but the whole sentences don't usually makes any sense.
+
+
 %----------------------------------------------------------------------------------------
 %	Question 2
 %----------------------------------------------------------------------------------------
 
-\newpage
 
 \section*{Exercise 9.3}
 \subsection*{Compute the following probabilities:}
 \begin{itemize}
 
-\item The probability that the battery is working =	0.9
-\\ The probability that the starter is working = 0.9*0.9
-\\ The probability that the engine is working = (0.9*0.9)*0.9*(0.9*0.9*0.9*0.9*0.9*0.9)
-\\ The probability that the engine is working after making the observation that the pump is working =(0.9*0.9)*0.9*(0.9*0.9)
+\item P(Battery\_Wk) = $P(Battery\_NotBrk) = 0.9$\\
 
-	
+\item P(Starter\_Wk) = $P(Starter\_NotBrk)* P(IgnitionKey\_Wk)*P(Battery\_Wk) = 0.9 * P(IgnitionKey\_NotBrk\|Battery\_Wk) * 0.9 =\\ 
+0.9 * P(Battery\_Wk||IgnitionKey\_NotBrk) * P (IgnitionKey\_NotBrk) * 0.9 =\\ 0.9*0.9*0.9*0.9 = 0.6561$
+
+\item P(Engine\_Wk) = $P(Engine\_NotBrk) * P(Starter\_Wk) * P(Filter\_Wk) = \\
+0.9*0.6561*P(Filter\_NotBrk||(FuelPump\_NotBrk||(FuelTank\_Wk,EFR\_Wk))=
+0.9*0.6561*P(Filter\_NotBrk||(FuelPump\_NotBrk||(FuelTank\_NotBrk,\\(EFR\_NotBrk,Battery\_Wk, IgnitionKwy\_Wk))=\\
+0.9*0.6561*0.9*0.9*0.9*0.9*0.9*0.9*0.9 = 0,282429536$
+
+
+\item P(Engine\_Wk|| FuelPump\_Wk) = $P(Engine\_NotBrk) * P(Starter\_Wk) * P(Filter\_Wk) = 
+0.9*0.6561*0.9 = 0,531441$
+
 \end{itemize}
 
 
@@ -133,23 +147,79 @@
 
 \section*{Exercise 9.4}
 \subsection*{Complete the missing probabilities and draw the probability network}
-\begin{itemize}
 
-\item The 
-	
-\end{itemize}
 
-\subsection*{Give an example of explaining away in the given network}
+\begin{tabular}{|l|||l ||l |}
 
+\hline
+Smuggler &F & 0.99  \\
+\hline
+ & T & 0.01 \\
+\hline
+\hline
+Fever & F & 0.987  \\
+\hline
+ & T & 0.013\\
+\hline
+\end{tabular}
+\newline
+
+\begin{tabular}{|l|||l||| l ||l|}
+\hline
+Fever & Smuggler & Sweat & Probability\\
+\hline
+F & F & F & 1\\
+\hline
+F & F & T & 0 \\
+\hline
+F & T & F & 0.6\\
+\hline
+
+F & T & T & 0.4\\
+\hline
+T & F & F & 0.4\\
+\hline
+T & F & T & 0.6\\
+\hline
+T & T & F & 0.2\\
+\hline
+T & T & T & 0.8\\
+\hline
+
+\end{tabular}
+\newline
+
+\begin{tabular}{|l|||l||l|}
+\hline
+Smuggler & DogBk & Probablity\\
+\hline
+F & F & 0.95\\
+\hline
+F & T & 0.05\\
+\hline
+T & F & 0.2\\
+\hline
+T & T & 0.8\\
+\hline
+\end{tabular}
+
+
+
+
+
+\subsection*{Give an example of 'explaining away' in the given network}
+
+If someone is not a smuggler nor has a fever then the likelihood that that person is sweating is zero, so sweating has ben explained away by fever and been smugger.
 
 \subsection*{Compute the following probabilities}
+\begin{itemize}
 
-The probability that a person is a smuggler given the observation that the drug dog is barking\\
+\item P(Smuggler||DogBk) = (DogBk||Smuggler) * P(Smuggler) = 0.8*0.001 = 0.0008
 
-The probability that a suspect is sweating (without any prior observation)\\
+\item P(Sweating) =P(Sw||Fev,Smug) + P(Sw||~Fev,Smug) + P(Sw||Fev,~Smug) + P(Sw||~Fev,~Smug) = 0.99 * 0.987 * 0 + 0.01 * 0.987 * 0.4 + 0.99 * 0.013 * 0.6 + 0.01 * 0.013 * 0.8 = 0.011774
 
-The probability that a person is a smuggler given both the observations that
-that person is sweating and that the drug dog barked at him or her
+
+\end{itemize}
 %------------------------------------------------
 
 %\bibliography{citas} %archivo citas.bib que contiene las entradas 
