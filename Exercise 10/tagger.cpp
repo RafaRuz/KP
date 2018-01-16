@@ -6,6 +6,8 @@
 #include <set>
 #include <list>
 #include <sstream>
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
 
 using namespace std;
 
@@ -23,6 +25,8 @@ int main(int argc, char const *argv[]) {
     cout << "Error reading the file." << endl;
     return(1);
   }
+
+  srand(time(NULL));
 
   string actual_word, last_word, actual_tag, last_tag;
   map<string,map<string,double> >  tag_dictionary;
@@ -84,17 +88,23 @@ int main(int argc, char const *argv[]) {
 
   for( string::const_iterator it = it_begin; it != it_end; ++it){
     if( *it == ' ' ){
-      actual_word = string(itBegin,it);
-      itBegin = it+1;
+      actual_word = string(it_begin,it);
+      it_begin = it+1;
 
       map<string,string>::iterator position = word_tag_dictionary.find(actual_word);
       if( position == word_tag_dictionary.end() ){
-        double r = r = ((double) rand() / (RAND_MAX));
+        double r = ((double) rand() / (RAND_MAX));
         double sums_of_probs = 0;
         string selected_tag;
         bool selected = false;
 
-        for( map<string,double>::iterator it2 = position->second.begin(); it2 != pos->second.end() && !selected; ++it2 ){
+        if( output_tags.empty() ){
+          last_tag = "<start>";
+        }
+
+        map<string,map<string,double> >::iterator tag_pos = tag_dictionary.find(last_tag);
+
+        for( map<string,double>::iterator it2 = tag_pos->second.begin(); it2 != tag_pos->second.end() && !selected; ++it2 ){
           sums_of_probs += it2->second;
 
           if( sums_of_probs >= r ){
@@ -106,53 +116,46 @@ int main(int argc, char const *argv[]) {
       else{
         output_tags += ' ';
         output_tags += position->second;
+        last_tag = position->second;
       }
     }
   }
 
-  if( itBegin != itEnd )
-    actual_word = string(itBegin,itEnd);
+  if( it_begin != it_end )
+    actual_word = string(it_begin,it_end);
 
-    map<string,map<string,double> >::iterator pos = dictionary.find(final_sentence);
+  map<string,string>::iterator position = word_tag_dictionary.find(actual_word);
+  if( position == word_tag_dictionary.end() ){
+    double r = ((double) rand() / (RAND_MAX));
+    double sums_of_probs = 0;
+    string selected_tag;
+    bool selected = false;
 
-    if( pos != dictionary.end() ){
-      for( int i=0; i<length ; i++){
-        double r = r = ((double) rand() / (RAND_MAX));
-        double sums_of_probs = 0;
-        string selected_word;
-        bool selected = false;
+    if( output_tags.empty() ){
+      last_tag = "<start>";
+    }
 
-        for( map<string,double>::iterator it2 = pos->second.begin(); it2 != pos->second.end() && !selected; ++it2 ){
-          sums_of_probs += it2->second;
+    map<string,map<string,double> >::iterator tag_pos = tag_dictionary.find(last_tag);
 
-          if( sums_of_probs >= r ){
-            selected_word = it2->first;
-            selected = true;
-          }
-        }
+    for( map<string,double>::iterator it2 = tag_pos->second.begin(); it2 != tag_pos->second.end() && !selected; ++it2 ){
+      sums_of_probs += it2->second;
 
-        //if( sentence_endings.count(selected_word) && i != length-1 ){
-        //  i--;
-        //}
-        //else{
-          final_sentence = final_sentence + " " + selected_word;
-        //}
+      if( sums_of_probs >= r ){
+        selected_tag = it2->first;
+        selected = true;
       }
-      cout << "Final sentece: " << final_sentence << endl << endl;
     }
-    else{
-      cout << "Oops, I didn't even know that word existed!." << endl;
-    }
-
-    cout << "Tell me the length of the sentence you want me to build." << endl;
-    cin >> length;
-    cin.ignore();
-    cout << "Tell me the initial part of the sentence (write # to end the program)." << endl;
-    getline(cin,final_sentence);
+    output_tags += ' ';
+    output_tags += selected_tag;
+    last_tag = selected_tag;
+  }
+  else{
+    output_tags += ' ';
+    output_tags += position->second;
+    last_tag = position->second;
   }
 
-
-
+  cout << output_tags << endl;
 
   input.close();
   return 0;
