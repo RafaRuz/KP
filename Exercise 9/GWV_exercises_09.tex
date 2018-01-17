@@ -218,6 +218,9 @@ If someone is not a smuggler nor has a fever then the likelihood that that perso
 
 \item P(Sweating) =P(Sw||Fev,Smug) + P(Sw||~Fev,Smug) + P(Sw||Fev,~Smug) + P(Sw||~Fev,~Smug) = 0.99 * 0.987 * 0 + 0.01 * 0.987 * 0.4 + 0.99 * 0.013 * 0.6 + 0.01 * 0.013 * 0.8 = 0.011774
 
+\item P(Smuggler||Sweating,DogBk) = P(DogBk||Smuggler) * P(Smuggler) * (P(Sweating||Smuggler,Fever) + P(Sweating||Smuggler,~Fever)) =
+0.8 * 0.01 * (0.4*0.987 + 0.8*0.013) = 0.0032416
+
 
 \end{itemize}
 %------------------------------------------------
