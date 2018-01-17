@@ -47,13 +47,15 @@ int main(int argc, char const *argv[]) {
     map<string,map<string,double> >::iterator pos = tag_dictionary.find(last_tag);
 
     if( pos == tag_dictionary.end() ){
+      aux.insert(pair<string,double>(actual_tag,1));
       tag_dictionary.insert(pair<string,map<string,double> >(last_tag,aux));
+      aux.clear();
     }
     else{
       map<string,double>::iterator pos2 = pos->second.find(actual_tag);
 
       if( pos2 == pos->second.end() ){
-        pos->second.insert(pair<string,double>(actual_word,1));
+        pos->second.insert(pair<string,double>(actual_tag,1));
       }
       else{
         pos2->second++;
@@ -99,7 +101,7 @@ int main(int argc, char const *argv[]) {
         bool selected = false;
 
         if( output_tags.empty() ){
-          last_tag = "<start>";
+          last_tag = "$.";
         }
 
         map<string,map<string,double> >::iterator tag_pos = tag_dictionary.find(last_tag);
@@ -112,6 +114,9 @@ int main(int argc, char const *argv[]) {
             selected = true;
           }
         }
+        output_tags += ' ';
+        output_tags += selected_tag;
+        last_tag = selected_tag;
       }
       else{
         output_tags += ' ';
@@ -132,7 +137,7 @@ int main(int argc, char const *argv[]) {
     bool selected = false;
 
     if( output_tags.empty() ){
-      last_tag = "<start>";
+      last_tag = "$.";
     }
 
     map<string,map<string,double> >::iterator tag_pos = tag_dictionary.find(last_tag);
